@@ -1,0 +1,37 @@
+
+
+.preview__container {
+    border: solid 1px #E07A5F;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.preview__title__container {
+    margin: 1rem;
+}
+
+.preview__title {
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #E07A5F;
+    margin-bottom: 1rem;
+}
+
+
+audio::-webkit-media-controls-enclosure { // container du lecteur
+    background-color: white;
+    border-radius: 0;
+    height: 500px;
+}
+
+// ne montre pas en entier le lecteur
+// audio::-webkit-media-controls-panel { // le lecteur
+//     display: flex;
+//     flex-direction: column;
+//     gap: .5rem;
+//     height: 100%;
+// }
