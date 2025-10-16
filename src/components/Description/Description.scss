@@ -1,0 +1,19 @@
+.description {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+
+.description__text img {
+    width: 10%;
+    height: auto;
+}
+
