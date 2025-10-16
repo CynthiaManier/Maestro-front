@@ -6,12 +6,19 @@ function Preview() {
 
     return (
         <>
-            <article className="preview__container">
+        <article className="preview">
+            <div className="preview__container">
                 <figure className="preview__title__container">
                     <figcaption className="preview__title">Titre</figcaption>
-                    <audio controls></audio>
+                    <audio controls src="null"></audio>
                 </figure>
-            </article>
+            </div>
+            <div className="preview__genre__container">
+                <span className="preview__genre">Rock</span>
+                <span className="preview__genre">Pop</span>
+                <span className="preview__genre">Classique</span>
+            </div>
+        </article>
         </>
     )
 
