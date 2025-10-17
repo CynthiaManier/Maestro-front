@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 2px;
+    gap: 50px;
 }
 
 img {
@@ -11,6 +11,9 @@ img {
     border-radius: 5px;
 }
 
+.description__image {
+    margin-top: 50px;
+}
 
 .description__text img {
     width: 10%;

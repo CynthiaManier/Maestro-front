@@ -11,7 +11,7 @@ function Description() {
             <div className="description__text">
                 <h2>
                     Présentation du compositeur
-                    <span><img src="crayon.svg" alt="Crayon" /></span>
+                    {/* <span><img src="crayon.svg" alt="Crayon" /></span> */}
                 </h2>
 
                 <p>Lorem Ipsum is simply dummy text of the printing and
