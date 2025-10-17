@@ -15,6 +15,7 @@
 
 .preview__figure {
     margin: 1rem;
+    margin-bottom: 0;
 }
 
 .preview__title {
@@ -25,7 +26,6 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: #E07A5F;
-    margin-bottom: 1rem;
 }
 
 audio {
@@ -51,13 +51,11 @@ audio {
 .buttons {
     display: flex;
     justify-content: center;
-    padding: .5rem 0 .5rem 0;
+    // padding: .5rem 0 .5rem 0;
 }
 
 .button {
     width: 1.5rem;
-    height: 1.5rem;
-    padding: .5rem;
     background-color: #fff;
     border-radius: 6px;
     cursor: pointer;

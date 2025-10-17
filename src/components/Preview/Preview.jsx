@@ -1,6 +1,8 @@
 import "./Preview.scss";
 import { useState } from "react";
 import { useEffect } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function Preview({title, audiosrc, genres}) {
 
@@ -40,7 +42,8 @@ function Preview({title, audiosrc, genres}) {
                 </figure>
                 <div className="buttons">
                     <div className={playIsHidden ? "button button__play hidden" : "button button__play"} onClick={handlePlay} id="play">
-                        <img className="icon" src="/src/assets/play-svgrepo-com.svg" alt="play button" />
+                        {/* <img className="icon" src="/src/assets/play-svgrepo-com.svg" alt="play button" /> */}
+                        <i className="bi bi-play fs-1"></i>
                     </div>
                     <div className={pauseIsHidden ? "button button__pause hidden" : "button button__pause"} onClick={handlePause} id="pause">
                         <img className="icon" src="/src/assets/pause-svgrepo-com.svg" alt="pause button" />
