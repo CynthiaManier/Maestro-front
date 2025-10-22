@@ -1,3 +1,5 @@
+header.scss
+
 header :
     position: fixed;              // Le header reste toujours visible en haut de la page, même lorsqu’on défile.
     top: 0;                      // Positionne le header tout en haut de la fenêtre.
@@ -56,3 +58,48 @@ body {
     padding-top: 176px; // hauteur du header + marge de sécurité
 }
 
+
+header.jsx
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setMenuOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+useEffect est déclenché une fois au montage du composant (car le tableau de dépendances est vide []).
+
+la fonction handleClickOutside est crée. Elle vérifie si l’endroit où l’utilisateur a cliqué (event.target) n’est pas à l’intérieur de l’élément menu ciblé par menuRef.
+
+Si le clic est en dehors (!menuRef.current.contains(event.target)), la fonction appelle setMenuOpen(false) pour fermer le menu.
+
+Un écouteur d’événement mousedown est ajouté à document pour capturer tous les clics.
+
+Ce même écouteur est retiré lors du démontage du composant pour éviter des fuites mémoire.
+
+
+
+const iconSrc = user
+        ? user.role === "admin"
+            ? adminIcon
+            : clientIcon
+        : null;
+
+La première condition teste si la variable user existe (est définie et "truthy").
+
+Si user existe, alors la deuxième condition vérifie le rôle de l'utilisateur :
+
+Si user.role est "admin", alors iconSrc prend la valeur adminIcon.
+
+Sinon (user.role n'est pas "admin"), iconSrc prend la valeur clientIcon.
+
+Si user n'existe pas (est null ou undefined), alors iconSrc vaut null.
+
+On peut dire en clair :
+"Si un utilisateur est connecté, vérifier son rôle. S’il est admin, afficher l’icône admin, sinon afficher l’icône client. Sinon, ne rien afficher."

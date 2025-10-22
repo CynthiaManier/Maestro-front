@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Header.scss";
-import userIcon from "../../assets/images/user-client.svg";
+import clientIcon from "../../assets/images/user-client.svg";
 import adminIcon from "../../assets/images/user-admin.svg";
 
 function Header() {
@@ -8,26 +8,29 @@ function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
+    // constante pour tout les liens communs
     const commonLinks = [
         { label: "Accueil", href: "#" },
         { label: "Compositions", href: "#" },
     ];
 
+    // fonction pour la connexion
     const handleLogin = (role) => {
         setUser({ role });
         setMenuOpen(false);
     };
 
+    // fonction pour la deconnexion
     const handleLogout = () => {
         setUser(null);
         setMenuOpen(false);
     };
-
+    // fonction du menu déroulant
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
 
-    // Fermer le menu quand on clique en dehors
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -39,41 +42,45 @@ function Header() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
-// ternaire qui signifie si on n'est connecté en tant que admin ou client
+
+    // ternaire qui signifie si on n'est connecté en tant que admin ou client
+    
     const iconSrc = user
         ? user.role === "admin"
             ? adminIcon
-            : userIcon
+            : clientIcon
         : null;
 
     return (
         <div>
             <header>
                 <img src="logo.png" alt="logo maestro" />
-                <nav>
-                    <ul>
+                    <nav>
+                        <ul>
                         {commonLinks.map((item, index) => (
                             <li key={index}>
                                 <a href={item.href}>{item.label}</a>
                             </li>
                         ))}
-                        
+{/* conditionnel user qui dis à la className "icon menu" quel user.role  
+il aura avec une ternaire */}
                         {user && (
                             <li className="icon-menu" ref={menuRef}>
                                 <img
                                     src={iconSrc}
                                     alt={
-                                        user.role === "admin"
+                                    user.role === "admin"
                                             ? "Icône admin"
-                                            : "Icône utilisateur"
+                                            : "Icône client"
                                     }
                                     className="nav-icon"
                                     onClick={toggleMenu}
                                 />
-                                {/* menu déroulant avec role si on n'est connecté en tant que client ou admin et bouton déconnecter*/}
+{/* conditionnel menuOpen qui dis à la className "dropdown-menu" quel {user role} 
+on aura et bouton se déconnecter de la fonction handleLogin au clique on se déconnecte*/}
                                 {menuOpen && (
                                     <div className="dropdown-menu">
-                                        <p>Connecté {user.role}</p>
+                                        <p> Espace {user.role}</p>
                                         <button onClick={handleLogout}>
                                             Se déconnecter
                                         </button>
@@ -81,24 +88,28 @@ function Header() {
                                 )}
                             </li>
                         )}
-                        {/*demo de simulation quand on clique sur l'icone admin ou client on se connecte*/}
+
                         {!user && (
                             <li>
                                 <a href="#">Connexion / Inscription</a>
-                                <div className="login-buttons">
-                                    <img
-                                        src={userIcon}
-                                        alt="Icône client"
-                                        onClick={() => handleLogin("client")}
-                                    />
-                                    <img
-                                        src={adminIcon}
-                                        alt="Icône admin"
-                                        onClick={() => handleLogin("admin")}
-                                    />
-                                </div>
                             </li>
                         )}
+
+{/*demo de simulation quand on clique sur l'icone admin ou client on se connecte*/}
+                {!user && (
+                    <div>
+                            <img
+                                src={clientIcon}
+                                alt="Icône client"
+                                onClick={() => handleLogin("client")}
+                                />
+                            <img
+                                src={adminIcon}
+                                alt="Icône admin"
+                                onClick={() => handleLogin("admin")}
+                                />
+                        </div>
+                    )}
                     </ul>
                 </nav>
             </header>
