@@ -4,55 +4,63 @@
 
 
 .description {
-    // display: grid;
-    // grid-template-columns: repeat(1, 1fr);
-    // grid-template-rows: repeat(2, 1fr);
-    // gap: var.$spacing-medium;
-
+    // par defaut style mobile-first
     display: flex;
     flex-direction: column;
-    gap: var.$spacing-medium;
+    gap: var.$spacing-large;
+    align-items: center;
 
-    @include mixin.large {
+    .description__title__container {
+        margin-top: 10rem;
+        text-align: center;
+    }
+
+    // style desktop
+    @include mixin.desktop {
         display: grid;
-        gap: var.$spacing-medium;
-        grid-template-areas: 
-        "b a"
-        "b c";
-        // display: grid;
-        // grid-template-columns: repeat(2, 1fr);
-        // grid-template-rows: repeat(2, 1fr);
-        // gap: var.$spacing-xlarge;
-        // color : var.$color-admin;
+        gap: var.$spacing-xlarge;
+        grid-template-areas:
+            "b a"
+            "b c";
+        align-items: start;
+
+        // titre desktop
         .description__title__container {
             grid-area: a;
         }
 
+        // image desktop
         .description__image__container {
             grid-area: b;
+            margin-top: 9rem;
             .description__image {
                 width: 40vw;
+                object-fit: cover; // l'image recadrée & garde la bonne proportion
             }
         }
 
+        // texte desktop
         .description__text__container {
             grid-area: c;
             .description__text {
                 width: 40vw;
+                line-height: 1.6;
             }
         }
     }
 }
 
+// image style par defaut mobile
 .description__image {
     width: 80vw;
     height: auto;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
+// texte couleur générale
 .description__text {
-    color : var.$color-title-text;
+    color: var.$color-title-text;
+    text-align: justify;
+    margin-left: var.$spacing-large;
+    margin-right: var.$spacing-large;
 }
-
-
-
