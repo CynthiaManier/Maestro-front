@@ -1,0 +1,58 @@
+@use "../var.scss";
+@use "../mixin.scss";
+
+
+
+.description {
+    // display: grid;
+    // grid-template-columns: repeat(1, 1fr);
+    // grid-template-rows: repeat(2, 1fr);
+    // gap: var.$spacing-medium;
+
+    display: flex;
+    flex-direction: column;
+    gap: var.$spacing-medium;
+
+    @include mixin.large {
+        display: grid;
+        gap: var.$spacing-medium;
+        grid-template-areas: 
+        "b a"
+        "b c";
+        // display: grid;
+        // grid-template-columns: repeat(2, 1fr);
+        // grid-template-rows: repeat(2, 1fr);
+        // gap: var.$spacing-xlarge;
+        // color : var.$color-admin;
+        .description__title__container {
+            grid-area: a;
+        }
+
+        .description__image__container {
+            grid-area: b;
+            .description__image {
+                width: 40vw;
+            }
+        }
+
+        .description__text__container {
+            grid-area: c;
+            .description__text {
+                width: 40vw;
+            }
+        }
+    }
+}
+
+.description__image {
+    width: 80vw;
+    height: auto;
+    border-radius: 5px;
+}
+
+.description__text {
+    color : var.$color-title-text;
+}
+
+
+
