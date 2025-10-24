@@ -1,4 +1,5 @@
 import React from "react";
+import { Dropdown } from "react-bootstrap"; 
 import "./Footer.scss";
 
 const links = [
@@ -6,41 +7,62 @@ const links = [
     { label: "Politique de confidentialité", href: "#" },
     { label: "Informations légales", href: "#" },
     { label: "CGU", href: "#" },
-    { label: "Accessibilité", href: "#" },
+    { label: "Accessibilité", href: "#" }
+];
+
+// Lien "Compositions" ajouté au début pour mobile
+const mobileLinks = [
+    { label: "Compositions", href: "#" },  
+    ...links
 ];
 
 function Footer() {
     return (
         <footer className="footer">
-            <nav >
+            <nav>
                 <ul className="footer-links">
-                    {links.map(({ label, href }, index) => (
+                    {links.map((link, index) => (
                         <li key={index}>
-                            <a href={href}>{label}</a>
+                            <a href={link.href}>{link.label}</a>
                         </li>
                     ))}
                 </ul>
             </nav>
-
-            <ul className="footer-icons" >
+            <ul className="footer-icons">
                 <li>
                     <a href="#" aria-label="Page d’accueil">
-                        <i className="bi bi-house" ></i>
+                        <i className="bi bi-house"></i>
                     </a>
                 </li>
                 <li>
                     <a href="#" aria-label="Espace personnel">
-                        <i className="bi bi-person" ></i>
+                        <i className="bi bi-person"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#" aria-label="Menu des liens">
-                        <i className="bi bi-list"></i>
-                    </a>
+                    <Dropdown>
+                        <Dropdown.Toggle
+                            as="a"
+                            href="#"
+                            className="bi bi-list"
+                            aria-label="Menu des liens"
+                        />
+                        <Dropdown.Menu>
+                            {mobileLinks.map((link, index) => (
+                                <Dropdown.Item 
+                                    key={index}
+                                    href={link.href}
+                                >
+                                    {link.label}
+                                </Dropdown.Item>
+                            ))}
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </li>
             </ul>
         </footer>
     );
 }
+
 
 export default Footer;

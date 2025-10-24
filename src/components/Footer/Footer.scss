@@ -11,70 +11,102 @@ footer {
     background-color: $color-bg;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 
-nav {
+
+    nav {
         width: 100%;
         display: flex;
         justify-content: center;
-}
+    }
 
-.footer-links {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-    list-style: none;
-    gap: 60px;
-    margin: 0;
-    padding: 0;
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 800px;
+        list-style: none;
+        gap: 60px;
+        margin: 0;
+        padding: 0;
 
-    li a {
-        text-decoration: none;
-        color: $color-title-and-text;
-        font-family: $font-main;
-        font-weight: 500;
-        font-size: $font-size-base;
-        transition: color 0.3s ease;
-
-        &:hover {
-            color: #007bff;
+        li a {
+            text-decoration: none;
+            color: $color-title-and-text;
+            font-family: $font-main;
+            font-weight: 500;
+            font-size: $font-size-base;
+            transition: color 0.3s ease;
+            &:hover {
+                color: #007bff;
+            }
         }
     }
-}
 
-.footer-icons {
-    display: none;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    .footer-icons {
+        display: none;
+        list-style: none;
+        margin: 0;
+        padding: 0;
 
-    li a {
+        li a {
             color: $color-title-and-text;
             font-size: 3rem;
         }
     }
+
     @include medium {
-        footer {
-            padding: 15px 20px;
+        padding: 15px 20px;
+
+        .footer-links {
+            display: none;
         }
 
-    .footer-links {
+        .footer-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+            padding: 10px 0;
+
+            li a {
+                color: $color-title-and-text;
+                font-size: 2rem;
+                text-decoration: underline;
+                text-decoration-color: $color-admin;
+                text-underline-offset: 4px;
+            }
+
+            // Ajustement du menu déroulant
+            .dropdown-menu {
+                bottom: 100%; // s’affiche au-dessus du footer
+                left: 0;
+                width: 100vw; // toute la largeur de l’écran
+                background-color: #fff;
+                border-radius: 0;
+                border: 1px solid $color-admin;
+                box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.15);
+                margin-bottom: 0.5rem;
+
+
+
+                a.dropdown-item {
+                    font-family: $font-main;
+                    font-weight: lighter;
+                    font-size: $font-size-base;
+                    color: $color-title-and-text;
+                    padding: 10px 16px;
+                    text-align: center;
+                }
+            }
+            //lien composition visible uniquement sur mobile
+            .mobile-only-link {
+                display: block;
+            }
+        }
+    }
+    //lien composition non-visible uniquement sur desktop
+    .mobile-only-link {
         display: none;
     }
-
-    .footer-icons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-        width: 100%;
-        padding: 10px 0;
-    }
-
-    .footer-icons li a {
-        font-size: 2rem;
-    }
 }
-
-}
-

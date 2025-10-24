@@ -57,9 +57,9 @@ function Header() {
                 <img src="logo.png" alt="logo maestro" />
                     <nav>
                         <ul>
-                        {commonLinks.map((item, index) => (
+                        {commonLinks.map((link, index) => (
                             <li key={index}>
-                                <a href={item.href}>{item.label}</a>
+                                <a href={link.href}>{link.label}</a>
                             </li>
                         ))}
 {/* conditionnel user qui dis à la className "icon menu" quel user.role  
