@@ -1,7 +1,14 @@
 import ClientInline from "./ClientInline/ClientInline.jsx";
 import "./ClientList.scss";
+import { getAllUsers } from "../../api/apiUser.js";
+import { useEffect } from "react";
 
 function ClientList() {
+    useEffect(() => {
+        const clients = getAllUsers();
+        console.log(clients);
+    });
+
     return (
         <>
             <section className="client-liste">
