@@ -1,43 +1,80 @@
 @use "../style/var" as *;
 
 footer {
-    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
     display: flex;
+    padding: 10px 40px;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 30px 40px;
     background-color: $color-bg;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
 
-    nav {
-        flex-grow: 1;
+nav {
+        width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
+}
 
-        ul {
-            display: flex;
-            align-items: center;
-            list-style: none;
-            gap: 50px;
-            margin: 0;
-            padding: 0;
+.footer-links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    list-style: none;
+    gap: 60px;
+    margin: 0;
+    padding: 0;
 
-            li a {
-                text-decoration: none;
-                color: $color-text;
-                font-family: $font-main;
-                font-weight: 500;
-                font-size: $spacing-medium;
-                transition: color 0.3s ease;
+    li a {
+        text-decoration: none;
+        color: $color-title-and-text;
+        font-family: $font-main;
+        font-weight: 500;
+        font-size: $font-size-base;
+        transition: color 0.3s ease;
 
-                &:hover {
-                    color: #007bff;
-                }
-            }
+        &:hover {
+            color: #007bff;
         }
     }
 }
+
+.footer-icons {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li a {
+            color: $color-title-and-text;
+            font-size: 3rem;
+        }
+    }
+    @include medium {
+        footer {
+            padding: 15px 20px;
+        }
+
+    .footer-links {
+        display: none;
+    }
+
+    .footer-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .footer-icons li a {
+        font-size: 2rem;
+    }
+}
+
+}
+

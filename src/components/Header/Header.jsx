@@ -96,7 +96,7 @@ on aura et bouton se déconnecter de la fonction handleLogin au clique on se dé
                         )}
 
 {/*demo de simulation quand on clique sur l'icone admin ou client on se connecte*/}
-                {!user && (
+{/*                 {!user && (
                     <div>
                             <img
                                 src={clientIcon}
@@ -109,7 +109,7 @@ on aura et bouton se déconnecter de la fonction handleLogin au clique on se dé
                                 onClick={() => handleLogin("admin")}
                                 />
                         </div>
-                    )}
+                    )}  */}
                     </ul>
                 </nav>
             </header>
