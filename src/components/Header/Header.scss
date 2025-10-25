@@ -1,4 +1,5 @@
-@use "../style/var" as *;
+@use "../style/var.scss";
+@use "../style/mixin.scss";
 
 header {
     position: sticky;
@@ -9,7 +10,7 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 10px 40px;
-    background-color: $color-bg;
+    background-color: var.$color-bg;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
 
@@ -35,10 +36,10 @@ header {
 
             li a {
                 text-decoration: none;
-                color: $color-title-and-text;
-                font-family: $font-main;
+                color: var.$color-title-and-text;
+                font-family: var.$font-main;
                 font-weight: 500;
-                font-size: $font-size-base;
+                font-size: var.$font-size-base;
                 transition: color 0.3s ease;
 
                 &:hover {
@@ -77,8 +78,8 @@ header {
 
             p {
                 margin: 0;
-                font-family: $font-main;
-                color: $color-title-and-text;
+                font-family: var.$font-main;
+                color: var.$color-title-and-text;
                 font-size: 0.95rem;
             }
 
@@ -89,14 +90,14 @@ header {
                 padding: 6px 12px;
                 border-radius: 4px;
                 cursor: pointer;
-                font-family: $font-main;
+                font-family: var.$font-main;
                 font-size: 0.9rem;
             }
         }
     }
 
 /* affichage en mode mobile  */
-    @include medium {
+    @include mixin.medium {
         flex-direction: column;
         align-items: center;
         padding: 10px 20px;

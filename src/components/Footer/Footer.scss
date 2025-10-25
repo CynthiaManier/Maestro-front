@@ -1,4 +1,5 @@
-@use "../style/var" as *;
+@use "../style/var.scss";
+@use "../style/mixin.scss";
 
 footer {
     left: 0;
@@ -8,9 +9,9 @@ footer {
     padding: 10px 40px;
     flex-direction: column;
     align-items: center;
-    background-color: $color-bg;
+    background-color: var.$color-bg;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-
+    z-index: 1;
 
     nav {
         width: 100%;
@@ -31,11 +32,12 @@ footer {
 
         li a {
             text-decoration: none;
-            color: $color-title-and-text;
-            font-family: $font-main;
+            color: var.$color-title-and-text;
+            font-family: var.$font-main;
             font-weight: 500;
-            font-size: $font-size-base;
+            font-size: var.$font-size-base;
             transition: color 0.3s ease;
+
             &:hover {
                 color: #007bff;
             }
@@ -48,13 +50,37 @@ footer {
         margin: 0;
         padding: 0;
 
-        li a {
-            color: $color-title-and-text;
-            font-size: 3rem;
+        li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            a {
+                color: var.$color-title-and-text;
+                font-size: 3rem;
+                text-decoration: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                i {
+                    display: block;
+                }
+
+                span {
+                    font-size: 0.7rem;
+                    color: var.$color-title-and-text;
+                    font-family: var.$font-main;
+                }
+
+                &:hover span {
+                    color: #007bff;
+                }
+            }
         }
     }
 
-    @include medium {
+    @include mixin.medium {
         padding: 15px 20px;
 
         .footer-links {
@@ -70,43 +96,44 @@ footer {
             padding: 10px 0;
 
             li a {
-                color: $color-title-and-text;
+                color: var.$color-title-and-text;
                 font-size: 2rem;
-                text-decoration: underline;
-                text-decoration-color: $color-admin;
-                text-underline-offset: 4px;
             }
 
-            // Ajustement du menu déroulant
+            .dropdown-toggle::after {
+                display: none;
+            }
+
+
+
+            // Menu déroulant mobile
             .dropdown-menu {
+                position: absolute;
                 bottom: 100%; // s’affiche au-dessus du footer
                 left: 0;
                 width: 100vw; // toute la largeur de l’écran
                 background-color: #fff;
-                border-radius: 0;
-                border: 1px solid $color-admin;
+                border: 1px solid var.$color-admin;
                 box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.15);
                 margin-bottom: 0.5rem;
 
-
-
                 a.dropdown-item {
-                    font-family: $font-main;
+                    font-family: var.$font-main;
                     font-weight: lighter;
-                    font-size: $font-size-base;
-                    color: $color-title-and-text;
+                    font-size: var.$font-size-base;
+                    color: var.$color-title-and-text;
                     padding: 10px 16px;
                     text-align: center;
                 }
             }
-            //lien composition visible uniquement sur mobile
+            //lien composition visible sur mobile
             .mobile-only-link {
                 display: block;
             }
         }
     }
-    //lien composition non-visible uniquement sur desktop
-    .mobile-only-link {
+        //lien composition non-visible sur desktop
+    .desktop-only-link {
         display: none;
     }
 }

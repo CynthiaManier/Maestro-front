@@ -18,20 +18,9 @@ $font-size-h2: 2rem;   // titres H2
 $font-size-h1: 3rem;   // titres H1
 
 // Les breakpoints
-$breakpoint-sd: 576px;
 $breakpoint-md: 768px;
 
-// Mixin responsive mobile 768 px
-@mixin small {
-    @media (max-width: #{$breakpoint-sm}) {
-        @content;
-    }
-}
 
-@mixin medium {
-    @media (max-width: #{$breakpoint-md}) {
-        @content;
-    }
-}
+
 
 
