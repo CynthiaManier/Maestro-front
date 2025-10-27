@@ -6,7 +6,7 @@ import ClientCard from "./components/ClientList/Clientcard/ClientCard.jsx";
 import ClientInline from "./components/ClientList/ClientInline/ClientInline.jsx";
 import ClientList from "./components/ClientList/ClientList.jsx"; 
 
-import './index.css';
+import "./index.css";
 
 function App() {
 
@@ -28,4 +28,4 @@ function App() {
 
 }
 
-export default App 
+export default App;
