@@ -50,11 +50,12 @@ const API_URL = "http://localhost:3000/api";
 // userRoute.delete('/user', userController.quelque chose)
 
 // Voir la liste des utilisateurs
+
 export async function getAllUsers() {
-    axios
+    return axios
         .get(`${API_URL}/admin/user`)
         .then(function (res) {
-            console.log(res.data);
+            console.log("api console :", res.data);
             return res.data;
         })
         .catch(function (error) {

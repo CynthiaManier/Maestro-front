@@ -1,4 +1,3 @@
-import ClientInline from "./ClientInline/ClientInline.jsx";
 import "./ClientList.scss";
 import { getAllUsers } from "../../api/apiUser.js";
 import { useEffect, useState } from "react";
@@ -7,12 +6,15 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 function ClientList() {
-    const [client, setClient] = useState("");
+    const [clientList, setClientList] = useState([]);
 
+    async function getAllClients() {
+        const allClients = await getAllUsers();
+        setClientList(allClients);
+    }
     useEffect(() => {
-        const clients = getAllUsers();
-        console.log(clients);
-    });
+        getAllClients();
+    }, []);
 
     return (
         <Container className="client-list">
@@ -48,32 +50,36 @@ function ClientList() {
                 </Col>
             </Row>
             {/* Lite des clients */}
-            <Row className="client-list-result">
-                <Col
-                    sm={2}
-                    className="client-list-result_item client-list-result_name_item"
-                >
-                    {firstname} {lastname}
-                </Col>
-                <Col
-                    sm={3}
-                    className="client-list-result_item client-list-result_email_item"
-                >
-                    {email}
-                </Col>
-                <Col
-                    sm={5}
-                    className="client-list-result_item client-list-result_adress_item"
-                >
-                    {localisation}
-                </Col>
-                <Col
-                    sm={2}
-                    className="client-list-result_item client-list-result_phone-number_item"
-                >
-                    {phonenumber}
-                </Col>
-            </Row>
+
+            {clientList != [] &&
+                clientList.map((client) => (
+                    <Row key={client.id} className="client-list-result">
+                        <Col
+                            sm={2}
+                            className="client-list-result_item client-list-result_name_item"
+                        >
+                            {client.firstname} {client.lastname}
+                        </Col>
+                        <Col
+                            sm={3}
+                            className="client-list-result_item client-list-result_email_item"
+                        >
+                            {/* {email} */}
+                        </Col>
+                        <Col
+                            sm={5}
+                            className="client-list-result_item client-list-result_adress_item"
+                        >
+                            {/* {localisation} */}
+                        </Col>
+                        <Col
+                            sm={2}
+                            className="client-list-result_item client-list-result_phone-number_item"
+                        >
+                            {/* {phonenumber} */}
+                        </Col>
+                    </Row>
+                ))}
         </Container>
     );
 }
