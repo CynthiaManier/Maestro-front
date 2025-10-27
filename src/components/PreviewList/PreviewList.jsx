@@ -24,8 +24,10 @@ function PreviewList() {
 
     return (
         <>
-                <h1>Tous les extraits</h1>
-                <section className="previewList">
+                <h1 className="preview__list__title">Tous les extraits</h1>
+                {/* ajout du tri par genre */}
+                
+                <section className="preview__list">
                     {previewList.length != 0 && previewList.map((preview) => (
                         <Preview key={preview.id} audiosrc={audioscr} title={preview.title} genres={preview.listGenres}/>
                     ))}
