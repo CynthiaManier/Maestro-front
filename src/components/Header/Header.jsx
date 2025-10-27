@@ -6,6 +6,7 @@ import adminIcon from "../../assets/images/user-admin.svg";
 function Header() {
     const [user, setUser] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
+    //peut être modifiée sans provoquer de re-rendu du composant
     const menuRef = useRef(null);
 
     // constante pour tout les liens communs
@@ -57,9 +58,9 @@ function Header() {
                 <img src="logo.png" alt="logo maestro" />
                     <nav>
                         <ul>
-                        {commonLinks.map((item, index) => (
+                        {commonLinks.map((link, index) => (
                             <li key={index}>
-                                <a href={item.href}>{item.label}</a>
+                                <a href={link.href}>{link.label}</a>
                             </li>
                         ))}
 {/* conditionnel user qui dis à la className "icon menu" quel user.role  
@@ -96,7 +97,7 @@ on aura et bouton se déconnecter de la fonction handleLogin au clique on se dé
                         )}
 
 {/*demo de simulation quand on clique sur l'icone admin ou client on se connecte*/}
-                {!user && (
+{/*                 {!user && (
                     <div>
                             <img
                                 src={clientIcon}
@@ -109,7 +110,7 @@ on aura et bouton se déconnecter de la fonction handleLogin au clique on se dé
                                 onClick={() => handleLogin("admin")}
                                 />
                         </div>
-                    )}
+                    )}  */}
                     </ul>
                 </nav>
             </header>

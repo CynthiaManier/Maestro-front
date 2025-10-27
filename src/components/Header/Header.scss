@@ -1,54 +1,35 @@
-@use "../style/var" as *;
+@use "../style/var.scss";
+@use "../style/mixin.scss";
 
 header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     display: flex;
+    flex-direction: column; // mobile: empilé
     align-items: center;
-    justify-content: space-between;
-    padding: 10px 40px;
-    background-color: $color-bg;
+    justify-content: center;
+    padding: 3px 20px;
+    background-color: var.$color-bg;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    z-index: 10;
 
     img {
-        width: 100px;
-        height: 100px;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
         object-fit: contain;
+        margin-bottom: 0;
     }
 
-    nav {
-        flex-grow: 1;
-        display: flex;
-        justify-content: space-around;
-
-        ul {
-            display: flex;
-            align-items: center;
-            list-style: none;
-            gap: 50px;
-            margin: 0;
-            padding: 0;
-
-            li a {
-                text-decoration: none;
-                color: $color-text;
-                font-family: $font-main;
-                font-weight: 500;
-                font-size: $spacing-medium;
-                transition: color 0.3s ease;
-
-                &:hover {
-                    color: #007bff;
-                }
-            }
-        }
+    // logo seul sur mobile
+    nav,
+    .icon-menu {
+        display: none;
     }
 
-/* menu déroulant */
+    /* menu déroulant mobile */
     .icon-menu {
         position: relative;
 
@@ -76,8 +57,8 @@ header {
 
             p {
                 margin: 0;
-                font-family: $font-main;
-                color: $color-text;
+                font-family: var.$font-main;
+                color: var.$color-title-and-text;
                 font-size: 0.95rem;
             }
 
@@ -88,29 +69,55 @@ header {
                 padding: 6px 12px;
                 border-radius: 4px;
                 cursor: pointer;
-                font-family: $font-main;
+                font-family: var.$font-main;
                 font-size: 0.9rem;
             }
         }
     }
 
-/* affichage en mode mobile  */
-    @include small {
-        flex-direction: column;
+    // À partir de medium : affichage complet (desktop)
+    @include mixin.medium {
+        flex-direction: row;
         align-items: center;
-        padding: 10px 20px;
+        justify-content: space-between;
+        padding: 10px 40px;
 
         img {
-            width: 100px;
-            height: 100px;
             margin-bottom: 0;
         }
 
-/* masque tout sauf le logo */
-        nav,
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+
+            ul {
+                display: flex;
+                align-items: center;
+                list-style: none;
+                gap: 50px;
+                margin: 0;
+                padding: 0;
+
+                li a {
+                    text-decoration: none;
+                    color: var.$color-title-and-text;
+                    font-family: var.$font-main;
+                    font-weight: 500;
+                    font-size: var.$font-size-base;
+                    transition: color 0.3s ease;
+
+                    &:hover {
+                        color: #007bff;
+                    }
+                }
+            }
+        }
+
         .icon-menu {
-            display: none;
+            display: flex;
+            align-items: center;
+            position: relative;
         }
     }
 }
-
