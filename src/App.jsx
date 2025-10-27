@@ -6,7 +6,7 @@ import ProjectForm from './components/ProjectForm/ProjectForm.jsx';
 import ClientCard from "./components/ClientList/Clientcard/ClientCard.jsx";
 import ClientInline from "./components/ClientList/ClientInline/ClientInline.jsx";
 import ClientList from "./components/ClientList/ClientList.jsx"; 
-
+import GenreList from './components/GenresList.jsx';
 import "./index.css";
 
 function App() {
@@ -18,12 +18,13 @@ function App() {
         
         <Header />
         <main>
-      <Description />
+          <GenreList/>
+ {/*      <Description />
     <ProjectForm />
           <PreviewList />
           <ClientCard />
           <ClientInline />
-          <ClientList />  
+          <ClientList />   */}
         </main>
         <Footer />
           
