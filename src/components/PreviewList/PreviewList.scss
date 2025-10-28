@@ -3,6 +3,7 @@
 
 .preview__list__title {
     text-align: center;
+    font-family: var.$font-main;
     margin: 1rem;
 }
 
@@ -40,7 +41,7 @@
 }
 
 .genre__menu {
-    width: 100vw;
+    width: calc(100vw - 2px);
     border: solid 1px var.$color-admin;
     display: flex;
     flex-direction: column;
@@ -49,6 +50,7 @@
 
 .genre__item {
     border-bottom: solid 1px var.$color-admin;
-    width: calc(100vw - 4rem);
-    margin: 2rem;
+    width: calc(100vw - 6rem);
+    margin: .5rem 3rem .5rem 3rem;
+    font-family: var.$font-alt;
 }
