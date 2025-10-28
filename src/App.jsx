@@ -1,10 +1,11 @@
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
-import Description from "./components/Description/Description";
+import Register from "./pages/register/Register.jsx";
+/* import Description from "./components/Description/Description";
 import PreviewList from "./components/PreviewList/PreviewList.jsx";
 import ProjectForm from "./components/ProjectForm/ProjectForm.jsx";
 import ClientList from "./components/ClientList/ClientList.jsx";
-import LoginForm from "./components/LoginForm/LoginForm.jsx";
+import LoginForm from "./components/LoginForm/LoginForm.jsx"; */
 
 import "./index.css";
 
@@ -13,11 +14,12 @@ function App() {
         <div className="App">
             <Header />
             <main>
-                {/* <Description />
+{/*                  <Description />
                 <ProjectForm />
-                <PreviewList /> */}
+                <PreviewList /> *
                 <ClientList />
-                <LoginForm />
+                <LoginForm /> */}
+                <Register/>
             </main>
             <Footer />
         </div>
