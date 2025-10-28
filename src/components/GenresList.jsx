@@ -22,7 +22,7 @@ const handleSubmit = async (e) => {
     //ok
     await addAGenre(newGenre); // Appel à l'apiGenre pour ajouter le genre
     console.log("ajouté un genre :", newGenre); //Affiche le genre ajouté dans la console
-    //not ok 
+    // ok 
     // Après ajout, recharge les genres depuis l'API
     getAllGenres().then((data) => {
         console.log(" lister tout les genres :", data); //Vérifie que la liste est bien mise à jour
