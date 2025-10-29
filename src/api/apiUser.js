@@ -26,12 +26,30 @@ export async function loginUser(userData) {
 // userRoute.post("/user/logout", userController.logout);
 
 // Voir ses informations personnelles
-// GET/api/user/profile
-// userRoute.get("/user/profile", authenticate, userController.profile);
+export async function getMyProfile() {
+    return api_axios
+        .get(`/user/profile`)
+        .then(function (res) {
+            console.log("api console :", res.data);
+            return res.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
 
 // Modifier ses informations
-// PATCH/api/user
-// userRoute.patch("/user", authenticate, userController.modify);
+export async function UpdateMyProfile() {
+    return api_axios
+        .patch(`/user`)
+        .then(function (res) {
+            console.log("api console :", res.data);
+            return res.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
 
 // Supprimer un utilisateur (désactiver)
 // DELETE/api/user
