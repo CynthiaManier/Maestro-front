@@ -1,4 +1,3 @@
-import ClientInline from "./ClientInline/ClientInline.jsx";
 import "./ClientList.scss";
 import { getAllUsers } from "../../api/apiUser.js";
 import { useEffect, useState } from "react";
@@ -7,12 +6,15 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 function ClientList() {
-    const [client, setClient] = useState("");
+    const [clientList, setClientList] = useState([]);
 
+    async function getAllClients() {
+        const allClients = await getAllUsers();
+        setClientList(allClients);
+    }
     useEffect(() => {
-        const clients = getAllUsers();
-        console.log(clients);
-    });
+        getAllClients();
+    }, []);
 
     return (
         <Container className="client-list">
@@ -48,92 +50,37 @@ function ClientList() {
                 </Col>
             </Row>
             {/* Lite des clients */}
-            <Row className="client-list-result">
-                <Col
-                    sm={2}
-                    className="client-list-result_item client-list-result_name_item"
-                >
-                    {firstname} {lastname}
-                </Col>
-                <Col
-                    sm={3}
-                    className="client-list-result_item client-list-result_email_item"
-                >
-                    {email}
-                </Col>
-                <Col
-                    sm={5}
-                    className="client-list-result_item client-list-result_adress_item"
-                >
-                    {localisation}
-                </Col>
-                <Col
-                    sm={2}
-                    className="client-list-result_item client-list-result_phone-number_item"
-                >
-                    {phonenumber}
-                </Col>
-            </Row>
+            {clientList != [] &&
+                clientList.map((client) => (
+                    <Row key={client.id} className="client-list-result">
+                        <Col
+                            sm={2}
+                            className="client-list-result_item client-list-result_name_item"
+                        >
+                            {client.firstname} {client.lastname}
+                        </Col>
+                        <Col
+                            sm={3}
+                            className="client-list-result_item client-list-result_email_item"
+                        >
+                            {client.email}
+                        </Col>
+                        <Col
+                            sm={5}
+                            className="client-list-result_item client-list-result_adress_item"
+                        >
+                            {client.localisation}
+                        </Col>
+                        <Col
+                            sm={2}
+                            className="client-list-result_item client-list-result_phone-number_item"
+                        >
+                            {client.phonenumber}
+                        </Col>
+                    </Row>
+                ))}
         </Container>
     );
 }
 
 export default ClientList;
-
-{
-    /* <Row className="client-list-result">
-                <Col
-                    sm={2}
-                    className="client-list-result_item client-list-result_name_item"
-                >
-                    Lucas Taguet
-                </Col>
-                <Col
-                    sm={3}
-                    className="client-list-result_item client-list-result_email_item"
-                >
-                    lucas.taguet@exemple.com
-                </Col>
-                <Col
-                    sm={5}
-                    className="client-list-result_item client-list-result_adress_item"
-                >
-                    17 Allée du Commit 75099 Paris
-                </Col>
-                <Col
-                    sm={2}
-                    className="client-list-result_item client-list-result_phone-number_item"
-                >
-                    1111111111
-                </Col>
-            </Row>
-            <Row className="client-list-result">
-                <Col
-                    sm={2}
-                    className="client-list-result_item client-list-result_name_item"
-                >
-                    Yann Middleware
-                </Col>
-                <Col
-                    sm={3}
-                    className="client-list-result_item client-list-result_email_item"
-                >
-                    yann.middleware@exemple.com
-                </Col>
-                <Col
-                    sm={5}
-                    className="client-list-result_item client-list-result_adress_item"
-                >
-                    Appartement 12B, Résidence des Développeurs Éclairés, 2457
-                    Boulevard de la Compatibilité Internavigateurs, Quartier des
-                    Variables Globales, Commune de Code-sur-Loire, Département
-                    du JavaScript-Atlantique, 99999 France
-                </Col>
-                <Col
-                    sm={2}
-                    className="client-list-result_item client-list-result_phone-number_item"
-                >
-                    3333333333
-                </Col>
-            </Row> */
-}
