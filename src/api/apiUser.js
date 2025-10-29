@@ -39,11 +39,11 @@ export async function getMyProfile() {
 }
 
 // Modifier ses informations
-export async function UpdateMyProfile() {
+export async function updateMyProfile(newUserData) {
     return api_axios
-        .patch(`/user`)
+        .patch(`/user`, newUserData)
         .then(function (res) {
-            console.log("api console :", res.data);
+            console.log("api console :", newUserData);
             return res.data;
         })
         .catch(function (error) {

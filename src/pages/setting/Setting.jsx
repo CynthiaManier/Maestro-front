@@ -6,9 +6,11 @@ import Form from "react-bootstrap/Form";
 import "./Setting.scss";
 import { useState } from "react";
 import { getMyProfile } from "../../api/apiUser";
+import { updateMyProfile } from "../../api/apiUser";
 import { useEffect } from "react";
 
 function Setting() {
+    // Voir mes informations
     const [setting, setSetting] = useState({});
 
     async function getMySetting() {
@@ -21,14 +23,36 @@ function Setting() {
         getMySetting();
     }, []);
 
+    // Modifier mes informations
+    const [newLastname, setNewLastname] = useState("");
+    const [newFirstname, setNewFirstname] = useState("");
+    const [newEmail, setNewEmail] = useState("");
+    const [newLocalisation, setNewLocalisation] = useState("");
+    const [newPhonenumber, setNewPhonenumber] = useState("");
+
+    function handelSubmit(event) {
+        event.preventDefault();
+        const newUserData = {
+            lastname: newLastname,
+            firstname: newFirstname,
+            email: newEmail,
+            localisation: newLocalisation,
+            phonenumber: newPhonenumber,
+        };
+        updateMyProfile(newUserData);
+    }
+
     return (
         <>
             <Container>
                 <Row>
                     {/* PARTICULIER */}
                     <Col sm={6}>
-                        <Form className="profile-form">
-                            {/* -------------------------------------------------------- */}
+                        <Form
+                            className="profile-form"
+                            method="post"
+                            onSubmit={(event) => handelSubmit(event)}
+                        >
                             <Container className="profil-item">
                                 {/* EN-TETE */}
                                 <Row className="profil-item-header">
@@ -44,14 +68,21 @@ function Setting() {
                                         <Form.Label>Nom</Form.Label>
                                         <Form.Control
                                             className="profile-form-item-input"
-                                            type=""
-                                            defaultValue={setting.user.lastname}
+                                            type="lastname"
                                             placeholder="Votre nom"
-                                            // value={lastname}
+                                            value={
+                                                setting?.user?.lastname
+                                                    ? setting.user.lastname
+                                                    : ""
+                                            }
+                                            onChange={(event) =>
+                                                setNewLastname(
+                                                    event.target.value
+                                                )
+                                            }
                                         />
                                     </Form.Group>
                                 </Row>
-                                {/* -------------------------------------------------------- */}
 
                                 {/* PRENOM */}
                                 <Row className="item">
@@ -62,12 +93,18 @@ function Setting() {
                                         <Form.Label>Prénom</Form.Label>
                                         <Form.Control
                                             className="profile-form-item-input"
-                                            type=""
-                                            defaultValue={
-                                                setting.user.firstname
-                                            }
+                                            type="firstname"
                                             placeholder="Votre prénom"
-                                            // value={firstname}
+                                            value={
+                                                setting?.user?.firstname
+                                                    ? setting.user.firstname
+                                                    : ""
+                                            }
+                                            onChange={(event) =>
+                                                setNewFirstname(
+                                                    event.target.value
+                                                )
+                                            }
                                         />
                                     </Form.Group>
                                 </Row>
@@ -82,9 +119,15 @@ function Setting() {
                                         <Form.Control
                                             className="profile-form-item-input"
                                             type="email"
-                                            defaultValue={setting.user.email}
                                             placeholder="Votre email"
-                                            // value={email}
+                                            value={
+                                                setting?.user?.email
+                                                    ? setting.user.email
+                                                    : ""
+                                            }
+                                            onChange={(event) =>
+                                                setNewEmail(event.target.value)
+                                            }
                                         />
                                     </Form.Group>
                                 </Row>
@@ -98,12 +141,18 @@ function Setting() {
                                         <Form.Label>Adresse</Form.Label>
                                         <Form.Control
                                             className="profile-form-item-input"
-                                            type=""
-                                            defaultValue={
-                                                setting.user.localisation
-                                            }
+                                            type="localisation"
                                             placeholder="Votre adresse"
-                                            // value={localisation}
+                                            value={
+                                                setting?.user?.localisation
+                                                    ? setting.user.localisation
+                                                    : ""
+                                            }
+                                            onChange={(event) =>
+                                                setNewLocalisation(
+                                                    event.target.value
+                                                )
+                                            }
                                         />
                                     </Form.Group>
                                 </Row>
@@ -119,19 +168,29 @@ function Setting() {
                                         </Form.Label>
                                         <Form.Control
                                             className="profile-form-item-input"
-                                            type=""
-                                            defaultValue={
-                                                setting.user.phonenumber
-                                            }
+                                            type="phonenumber"
                                             placeholder="Votre numero de téléphone"
-                                            // value={phonenumber}
+                                            value={
+                                                setting?.user?.phonenumber
+                                                    ? setting.user.phonenumber
+                                                    : ""
+                                            }
+                                            onChange={(event) =>
+                                                setNewPhonenumber(
+                                                    event.target.value
+                                                )
+                                            }
                                         />
                                     </Form.Group>
                                 </Row>
 
                                 {/* BOUTTON */}
                                 <Row className="item-button">
-                                    <Button className="mofifier-button">
+                                    <Button
+                                        className="mofifier-button"
+                                        variant="mofifier-button"
+                                        type="submit"
+                                    >
                                         Modifier
                                     </Button>
                                 </Row>
@@ -209,57 +268,6 @@ function Setting() {
                                 </Container>
                             </Form>
                         </Row>
-                        <Row>
-                            <Form className="profile-form">
-                                <Container className="profil-item">
-                                    {/* EN-TETE */}
-                                    <Row className="profil-item-header">
-                                        <Col>Modifier mon mot de passe</Col>
-                                    </Row>
-
-                                    {/* MOT DE PASSE*/}
-                                    <Row className="item password-item">
-                                        <Form.Group
-                                            className="profile-form-item"
-                                            controlId="password"
-                                        >
-                                            <Form.Label>
-                                                Nouveau mot de passe
-                                            </Form.Label>
-                                            <Form.Control
-                                                className="profile-form-item-input"
-                                                type="password"
-                                                placeholder="Mot de passe"
-                                                // value={password}
-                                            />
-                                        </Form.Group>
-                                    </Row>
-                                    <Row className="item password-item">
-                                        <Form.Group
-                                            className="profile-form-item"
-                                            controlId="password"
-                                        >
-                                            <Form.Label>
-                                                Retapper le mot de passe
-                                            </Form.Label>
-                                            <Form.Control
-                                                className="profile-form-item-input"
-                                                type="password"
-                                                placeholder="Mot de passe"
-                                                // value={password}
-                                            />
-                                        </Form.Group>
-                                    </Row>
-
-                                    {/* BOUTTON */}
-                                    <Row className="item-button">
-                                        <Button className="mofifier-button">
-                                            Modifier
-                                        </Button>
-                                    </Row>
-                                </Container>
-                            </Form>
-                        </Row>
                     </Col>
                 </Row>
             </Container>
@@ -268,3 +276,55 @@ function Setting() {
 }
 
 export default Setting;
+
+// {/* <Row>
+// <Form className="profile-form">
+//     <Container className="profil-item">
+//         {/* EN-TETE */}
+//         // <Row className="profil-item-header">
+//         //     <Col>Modifier mon mot de passe</Col>
+//         // </Row>
+
+//         {/* MOT DE PASSE*/}
+//         // <Row className="item password-item">
+//         //     <Form.Group
+//         //         className="profile-form-item"
+//         //         controlId="password"
+//         //     >
+//         //         <Form.Label>
+//         //             Nouveau mot de passe
+//         //         </Form.Label>
+//         //         <Form.Control
+//         //             className="profile-form-item-input"
+//         //             type="password"
+//         //             placeholder="Mot de passe"
+//         //             // value={password}
+//         //         />
+//         //     </Form.Group>
+//         // </Row>
+//         // <Row className="item password-item">
+//         //     <Form.Group
+//         //         className="profile-form-item"
+//         //         controlId="password"
+//         //     >
+//         //         <Form.Label>
+//         //             Retapper le mot de passe
+//         //         </Form.Label>
+//         //         <Form.Control
+//         //             className="profile-form-item-input"
+//         //             type="password"
+//         //             placeholder="Mot de passe"
+//         //             // value={password}
+//         //         />
+//         //     </Form.Group>
+//         // </Row>
+
+//         {/* BOUTTON */}
+// //         <Row className="item-button">
+// //             <Button className="mofifier-button">
+// //                 Modifier
+// //             </Button>
+// //         </Row>
+// //     </Container>
+// // </Form>
+// // </Row> */}
