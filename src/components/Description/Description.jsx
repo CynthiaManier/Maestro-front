@@ -1,13 +1,46 @@
 import "./Description.scss";
+import { getAllDescription } from "../../api/apiDescription.js";
+import { useState, useEffect } from "react";
 
 function Description() {
+
+
+
+    const [descriptionList, setDescriptionList] = useState([]);
+
+    async function getDescriptionList() {
+        const allDescriptions = await getAllDescription();
+        // console.log('allDescriptions ', allDescriptions);
+        setDescriptionList(allDescriptions);
+        // console.log('descriptionList',descriptionList);
+    }
+
+
+    useEffect(() => {
+        getDescriptionList();
+    }, [])
+
+    
     return (
+        <>
         <section className="description">
+            {descriptionList.length != 0 && 
+            descriptionList.map((description) => (
+            <div key={description.id} className="description__title__container">
+                <h2 className="description__title">
+                    {description.title}
+                </h2>
+            </div>
+            ))
+            }
+        </section>
+        
+        {/* <section className="description">
             <div className="description__title__container">
                 <h2 className="description__title">
                     Présentation du compositeur
                 </h2>
-                {/* <i class="bi bi-pencil-square"></i> */}
+                <i class="bi bi-pencil-square"></i>
             </div>
 
             <div className="description__image__container">
@@ -47,7 +80,8 @@ function Description() {
                     printer took a galley of type and
                 </p>
             </div>
-        </section>
+        </section> */}
+        </>
     );
 }
 
