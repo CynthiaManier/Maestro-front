@@ -4,18 +4,12 @@ import "./Register.scss";
 import { create } from "../../api/apiUser";
 
 function Register() {
-    const [pseudo, setPseudo] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setconfirmPassword] = useState("");
-    const [acceptPrivacy, setAcceptPrivacy] = useState(false);
 
     function handelSubmit(event) {
         event.preventDefault();
-        if (!acceptPrivacy) {
-            alert("Vous devez accepter la politique de confidentialité");
-            return;
-        }
         if (password !== confirmPassword) {
             alert("Les mots de passe ne correspondent pas");
             return;
@@ -23,7 +17,6 @@ function Register() {
         const registerData = {
             email: email,
             password: password,
-            pseudo: pseudo,
             confirmPassword: confirmPassword,
         };
         create(registerData)
@@ -48,20 +41,6 @@ function Register() {
                             method="post"
                             onSubmit={(event) => handelSubmit(event)}
                         >
-                            <Form.Group controlId="pseudo" className="mb-3">
-                                <Form.Label>Pseudo *</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Entrez votre pseudo"
-                                    name="name"
-                                    value={pseudo}
-                                    onChange={(event) =>
-                                        setPseudo(event.target.value)
-                                    }
-                                    required
-                                />
-                            </Form.Group>
-
                             <Form.Group controlId="email" className="mb-3">
                                 <Form.Label>Adresse-mail *</Form.Label>
                                 <Form.Control
@@ -108,32 +87,15 @@ function Register() {
                                     required
                                 />
                             </Form.Group>
-
-                            <Form.Group
-                                controlId="privacyPolicy"
-                                className="mb-4"
-                            >
-                                <Form.Check
-                                    type="checkbox"
-                                    label="J'accepte que mes données soient traitées conformément à la politique de confidentialité"
-                                    checked={acceptPrivacy}
-                                    onChange={(event) =>
-                                        setAcceptPrivacy(event.target.checked)
-                                    }
-                                    required
-                                />
-                            </Form.Group>
-
                             <div className="form-actions">
                                 <Button
-                                    variant="primary"
                                     type="submit"
                                     className="rounded-btn"
                                 >
                                     S'inscrire
                                 </Button>
                                 <p className="mt-3 mb-0">
-                                    Déjà un compte ?{" "}
+                                    Déjà un compte ?
                                     <a href="#">Se connecter</a>
                                 </p>
                             </div>
