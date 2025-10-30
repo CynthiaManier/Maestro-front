@@ -63,7 +63,7 @@ export async function updateCompany(newCompanyData) {
 // companyRoute.delete('/company/:id', companyController.delete)
 export async function deleteCompany() {
     return api_axios
-        .delete(`/compagny`)
+        .delete(`/company`)
         .then(function (res) {
             console.log(res.data);
             return res.data;
