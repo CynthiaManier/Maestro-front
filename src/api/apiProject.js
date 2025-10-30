@@ -3,7 +3,7 @@ import api_axios from "./axiosConfig.js";
 
 
 
-// ajouter un projet
+// ajouter une description
 export async function createProject(projectData) {
     return (
         api_axios
