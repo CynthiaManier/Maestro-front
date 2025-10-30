@@ -9,7 +9,7 @@ function Admin() {
         // Liste des clients avec leurs informations 
         // => ClientList
         // Les projets validés (avec leur statut etc) 
-        // => ProjectList
+        // => ProjectList (version admin)
         // Nouvelles demandes de contact 
         // => ContactRequestList
 
