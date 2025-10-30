@@ -309,7 +309,7 @@ function Setting() {
                                             <Form.Control
                                                 className="profile-form-item-input"
                                                 type=""
-                                                placeholder="24586268423368325562561256"
+                                                placeholder="Numero de siret"
                                                 defaultValue={
                                                     companySetting?.company
                                                         ?.siret
