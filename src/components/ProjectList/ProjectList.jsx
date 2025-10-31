@@ -1,18 +1,24 @@
 import { Card, Badge, Row, Col } from "react-bootstrap";
 import { getAllProjectList, getFilteredProjectList } from "../../api/apiProjectList.js";
 import { useState, useEffect } from "react";
+import Form from 'react-bootstrap/Form';
+
 
 function ProjectList() {
     // projectList est un tableau vide contenant tous les projets
     const [projectList, setProjectList] = useState([]);
     const [projectFilter, setProjectFilter] = useState ('');
+    const [statusList, setStatusList] = useState ([]);
+
 
     // je récupère les projets dans l'API coté back
     async function getProjects() {
         // l'api me renvoie la liste des projets
-        const allProjects = await getAllProjectList();
+        const result = await getAllProjectList();
+        setStatusList (result.Liststatus);
+
         // les projets se mettent dans le usestate pour les afficher
-        setProjectList(allProjects);
+        setProjectList(result.projects);
     }
 
     // je récupère les status du projet dans l'API coté back
@@ -52,11 +58,27 @@ function ProjectList() {
     return (
         <div className="title__container">
             <h3 className="title">Projets en cours</h3>
-            <select class="bi bi-filter" onChange={handleChange} value='' className="filter__button"></select>
-            {projectFilter.length != 0 && projectFilter.map((status) => (
-                            //
-                            <option value={status.label} key={status.id} className="genre__item">{status.label.charAt(0).toUpperCase() + status.label.slice(1)}</option>
+            <Form.Select size="lg" onChange={handleChange} aria-label="Sort by genre">
+                        
+                        <option value=''>Trier par statut</option>
+                        {/* On map sur la liste des status */}
+                        {statusList.length != 0 && statusList.map((status) => (
+                            // On affiche le genre (genreList[index])
+                        
+                            <option value={status} key={status}>{status}</option>
                         ))}
+                        {/* <option value="1">One</option> 
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>  */}
+                    </Form.Select>
+
+            {/* <select className="bi bi-filter" onChange={handleChange} value='' >
+            {statusList.length != 0 && statusList.map((status) => (
+                            //
+                            <option value={status} key={status} className="genre__item">{status}</option>
+                        ))}
+            </select> */}
+
             {projectList.map((project) => (
                 <Card
                     key={project.id}
