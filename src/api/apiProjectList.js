@@ -21,9 +21,9 @@ export async function getAllProjectList() {
 // GET /api/project/filter?
 // projectRouter.get('/project/filter', projectsController.sortByStatut)
 
-export async function getFilteredProjectList() {
+export async function getFilteredProjectList(status) {
     return api_axios
-        .get(`/project/filter`)
+        .get("/project/filter"+'?'+'status='+status)
         .then(function (res) {
             console.log(res.data);
             return res.data;

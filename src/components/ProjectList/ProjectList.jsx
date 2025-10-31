@@ -1,10 +1,11 @@
 import { Card, Badge, Row, Col } from "react-bootstrap";
-import { getAllProjectList } from "../../api/apiProjectList.js";
+import { getAllProjectList, getFilteredProjectList } from "../../api/apiProjectList.js";
 import { useState, useEffect } from "react";
 
 function ProjectList() {
     // projectList est un tableau vide contenant tous les projets
     const [projectList, setProjectList] = useState([]);
+    const [projectFilter, setProjectFilter] = useState ('');
 
     // je récupère les projets dans l'API coté back
     async function getProjects() {
@@ -14,13 +15,32 @@ function ProjectList() {
         setProjectList(allProjects);
     }
 
-    // je récupère les projets dans l'API coté back
-    async function getProjects() {
-        // l'api me renvoie la liste des projets
-        const allProjects = await getAllProjectList();
-        // les projets se mettent dans le usestate pour les afficher
-        setProjectList(allProjects);
+    // je récupère les status du projet dans l'API coté back
+    async function getStatusProject(status) {
+        // l'api me renvoie les projets filtrés suivant le status choisis
+        const filteredProjects = await getFilteredProjectList(status);
+        // je mets la liste filtrés dans le usestate pour les afficher
+        setProjectList(filteredProjects);
     }
+
+    // la fonction est déclénchée quand la valeur du filter est changée
+    function handleChange(e) {
+        e.preventDefault(); // empêche le rechargement par défaut
+        const status = e.target.value;
+        console.log('status : ',status);
+        setProjectFilter(status); // Met à jour le status sélectionné
+        console.log('projectFilter : ', projectFilter);
+
+        if (status === "") {
+            getProjects();
+            // si le user selectionne tous les projet donc la valeur vide ""
+            // on affiche toute la liste des projets
+        } else {
+            getStatusProject(status);
+            // sinon on filtre suivant le status qu'aura choisi le user (en cours, terminé, etc)
+        }
+    }
+
 
     // useeffect s'exécute quand le composant apparait sur la page
     useEffect(() => {
@@ -32,6 +52,11 @@ function ProjectList() {
     return (
         <div className="title__container">
             <h3 className="title">Projets en cours</h3>
+            <select class="bi bi-filter" onChange={handleChange} value='' className="filter__button"></select>
+            {projectFilter.length != 0 && projectFilter.map((status) => (
+                            //
+                            <option value={status.label} key={status.id} className="genre__item">{status.label.charAt(0).toUpperCase() + status.label.slice(1)}</option>
+                        ))}
             {projectList.map((project) => (
                 <Card
                     key={project.id}
