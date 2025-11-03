@@ -12,12 +12,12 @@ function Composition() {
         // const userIs = useContext(UserContext)
 
         // console.log(userIs);
-        
+        const locationComposition = "/compositions";
 
     return (
         <>
         <h1>Composition</h1>
-        <PreviewList />
+        <PreviewList location={locationComposition}/>
         </>
     )
 }

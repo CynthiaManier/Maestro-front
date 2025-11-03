@@ -2,13 +2,13 @@ import Preview from "../Preview/Preview.jsx";
 import "./PreviewList.scss"
 import { getAllPreviews, getAllGenres, filterByGenre, getAllStarPreviews } from "../../api/apiPreview.js";
 import { useState, useEffect, useContext } from "react";
-import { useLocation } from "react-router";
+// import { useLocation } from "react-router";
 import UserContext from "../../UserContext.jsx";
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import PreviewForm from "../PreviewForm/PreviewForm.jsx";
 
-function PreviewList() {
+function PreviewList({location}) {
 
     const [selectedGenre, setSelectedGenre] = useState('');
     const [previewList, setPreviewList] = useState([]);
@@ -23,8 +23,8 @@ function PreviewList() {
 
     console.log('role après context', userIs);
 
-    let location = useLocation().pathname;
-    console.log(location); // ex : /compositions
+    // let location = useLocation().pathname;
+    // console.log(location); // ex : /compositions
     
 
     async function getPreviewList() {
@@ -32,6 +32,7 @@ function PreviewList() {
             const allPreviewList = await getAllPreviews();
             setPreviewList(allPreviewList);
             setComponentTitle('Tous les extraits');
+            getGenreList();
         } else {
             const allStarPreviews = await getAllStarPreviews();
             console.log('allstarpreviews : ', allStarPreviews);
@@ -53,9 +54,9 @@ function PreviewList() {
     function handleChange(e) {
         e.preventDefault();
         const genre = e.target.value;
-        console.log('genre : ',genre);
+        // console.log('genre : ',genre);
         setSelectedGenre(genre);
-        console.log('selectedGenre : ', selectedGenre);
+        // console.log('selectedGenre : ', selectedGenre);
 
         if (genre == "") {
             getPreviewList();
@@ -77,9 +78,6 @@ function PreviewList() {
 
     useEffect(() => {
         getPreviewList();
-        if (location == '/compositions') {
-            getGenreList();
-        }
     }, [])
 
     // test genres en dur pour map ensuite

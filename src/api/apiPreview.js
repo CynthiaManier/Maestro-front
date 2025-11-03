@@ -61,7 +61,7 @@ export async function addPreview(formData) {
             }
         })
         .then(function (res) {
-            console.log(res.data);
+            console.log("res.data : ", res.data);
             return res.data;
         })
         .catch(function (error) {
