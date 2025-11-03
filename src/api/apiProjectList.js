@@ -1,5 +1,7 @@
 import api_axios from "./axiosConfig";
 
+
+
 // Lister tous les projects
 // GET /api/project
 // projectRouter.get('/project', projectsController.listProjects)
@@ -15,7 +17,6 @@ export async function getAllProjectList() {
             console.log( error);
         });
 }
-
 
 // Trier les projets par filtre
 // GET /api/project/filter?
