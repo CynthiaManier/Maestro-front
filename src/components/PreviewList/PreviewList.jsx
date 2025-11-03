@@ -22,6 +22,8 @@ function PreviewList({location}) {
     const {userIs} = useContext(UserContext)
 
     console.log('role après context', userIs);
+    console.log(genreList);
+    
 
     // let location = useLocation().pathname;
     // console.log(location); // ex : /compositions
@@ -68,7 +70,7 @@ function PreviewList({location}) {
     function handleAdd(e) {
         e.preventDefault();
         if (previewForm === '') {
-            setPreviewForm(<PreviewForm />)
+            setPreviewForm(<PreviewForm genreList={genreList}/>)
         } else {
             setPreviewForm('');
         }
