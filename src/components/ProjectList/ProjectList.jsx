@@ -14,6 +14,7 @@ function ProjectList() {
     // je récupère les projets dans l'API coté back (Lister tous les projects)
     async function getProjects() {
         // l'api me renvoie la liste des projets
+        // ***si c'est un client c'est bien getAllProjectList sinon getAllAdminProjects
         const result = await getAllProjectList();
 
         setStatusList (result.Liststatus);
@@ -24,6 +25,7 @@ function ProjectList() {
     // je récupère les status du projet dans l'API coté back (Trier les projets par filtre)
     async function getStatusProject(status) {
         // l'api me renvoie les projets filtrés suivant le status choisis
+        // ***si c'est un client c'est bien getFilteredProjectList sinon getFilteredAdminProjects
         const result  = await getFilteredProjectList(status);
         console.log(result.projects);
         

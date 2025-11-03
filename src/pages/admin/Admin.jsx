@@ -14,7 +14,10 @@ function Admin() {
         // => ContactRequestList
 
     return (
+        <>
         <h1>Mon espace administrateur</h1>
+
+        </>
 
     )
 }
