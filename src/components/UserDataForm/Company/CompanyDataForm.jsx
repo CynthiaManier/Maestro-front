@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import "./CompanyDataForm.scss";
+import "../DataForm.scss";
 import { useState } from "react";
 import { getMyCompany } from "../../../api/apiCompany.js";
 import { updateCompany } from "../../../api/apiCompany.js";
@@ -16,7 +16,7 @@ function CompanyDataForm() {
     async function getMyCompanySetting() {
         const myCompagny = await getMyCompany();
         setCompanySetting(myCompagny);
-        console.log("setting log :", myCompagny);
+        // console.log("setting log :", myCompagny);
     }
 
     useEffect(() => {
@@ -29,14 +29,17 @@ function CompanyDataForm() {
     const [newSiret, setNewSiret] = useState("");
 
     function companyHandelSubmit(event) {
-        console.log("companyHandelSubmit");
+        // console.log("companyHandelSubmit");
         event.preventDefault();
         const newCompanyData = {
             name: newCompanyName,
             localisation: newCompanyLocalisation,
             siret: newSiret,
         };
+        // si props onUpdate
         updateCompany(newCompanyData);
+        // sinon on appel
+        //postCompany(newCompanyData);
     }
 
     return (

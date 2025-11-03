@@ -7,7 +7,7 @@ export async function getAllCompany() {
     return api_axios
         .get(`/admin/company`)
         .then(function (res) {
-            console.log("api console :", res.data);
+            // console.log("api console :", res.data);
             return res.data;
         })
         .catch(function (error) {
@@ -20,7 +20,7 @@ export async function getMyCompany() {
     return api_axios
         .get(`/company/companyProfile`)
         .then(function (res) {
-            console.log("api console :", res.data);
+            // console.log("api console :", res.data);
             return res.data;
         })
         .catch(function (error) {

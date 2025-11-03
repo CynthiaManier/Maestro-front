@@ -3,12 +3,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import "./UserDataForm.scss";
+import "../DataForm.scss";
 import { useState } from "react";
 import { getMyProfile } from "../../../api/apiUser.js";
 import { updateMyProfile } from "../../../api/apiUser.js";
-// import { getMyCompany } from "../../../api/apiCompany.js";
-// import { updateCompany } from "../../../api/apiCompany.js";
 import { useEffect } from "react";
 
 function UserDataForm() {
@@ -18,7 +16,7 @@ function UserDataForm() {
     async function getMySetting() {
         const myProfile = await getMyProfile();
         setSetting(myProfile);
-        console.log("setting log :", myProfile);
+        // console.log("setting log :", myProfile);
     }
 
     useEffect(() => {
@@ -43,35 +41,6 @@ function UserDataForm() {
         };
         updateMyProfile(newUserData);
     }
-
-    // // Voir mes informations d'entreprise
-    // const [companySetting, setCompanySetting] = useState({});
-
-    // async function getMyCompanySetting() {
-    //     const myCompagny = await getMyCompany();
-    //     setCompanySetting(myCompagny);
-    //     console.log("setting log :", myCompagny);
-    // }
-
-    // useEffect(() => {
-    //     getMyCompanySetting();
-    // }, []);
-
-    // // Modifier mes informations d'entreprise
-    // const [newCompanyName, setnewCompanyName] = useState("");
-    // const [newCompanyLocalisation, setNewCompanyLocalisation] = useState("");
-    // const [newSiret, setNewSiret] = useState("");
-
-    // function companyHandelSubmit(event) {
-    //     console.log("companyHandelSubmit");
-    //     event.preventDefault();
-    //     const newCompanyData = {
-    //         name: newCompanyName,
-    //         localisation: newCompanyLocalisation,
-    //         siret: newSiret,
-    //     };
-    //     updateCompany(newCompanyData);
-    // }
 
     return (
         <>
