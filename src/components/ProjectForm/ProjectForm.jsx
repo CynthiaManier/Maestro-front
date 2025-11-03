@@ -9,6 +9,7 @@ function ProjectForm() {
     const [name, setName] = useState("");
     const [resume, setResume] = useState("");
 
+    // ****A METTRE DANS UNE FUNCTION ASYNC AWAIT******
     // Fonction appelée quand l'utilisateur valide le formulaire
     const handleCreateProject = (e) => {
         e.preventDefault(); // empêche la page de se recharger
