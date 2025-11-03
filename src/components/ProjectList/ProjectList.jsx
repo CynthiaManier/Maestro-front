@@ -10,25 +10,28 @@ function ProjectList() {
     const [projectFilter, setProjectFilter] = useState ('');
     const [statusList, setStatusList] = useState ([]);
 
-
-    // je récupère les projets dans l'API coté back
+    // 
+    // je récupère les projets dans l'API coté back (Lister tous les projects)
     async function getProjects() {
         // l'api me renvoie la liste des projets
         const result = await getAllProjectList();
-        setStatusList (result.Liststatus);
 
+        setStatusList (result.Liststatus);
         // les projets se mettent dans le usestate pour les afficher
         setProjectList(result.projects);
     }
 
-    // je récupère les status du projet dans l'API coté back
+    // je récupère les status du projet dans l'API coté back (Trier les projets par filtre)
     async function getStatusProject(status) {
         // l'api me renvoie les projets filtrés suivant le status choisis
-        const filteredProjects = await getFilteredProjectList(status);
+        const result  = await getFilteredProjectList(status);
+        console.log(result.projects);
+        
         // je mets la liste filtrés dans le usestate pour les afficher
-        setProjectList(filteredProjects);
+        setProjectList(result.projects);
     }
 
+    
     // la fonction est déclénchée quand la valeur du filter est changée
     function handleChange(e) {
         e.preventDefault(); // empêche le rechargement par défaut
@@ -60,26 +63,16 @@ function ProjectList() {
             <h3 className="title">Projets en cours</h3>
             <Form.Select size="lg" onChange={handleChange} aria-label="Sort by genre">
                         
-                        <option value=''>Trier par statut</option>
-                        {/* On map sur la liste des status */}
-                        {statusList.length != 0 && statusList.map((status) => (
-                            // On affiche le genre (genreList[index])
-                        
-                            <option value={status} key={status}>{status}</option>
-                        ))}
-                        {/* <option value="1">One</option> 
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>  */}
-                    </Form.Select>
+                <option value=''>Trier par statut</option>
+                {/* si statusList n’est pas vide (length != 0), alors j’affiche la liste des status avec map */}
+                {statusList.length != 0 && statusList.map((status) => (
+                
+                    <option value={status} key={status}>{status}</option>
+                ))}
 
-            {/* <select className="bi bi-filter" onChange={handleChange} value='' >
-            {statusList.length != 0 && statusList.map((status) => (
-                            //
-                            <option value={status} key={status} className="genre__item">{status}</option>
-                        ))}
-            </select> */}
-
-            {projectList.map((project) => (
+            </Form.Select>
+            {/* si projectList existe (!=null) et n’est pas vide (length != 0), alors j’affiche la liste des projets avec map */}
+            {(projectList != null && projectList.length != 0) && projectList.map((project) => (
                 <Card
                     key={project.id}
                     className="border border-primary rounded-3 shadow-sm"
@@ -92,7 +85,7 @@ function ProjectList() {
                     <Card.Body>
                         <Row className="align-items-center">
                             <Col xs="auto">
-                                <div
+                                <div   
                                     className="d-flex align-items-center justify-content-center"
                                     style={{
                                         backgroundColor: "#a3c1b0",
