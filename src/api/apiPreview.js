@@ -68,3 +68,15 @@ export async function addPreview(formData) {
             console.log(error);
         });
 }
+
+export async function updatePreview(id, newPreviewData) {
+    return api_axios
+        .patch(`/admin/preview/${id}`, {newPreviewData})
+        .then(function (res) {
+            console.log('updatePreview res.data : ', res.data);
+            return res.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}

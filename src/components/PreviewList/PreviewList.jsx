@@ -7,6 +7,7 @@ import UserContext from "../../UserContext.jsx";
 // import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import PreviewForm from "../PreviewForm/PreviewForm.jsx";
+import UpdatePreviewForm from "../UpdatePreviewForm/UpdatePreviewForm.jsx";
 
 function PreviewList({location}) {
 
@@ -15,7 +16,9 @@ function PreviewList({location}) {
     const [genreList, setGenreList] = useState([]);
     const [componentTitle, setComponentTitle] = useState('');
     const [previewForm, setPreviewForm] = useState('');
+    // const [updatePreviewForm, setUpdatePreviewForm] = useState('');
     const [isPlus, setIsPlus] = useState(true);
+    const [pencilIsClicked, setPencilIsClicked] = useState(false);
     // ici tu récupères tout l'objet => {userIs, loginProvider, logoutProvider}
     // pour cela que tu dois faire userIs.userIs
     // essai de faire {userIs} pour voir si tu y accède en direct ;) 
@@ -77,6 +80,11 @@ function PreviewList({location}) {
         setIsPlus(!isPlus);
     }
 
+    function handlePencil(e) {
+        e.preventDefault();
+        setPencilIsClicked(!pencilIsClicked);
+    }
+
 
     useEffect(() => {
         getPreviewList();
@@ -119,12 +127,17 @@ function PreviewList({location}) {
                     {/* Ici, on map sur la liste des extraits */}
                     {previewList.length > 0 ? previewList.map((preview) => (
                         // On affiche l'extrait suivant l'index
+                        <>
                         <article className="preview__item">
                             <Preview key={preview.id} audiosrc={audioscr} title={preview.title} genres={preview.listGenres}/>
                             <div className="pencil-icon__container">
-                                {userIs === 'admin' && <i class="pencil-icon fs-2 bi bi-pencil-square"></i>}
+                                {userIs === 'admin' && <button  onClick={handlePencil}><i className="pencil-icon fs-2 bi bi-pencil-square"></i></button>}
                             </div>
                         </article>
+                        {/* <article className="update__preview__form">
+                            {<UpdatePreviewForm pencilIsClicked={pencilIsClicked} genreList={genreList} id={preview.id}/>}
+                        </article> */}
+                        </>
                     ))
                     : <p>Pas d'extraits</p>
                     }
