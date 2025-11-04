@@ -21,25 +21,12 @@ function CompanyDataForm({ onUpdate }) {
     }
 
     useEffect(() => {
-        getMyCompanySetting();
+        onUpdate ? getMyCompanySetting() : null;
     }, []);
-
-    // Modifier mes informations d'entreprise
-    // const [newCompanyName, setnewCompanyName] = useState("");
-    // const [newCompanyLocalisation, setNewCompanyLocalisation] = useState("");
-    // const [newSiret, setNewSiret] = useState("");
-    // const [onUpdate, setOnUpdate] = useState(false);
 
     function companyHandelSubmit(event) {
         console.log("companyHandelSubmit", companySetting);
         event.preventDefault();
-        // const newCompanyData = {
-        //     name: newCompanyName,
-        //     localisation: newCompanyLocalisation,
-        //     siret: newSiret,
-        // };
-
-        // setOnUpdate(true);
 
         onUpdate
             ? updateCompany(companySetting)

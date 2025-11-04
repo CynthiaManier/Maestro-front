@@ -36,11 +36,12 @@
 //     margin-right: 1rem;
 // }
 
-// .mofifier-button {
-//     background-color: var.$color-client;
-//     border: solid 1px var.$color-client;
-//     width: max-content;
-// }
+.addCompany-button {
+    background-color: var.$color-client;
+    border: solid 1px var.$color-client;
+    border-radius: 5px;
+    width: max-content;
+}
 
 // .profile-item,
 // .siret-item {
@@ -50,5 +51,6 @@
 // }
 
 .professionnel-div {
-    margin-bottom: 10rem;
+    margin-bottom: 2rem;
+    padding: 12px;
 }
