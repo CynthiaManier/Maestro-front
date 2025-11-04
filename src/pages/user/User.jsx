@@ -1,3 +1,4 @@
+import ProjectForm from "../../components/ProjectForm/ProjectForm.jsx";
 import ProjectList from "../../components/ProjectList/ProjectList.jsx";
 
 function User() {
@@ -12,6 +13,7 @@ function User() {
     return (
         <>
         <h1>User</h1>
+        <ProjectForm />
         <ProjectList />
         </>
     )
