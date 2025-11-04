@@ -51,6 +51,10 @@ function PreviewForm({genreList}) {
                 <Form.Label htmlFor='previewTitle'>Titre de l'extrait</Form.Label>
                 <Form.Control id='previewTitle' name='title' type="text" placeholder="Entrer le titre" />
             </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label htmlFor='previewDate'>Date de l'extrait</Form.Label>
+                <Form.Control id='previewDate' name='date' type="date"/>
+            </Form.Group>
             <Form.Group>
                 <Form.Label htmlFor='star-switch'>Voulez-vous rendre cet extrait accessible sur la page d'accueil ?</Form.Label>
                 <Form.Check
