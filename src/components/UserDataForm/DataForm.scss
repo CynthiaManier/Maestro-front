@@ -1,6 +1,10 @@
 @use "../var";
 @use "../mixin";
 
+.dataForm-container {
+    max-width: 50%;
+}
+
 .profil-item {
     border: solid 1px var.$color-client;
     border-radius: 10px;

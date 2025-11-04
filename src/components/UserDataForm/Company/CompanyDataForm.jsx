@@ -35,9 +35,10 @@ function CompanyDataForm({ onUpdate }) {
 
     return (
         <>
-            <Container>
+            <Container className="dataForm-container">
                 <Row>
-                    <Col sm={6}>
+                    {/* <Col sm={6}> */}
+                    <Col>
                         {/* ENTREPRISE */}
                         <Row>
                             <Form

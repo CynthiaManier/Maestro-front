@@ -40,7 +40,7 @@ function SettingPage() {
                 <p>Chargement en cours...</p>
             ) : (
                 <div>
-                    <h1>Setting</h1>
+                    {/* <h1>Setting</h1> */}
                     <UserDataForm />
 
                     {setting.user.company_id != null ? (

@@ -30,10 +30,11 @@ function UserDataForm() {
 
     return (
         <>
-            <Container>
+            <Container className="dataForm-container">
                 <Row>
                     {/* PARTICULIER */}
-                    <Col sm={6}>
+                    {/* <Col sm={6}> */}
+                    <Col>
                         <Form
                             className="profile-form"
                             method="post"
