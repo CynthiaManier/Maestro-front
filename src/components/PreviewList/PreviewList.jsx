@@ -4,7 +4,7 @@ import { getAllPreviews, getAllGenres, filterByGenre, getAllStarPreviews } from 
 import { useState, useEffect, useContext } from "react";
 // import { useLocation } from "react-router";
 import UserContext from "../../UserContext.jsx";
-import Dropdown from 'react-bootstrap/Dropdown';
+// import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import PreviewForm from "../PreviewForm/PreviewForm.jsx";
 
@@ -100,9 +100,6 @@ function PreviewList({location}) {
                             // On affiche le genre (genreList[index])
                             <option value={genre.label} key={genre.id} className="genre__item">{genre.label.charAt(0).toUpperCase() + genre.label.slice(1)}</option>
                         ))}
-                        {/* <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option> */}
                     </Form.Select>
                     {/* <Dropdown>
                         <Dropdown.Toggle className="toggle-button" variant="success" id="dropdown-basic">

@@ -2,40 +2,25 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { addPreview } from '../../api/apiPreview.js';
-import FormCheckLabel from 'react-bootstrap/FormCheckLabel'
 
 function PreviewForm({genreList}) {
 
     const [form, setForm] = useState();
-    
-    // const [selectedGenre, setSelectedGenre] = useState([])
-    // const form = document.getElementById('addPreview');
-    // console.log(form);
-    
-    // function initGenreState() {
-    //     if (genreList.length > 0) {
-    //         for (const genre of genreList) {
-    //             selectedGenre[genre.label] = false;
-    //         }
-    //     }
-    // }
 
-    // function handleChange(e) {
-    //     console.log(e.target.id);
-    //     selectedGenre[e.target.id] = !selectedGenre[e.target.id];
-    //     console.log(selectedGenre);
-        
-    // }
+    function initForm() {
+        setForm(document.getElementById('addPreview'));
+    }
 
     async function handleSubmit(event) {
         event.preventDefault();
-        setForm(document.getElementById('addPreview'));
         const formCheckbox = event.target;
         const checkedBoxes = formCheckbox.querySelectorAll('input[type="checkbox"]:checked');
         console.log('checkboxes', checkedBoxes);
         console.log('dans handleSubmit début');
+        // if (document.getElementById('addPreview') != null) {
+        //     setForm(document.getElementById('addPreview'));
+        // }
         console.log(form);
-        
         const formData = new FormData(form);
         const genres = [];
         checkedBoxes.forEach((checkbox) => {
@@ -50,9 +35,9 @@ function PreviewForm({genreList}) {
         
     }
 
-    // useEffect(() => {
-    //     initGenreState();
-    // }, []);
+    useEffect(() => {
+        initForm();
+    }, []);
 
     return (
         <Form onSubmit={handleSubmit} id='addPreview' method='post' encType="multipart/form-data">
@@ -70,7 +55,6 @@ function PreviewForm({genreList}) {
                         name={genre.label}
                         type="checkbox"
                         id={genre.id}
-                        // onChange={handleChange}
                     />
                     </div>
                 ))}
