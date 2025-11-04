@@ -1,5 +1,5 @@
 import "./ProjectForm.scss";
-import { createProject } from "../../api/apiProjectForm.js";
+import { createProject } from "../../api/apiProject.js";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -9,6 +9,7 @@ function ProjectForm() {
     const [name, setName] = useState("");
     const [resume, setResume] = useState("");
 
+    // ****A METTRE DANS UNE FUNCTION ASYNC AWAIT******
     // Fonction appelée quand l'utilisateur valide le formulaire
     const handleCreateProject = (e) => {
         e.preventDefault(); // empêche la page de se recharger
@@ -20,7 +21,8 @@ function ProjectForm() {
     };
 
     return (
-        <Form className="project-frm" onSubmit={(e) => handleCreateProject(e)}> // onSubmit = exécute la fonction "handleCreateProject" quand le formulaire est soumis
+        <Form className="project-frm" onSubmit={(e) => handleCreateProject(e)}> 
+        {/* onSubmit = exécute la fonction "handleCreateProject" quand le formulaire est soumis */}
             <h2 className="title">Nouvelle demande de projet</h2>
 
             {/* Titre du projet */}
@@ -32,7 +34,7 @@ function ProjectForm() {
                     className="form__titleInput"
                     type="text"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setName(e.target.value)} // onChange = met à jour la valeur de l’état "name" à chaque saisie dans le champ de formulaire.
                 />
             </Form.Group>
 
@@ -47,7 +49,7 @@ function ProjectForm() {
                     as="textarea"
                     rows={4}
                     value={resume}
-                    onChange={(e) => setResume(e.target.value)}
+                    onChange={(e) => setResume(e.target.value)} // onChange = met à jour la valeur de l’état "resume" à chaque saisie dans le champ de formulaire.
                 />
             </Form.Group>
 
