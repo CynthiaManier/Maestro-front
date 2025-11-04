@@ -40,7 +40,6 @@ function ProjectList() {
     // je récupère les status du projet dans l'API coté back (Trier les projets par filtre)
     async function getStatusProject(status) {
         // l'api me renvoie les projets filtrés suivant le status choisis (si USER ou ADMIN)
-        // *** A MODIFIER si c'est un client c'est bien getFilteredProjectList sinon getFilteredAdminProjects
         if (userIs === 'client'){ 
             const result  = await getFilteredProjectList(status);
             console.log(result.projects);
