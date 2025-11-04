@@ -1,6 +1,6 @@
 import "./Preview.scss";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import UserContext from "../../UserContext.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
@@ -9,6 +9,9 @@ function Preview({title, audiosrc, genres}) {
     const [audioElement, setAudioElement] = useState();
     const [playIsHidden, setPlayIsHidden] = useState(false);
     const [pauseIsHidden, setPauseIsHidden] = useState(true);
+    // const userIs = useContext(UserContext)
+
+    // console.log(userIs);
 
     function toggleHidden() {
         setPlayIsHidden(!playIsHidden);
@@ -53,10 +56,13 @@ function Preview({title, audiosrc, genres}) {
             </div>
             <div className="preview__genre__container">
                 {
+                    genres.length > 0 ?
                     // on va chercher dans genres pour afficher dynamiquement (pour le moment avec les données en dur)
-                    genres.map((genre, index) => (
-                        <span key={index} className="preview__genre">{genre}</span>
+                    genres.map((genre) => (
+                        <span key={genre.id} className="preview__genre">{genre.label}</span>
                     ))
+                    :
+                    <p>Pas de genre</p>
                 }
                 {/* <span className="preview__genre">Rock</span>
                 <span className="preview__genre">Pop</span>

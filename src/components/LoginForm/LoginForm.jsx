@@ -1,17 +1,28 @@
 import "./LoginForm.scss";
 import { loginUser } from "../../api/apiUser.js";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
+import UserContext from "../../UserContext.jsx";
 
-function LoginForm() {
+function LoginForm({setUserHasAccount}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    // il va falloir appeler le userContext, res.data.user(.role)
+    const {loginProvider} = useContext(UserContext);
 
-    function handelSubmit(event) {
+    async function handelSubmit(event) {
         event.preventDefault();
         const loginData = { email: email, password: password };
-        loginUser(loginData);
+        const userInfo = await loginUser(loginData);
+        console.log('userInfo ',userInfo);
+        
+        loginProvider(userInfo.user.role);
+    }
+
+    function handleRegister(event) {
+        event.preventDefault();
+        setUserHasAccount(false);
     }
 
     return (
@@ -58,6 +69,7 @@ function LoginForm() {
                     Se connecter
                 </Button>
             </Form>
+                <p>Pas encore de compte ? Veuillez vous <Button onClick={handleRegister}>Inscrire</Button></p>
         </>
     );
 }
