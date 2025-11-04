@@ -129,7 +129,7 @@ function PreviewList({location}) {
                     <Preview audiosrc={audioscr} title="titre 3" genres={genres}/> */}
                 </section>
 
-                {userIs === 'admin' &&
+                {(userIs === 'admin' && location === '/compositions') &&
                 <div>
                     <section className="admin__plus">
                         <button onClick={handleAdd} className="button__plus">
