@@ -16,6 +16,17 @@ export async function getAllPreviews() {
         });
 }
 
+export async function getPreviewById(id) {
+    return api_axios
+        .get(`/preview/${id}`)
+        .then(function (res) {
+            return res.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 export async function getAllStarPreviews() {
     return api_axios
         .get('/preview/star')

@@ -81,14 +81,19 @@ function PreviewList({location}) {
         setIsPlus(!isPlus);
     }
 
-    function handlePencil(e) {
-        e.preventDefault();
-        setPencilIsClicked(!pencilIsClicked);
-        console.log(e.target.value);
-        const previewId = e.target.value;
-        setPencilClicked(previewId);
+    function handlePencil(e, previewIdSelected) {
+        // e.preventDefault();
+        if (pencilClicked === previewIdSelected) {
+            setPencilIsClicked(!pencilIsClicked);
+        } else {
+            // const previewId = e.target.value;
+            setPencilClicked(previewIdSelected);
+        }
     }
 
+    // useEffect(() => {
+
+    // })
 
     useEffect(() => {
         getPreviewList();
@@ -136,13 +141,16 @@ function PreviewList({location}) {
                             {/* MODIFIER AUDIOSRC */}
                             <Preview key={preview.id} audiosrc={audioscr} title={preview.title} genres={preview.listGenres}/>
                             <div className="pencil-icon__container">
-                                {userIs === 'admin' && <button value={preview.id} onClick={handlePencil}><i className="pencil-icon fs-2 bi bi-pencil-square"></i></button>}
+                                {userIs === 'admin' && <button onClick={handlePencil(preview.id)}><i className="pencil-icon fs-2 bi bi-pencil-square"></i></button>}
                             </div>
                         </article>
 
-                        {(pencilIsClicked === true && pencilClicked == preview.id) &&
+                        {(pencilIsClicked === true && pencilClicked == preview.id) ?
                             <article className="update__preview__form">
                                     <UpdatePreviewForm key={index} genreList={genreList} id={preview.id}/>
+                            </article>
+                            : <article>
+                                
                             </article>
                         }
                         </>
