@@ -1,9 +1,10 @@
-import { Card, Badge, Row, Col } from "react-bootstrap";
+import { Card, Badge, Row, Col, Button } from "react-bootstrap";
 import { getAllProjectList, getFilteredProjectList } from "../../api/apiProjectList.js";
 import { getAllAdminProjects, getFilteredAdminProjects, updateProjectStatus, deleteProject  } from "../../api/apiProjectList.js";
 import { useState, useEffect, useContext } from "react";
 import UserContext from "../../UserContext.jsx";
 import Form from 'react-bootstrap/Form';
+import "./ProjectList.scss";
 
 
 
@@ -12,6 +13,9 @@ function ProjectList() {
     const [projectList, setProjectList] = useState([]); // Liste des projets affichés
     const [projectFilter, setProjectFilter] = useState (''); // Filtre appliqué aux projets
     const [statusList, setStatusList] = useState ([]); // Liste des statuts disponibles
+    const [newStatus, setNewStatus] = useState (''); 
+
+
 
     // je récupère le rôle user dans le UserContext
     const {userIs} = useContext(UserContext);
@@ -53,9 +57,15 @@ function ProjectList() {
         }
     }
 
-    async function updateProjectStatus () {
 
-    }
+
+    // async function updateProject (id, label) {
+
+    //     if (userIs === 'admin'){
+            
+    //     }
+
+    // }
 
     
     // la fonction est déclénchée quand la valeur du filter est changée
@@ -75,6 +85,32 @@ function ProjectList() {
             // sinon on filtre suivant le status qu'aura choisi le user (en cours, terminé, etc)
         }
     }
+
+    console.log('status list : ', statusList)
+
+    function handleChangeStatus(e) {
+        e.preventDefault();
+        console.log(e.target);
+        
+        setNewStatus(e.target.value);
+        console.log('id du target selected :', e.target.value);
+        console.log('xxxx:', e.target.selectedOptions[0].id);
+        const result = updateProjectStatus(e.target.selectedOptions[0].id, e.target.value);
+        console.log(newStatus);
+
+        //const statusToChange = await updateProjectStatus(  )
+    }
+
+    // function handleSubmit(e) {
+    //     e.preventDefault(); // empêche le rechargement par défaut
+    //     console.log('onSubmit');
+        
+    //     console.log(e.target.value);
+        
+    
+    // }
+
+
 
 
     // useeffect s'exécute quand le composant apparait sur la page
@@ -99,6 +135,7 @@ function ProjectList() {
             </Form.Select>
             {/* si projectList existe (!=null) et n’est pas vide (length != 0), alors j’affiche la liste des projets avec map */}
             {(projectList != null && projectList.length != 0) && projectList.map((project) => (
+                <Form>
                 <Card
                     key={project.id}
                     className="border border-primary rounded-3 shadow-sm"
@@ -123,6 +160,7 @@ function ProjectList() {
                             </Col>
 
                             <Col className="text-center">
+                            {/* TITRE*/}
                                 <Badge
                                     pill
                                     style={{
@@ -135,7 +173,24 @@ function ProjectList() {
                                     {project.name}
                                 </Badge>
 
-                                <Badge
+                                {/* STATUS*/}
+                                {userIs === 'admin' &&
+                                <div>
+                                    <section className="update__status">
+                                        <Form.Group>
+                                            <Form.Label htmlFor="status-select">Selectionner le status</Form.Label>
+
+                                            <Form.Select defaultValue={project.status} onChange={handleChangeStatus} name="status" id="status-select">
+                                                {statusList.length > 0 ?
+                                                statusList.map((status, index) => (
+                                                    <option value={status} id={project.id} key={index}>{status}</option>
+                                                )):
+                                                <option value="noStatus">pas de status</option>
+                                                }
+                                            </Form.Select>
+                                        </Form.Group>
+                                    </section>
+                                {/* <Badge
                                     pill
                                     style={{
                                         backgroundColor: "#a3c1b0",
@@ -145,8 +200,11 @@ function ProjectList() {
                                     className="mb-2 d-block"
                                 >
                                     {project.status}
-                                </Badge>
+                                </Badge> */}
+                                </div>
+                                }       
 
+                                {/* DEADLINE*/}
                                 <Badge
                                     pill
                                     style={{
@@ -154,14 +212,16 @@ function ProjectList() {
                                         color: "black",
                                         fontSize: "0.9rem",
                                     }}
-                                    className="d-block"
+                                    className="deadline__badge d-block"
                                 >
                                     {project.deadline}
                                 </Badge>
                             </Col>
                         </Row>
                     </Card.Body>
+                    {/* <Button>Modifier</Button> */}
                 </Card>
+            </Form>
             ))}
         </div>
     );
