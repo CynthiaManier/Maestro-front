@@ -19,9 +19,9 @@ function ClientList() {
     return (
         <Container className="client-list">
             {/* Header-mobile*/}
-            <Row className="client-list-header client-list-header-mobile">
+            {/* <Row className="client-list-header client-list-header-mobile">
                 <Col>Liste des clients</Col>
-            </Row>
+            </Row> */}
             {/* Header-desktop */}
             <Row className="client-list-header client-list-header-desktop">
                 <Col

@@ -1,0 +1,26 @@
+@use "../style/var";
+@use "../style/mixin";
+
+.project-list-item {
+    box-shadow: 3px 3px 15px 1px rgba(133, 132, 132, 0.31);
+    margin-bottom: 2rem;
+}
+
+.contact-request-list-item {
+    box-shadow: 3px 3px 15px 1px rgba(133, 132, 132, 0.31);
+    margin-bottom: 2rem;
+    margin-right: 1rem;
+}
+
+.waiting-project-list-item {
+    box-shadow: 3px 3px 15px 1px rgba(133, 132, 132, 0.31);
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+}
+
+.list-item {
+    box-shadow: 3px 3px 15px 1px rgba(133, 132, 132, 0.31);
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+    padding: 1rem;
+}
