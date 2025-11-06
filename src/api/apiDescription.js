@@ -21,12 +21,10 @@ export async function getAllDescription() {
 // POST /api/admin/description
 //descriptionRoute.post('/admin/description', imageUpload.single('image'), descriptionController.create)
 
-export async function create(description) {
+
+export async function create(formData) {
     return api_axios
-        .post('/admin/description', description, {
-    /*         header: {
-                'Content-Type': 'multipart/form-data'
-            } */
+        .post('/admin/description', formData, {
         })
         .then(function (res) {
             console.log("res.data : ", res.data);
