@@ -16,3 +16,23 @@ export async function getAllDescription() {
             console.log(error);
         });
 }
+
+// créer la liste des description
+// POST /api/admin/description
+//descriptionRoute.post('/admin/description', imageUpload.single('image'), descriptionController.create)
+
+export async function create(description) {
+    return api_axios
+        .post('/admin/description', description, {
+    /*         header: {
+                'Content-Type': 'multipart/form-data'
+            } */
+        })
+        .then(function (res) {
+            console.log("res.data : ", res.data);
+            return res.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}

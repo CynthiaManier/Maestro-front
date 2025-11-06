@@ -1,6 +1,6 @@
-import "./Description.scss";
-import { getAllDescription } from "../../api/apiDescription.js";
 import { useState, useEffect } from "react";
+import { getAllDescription } from "../../api/apiDescription.js";
+import "./Description.scss";
 
 function Description() {
 
@@ -35,6 +35,8 @@ function Description() {
                 <h2 className="description__title">
                     {description.title}
                 </h2>
+                <img src={description.image_link} alt="" />
+                <p>{description.text}</p>
             </div>
             ))
             }
