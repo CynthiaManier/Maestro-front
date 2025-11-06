@@ -3,7 +3,7 @@ import UserContext from "../../UserContext.jsx";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { updatePreview, deletePreview } from "../../api/apiPreview.js";
-import { getPreviewById } from "../../api/apiPreview.js";
+import Modal from 'react-bootstrap/Modal';
 
 
 function UpdatePreviewForm({ id, genreList = [], preview, onSaved = () => {} }) {
@@ -19,6 +19,11 @@ function UpdatePreviewForm({ id, genreList = [], preview, onSaved = () => {} }) 
     }));
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState(null);
+    // Modal
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const {userIs} = useContext(UserContext)
     
@@ -135,10 +140,24 @@ function UpdatePreviewForm({ id, genreList = [], preview, onSaved = () => {} }) 
                     </Button>
                 </div>
                 <div className="d-flex form__button__container">
-                    <Button onClick={(e) => { e.preventDefault(); handleDelete(e)}} disabled={saving} className="preview__form__button preview__form__button--delete">
+                    <Button onClick={(e) => { e.preventDefault(); handleShow()}} disabled={saving} className="preview__form__button preview__form__button--delete">
                     {saving ? "Suppression..." : "Supprimer l'extrait"}
                     </Button>
                 </div>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Etes-vous sur de vouloir supprimer l'extrait ?</Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Annuler
+                    </Button>
+                    <Button variant="primary" onClick={(e) => {e.preventDefault(); handleDelete(e); handleClose()}}>
+                        Supprimer l'extrait
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
             </Form>
         </>
     
