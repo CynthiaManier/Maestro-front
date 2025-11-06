@@ -24,20 +24,20 @@ function Preview({title, audiosrc, genres}) {
         setPauseIsHidden(!pauseIsHidden);
     }
 
-    function handlePlay() {
+    async function handlePlay() {
         console.log('hanlde play ', handlePlay);
         
-        audioElement.play();
+        await audioElement.play();
         toggleHidden();
     }
 
-    function handlePause() {
-        audioElement.pause();
+    async function handlePause() {
+        await audioElement.pause();
         toggleHidden();
     }
 
     useEffect(() => {
-        setAudioElement(new Audio(audiosrc));
+        setAudioElement(new Audio(URL + audiosrc));
         console.log(audioElement);
         
     }, [])
