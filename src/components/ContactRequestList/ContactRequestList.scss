@@ -4,16 +4,16 @@
 .contact-requests {
     width: 99%;
     max-width: 1600px;
-    position: fixed;
+    // position: fixed;
     bottom: 5rem;
     left: 50%;
-    transform: translateX(-50%); // centrage -50% de la gauche du conteneur pour le centré
+    // transform: translateX(-50%); // centrage -50% de la gauche du conteneur pour le centré
     padding: 1rem 1.5rem;
     border-radius: 8px;
     background-color: var.$color-bg;
 
-    max-height: 400px;
-    overflow-y: auto;
+    // max-height: 400px;
+    // overflow-y: auto;
 
     .contact-title {
         background-color: var.$color-admin;

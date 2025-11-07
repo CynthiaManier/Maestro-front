@@ -40,7 +40,7 @@ function ProjectList() {
         // ** METTRE UN TOAST AFIN D'INDIQUER CONNECTER VOUS (page utilisateur)
         }
         if (userIs === 'client'){ 
-            // l'api me renvoie la liste des projets (si USER ou ADMIN)
+            // l'api me renvoie la liste des projets (si USER)
             const result = await getAllProjectList();
             setStatusList (result.Liststatus);
                 // les projets se mettent dans le usestate pour les afficher
@@ -57,7 +57,7 @@ function ProjectList() {
 
     // je récupère les status du projet dans l'API coté back (Trier les projets par filtre)
     async function getStatusProject(status) {
-        // l'api me renvoie les projets filtrés suivant le status choisis (si USER ou ADMIN)
+        // l'api me renvoie les projets filtrés suivant le status choisis (si USER)
         if (userIs === 'client'){ 
             const result  = await getFilteredProjectList(status);
             console.log(result.projects);
@@ -130,17 +130,21 @@ function ProjectList() {
             <Form.Select size="lg" onChange={handleChange} aria-label="Sort by genre">
                         
                 <option value=''>Trier par statut</option>
-                {/* si statusList n’est pas vide (length != 0), alors j’affiche la liste des status avec map */}
-                {statusList.length != 0 && statusList.map((status) => (
+                {/* Si la liste de projets et de statuts n'est pas vide, on affiche la liste des status, sinon on affiche "Pas de statut"*/}
+                {(projectList.length > 0 && statusList.length != 0) ? statusList.map((status) => (
                 
                     <option value={status} key={status}>{status}</option>
-                ))}
+                ))
+                :
+                <option>Pas de statut</option>
+                }
 
             </Form.Select>
-            {/* si projectList existe (!=null) et n’est pas vide (length != 0), alors j’affiche la liste des projets avec map */}
-            {(projectList != null && projectList.length != 0) && projectList.map((project) => (
+            {/* si projectList existe (!=null) et n’est pas vide (length != 0), alors j’affiche la liste des projets avec map, sinon on affiche pas de projet */}
+            {(projectList != null && projectList.length != 0) ? projectList.map((project) => (
                 <Form key={project.id}>
                 <Card
+                    id="test"
                     className="border border-primary rounded-3 shadow-sm"
                     style={{
                         backgroundColor: "#f8f5e4",
@@ -205,7 +209,7 @@ function ProjectList() {
 
                                 {/* DEADLINE*/}
                                 <Badge
-                                    pill
+                                    pill 
                                     style={{
                                         backgroundColor: "#a3c1b0",
                                         color: "black",
@@ -220,7 +224,8 @@ function ProjectList() {
                     </Card.Body>
                 </Card>
             </Form>
-            ))}
+            ))
+        : <p>pas de projet</p>}
         </div>
     );
 }
