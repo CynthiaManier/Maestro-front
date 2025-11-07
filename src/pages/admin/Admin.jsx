@@ -29,7 +29,6 @@ function Admin() {
 
     // Recuperer la liste des clients et les faires passer aux composants
     const [clients, setClients] = useState([]);
-    const [company, setCompany] = useState([]);
 
     async function getClients() {
         const clients = await getAllUsers();
@@ -37,15 +36,8 @@ function Admin() {
         console.log("Dans ma page admin :", clients);
     }
 
-    async function getCompany() {
-        const companies = await getAllCompany();
-        setCompany(companies);
-        console.log("Dans ma page admin :", clients);
-    }
-
     useEffect(() => {
         getClients();
-        getCompany();
     }, []);
 
     return (
@@ -79,19 +71,10 @@ function Admin() {
                     <GenreList />
                 </Row>
 
-                {clients != [] &&
-                    clients.map((client) => (
-                        <Row className="list-item">
-                            <h2 className="admin-item-title">
-                                La liste des clients
-                            </h2>
-                            <FullClientCard
-                                key={client.id}
-                                client={client}
-                                company={company}
-                            />
-                        </Row>
-                    ))}
+                <Row className="list-item">
+                    <h2 className="admin-item-title">La liste des clients</h2>
+                    <FullClientCard key={clients.id} client={clients} />
+                </Row>
             </Container>
         </>
     );

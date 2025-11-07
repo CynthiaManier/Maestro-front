@@ -3,20 +3,25 @@ import ClientCard from "./Clientcard/ClientCard.jsx";
 import CompanyCard from "./CompanyCard/CompanyCard.jsx";
 import "./FullClientCard.scss";
 
-function FullClientCard({ client, company }) {
+function FullClientCard({ client }) {
     console.log("Dans FullClientCard - client", client);
-    console.log("Dans FullClientCard - company", company);
     return (
         <>
             <Container className="full-client-card-container">
-                <Row>
-                    <Col>
-                        <ClientCard client={client} />
-                    </Col>
-                    <Col>
-                        <CompanyCard company={company} />
-                    </Col>
-                </Row>
+                {client != [] &&
+                    client.map((client) => (
+                        <Row>
+                            <Col className="client-card-columne">
+                                <ClientCard client={client} />
+                            </Col>
+
+                            {client.company_id != null && (
+                                <Col className="company-card-columne">
+                                    <CompanyCard company={client.company} />
+                                </Col>
+                            )}
+                        </Row>
+                    ))}
             </Container>
         </>
     );

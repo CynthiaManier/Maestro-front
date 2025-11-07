@@ -1,14 +1,14 @@
 .client-card {
     border-radius: 10px;
     box-shadow: 3px 3px 15px 3px rgba(133, 132, 132, 0.31);
-    padding: 1rem;
+    padding: 0.5rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
 .client-card-header-title {
     margin: 0;
-    padding: 0.3rem;
+    font-size: 0.8rem;
 }
 
 .client-card_item-result {
@@ -18,6 +18,8 @@
 .client-card_div {
     display: flex;
     column-gap: 0.5rem;
+    font-size: 0.7rem;
+    margin-bottom: 0.2rem;
 }
 
 .client-card-header {
@@ -25,7 +27,7 @@
     border-top-right-radius: 10px;
     background-color: #e07a5f;
     color: white;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     padding: 0.6rem;
 }
 
