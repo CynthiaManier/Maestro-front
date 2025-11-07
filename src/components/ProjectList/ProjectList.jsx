@@ -159,15 +159,15 @@ function ProjectList() {
                             
                                 <Modal show={show} onHide={handleClose}>
                                     <Modal.Header closeButton>
-                                    <Modal.Title>Modal heading</Modal.Title>
+                                    <Modal.Title>Supprimer un projet</Modal.Title>
                                     </Modal.Header>
-                                    <Modal.Body>Etes-vous sur de vouloir supprimer ?</Modal.Body>
+                                    <Modal.Body>Etes-vous sur de vouloir le supprimer ?</Modal.Body>
                                     <Modal.Footer>
                                     <Button variant="secondary" onClick={handleClose}>
-                                        Close
+                                        Annuler
                                     </Button>
                                     <Button variant="primary" onClick={(e) => {e.preventDefault(); handleDelete(project.id); handleClose()}}>
-                                        Save Changes
+                                        Supprimer
                                     </Button>
                                     </Modal.Footer>
                                 </Modal>
