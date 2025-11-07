@@ -9,19 +9,30 @@ function GenreForm() {
 
     const [genreList, setGenreList] = useState([]);
     const [genreToAdd, setGenreToAdd] = useState('');
+    const [saving, setSaving] = useState(false);
 
     async function getListGenres() {
         const allGenreList = await getAllGenres();
         setGenreList(allGenreList);
     }
 
+    function handleOnSaved() {
+        getListGenres();
+    }
+
     async function handleAddGenre() {
         console.log("addgenre clicked"); // ok
+        setSaving(true);
         // e.preventDefault();
         // console.log(e.target.value);
-        
-        const genreAdded = await addAGenre(genreToAdd);
-        // console.log(genreAdded);
+        try {
+            const genreAdded = await addAGenre(genreToAdd);
+            handleOnSaved();
+        } catch (error) {
+            console.error("Erreur lors de la suppression de l'extrait : ", error);
+        } finally {
+            setSaving(false);
+        }
         
     }
 
@@ -33,7 +44,7 @@ function GenreForm() {
         <>
             <div className='genre__container'>
                 <h1>Formulaire genre</h1>
-                <Accordion defaultActiveKey="1">
+                <Accordion>
                     <Accordion.Item eventKey="1">
                         <Accordion.Header>Liste des genres</Accordion.Header>
                             <Accordion.Body>
@@ -65,7 +76,9 @@ function GenreForm() {
                                         name='genre'
                                         aria-describedby="Insert genre to add"
                                     />
-                                    <Button type='submit'>Ajouter</Button>
+                                    <Button type='submit'>
+                                    {saving ? "Ajout..." : "Ajouter"}
+                                    </Button>
                                 </Form>
                             </Accordion.Body>
                         </Accordion.Item>

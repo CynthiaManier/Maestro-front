@@ -38,7 +38,7 @@ function Preview({title, audiosrc, genres}) {
 
     useEffect(() => {
         setAudioElement(new Audio(URL + audiosrc));
-        console.log(audioElement);
+        // console.log(audioElement);
         
     }, [])
 
