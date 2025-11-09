@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { create } from "../../api/apiDescription.js";
 
-function DescriptionList() {
+function DescriptionForm() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [imageFile, setImageFile] = useState(null);
@@ -56,4 +56,4 @@ function DescriptionList() {
   );
 }
 
-export default DescriptionList;
+export default DescriptionForm;

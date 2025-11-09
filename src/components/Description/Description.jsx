@@ -7,12 +7,12 @@ import "./Description.scss";
 function Description() {
     // stocke la liste des descriptions récupérées depuis l'API
     const [descriptionList, setDescriptionList] = useState([]);
-        const {userIs} = useContext(UserContext)
+    const { userIs } = useContext(UserContext);
 
     // on récupère les données depuis l'API
     async function getDescriptionList() {
         const allDescriptions = await getAllDescription();
-        // console.log('allDescriptions ', allDescriptions);
+        console.log("allDescriptions ", allDescriptions);
         // on appelle l'API pour avoir toutes les descriptions
         setDescriptionList(allDescriptions);
         // console.log('descriptionList',descriptionList);
@@ -34,16 +34,23 @@ function Description() {
                             <h2 className="description__title">
                                 {description.title}
                             </h2>
-                            <img src={description.image_link} alt="" />
+                            <img
+                                src={`http://localhost:3000/${description.image_link.replace(
+                                    /^app\//,
+                                    ""
+                                )}`}
+                                alt="présentation du compositeur"
+                            />
+
                             <p>{description.text}</p>
                         </div>
                     ))}
             </section>
             {userIs === "admin" && (
-            <section className="description__form">
-                <h3>Ajouter une description</h3>
-                <DescriptionForm />
-            </section>
+                <section className="description__form">
+                    <h3>Ajouter une description</h3>
+                    <DescriptionForm />
+                </section>
             )}
         </>
     );

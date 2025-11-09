@@ -25,12 +25,12 @@ export async function getAllDescription() {
 export async function create(formData) {
     return api_axios
         .post('/admin/description', formData, {
-                headers: {
+                header: {
                 'Content-Type': 'multipart/form-data'
             }
         })
         .then(function (res) {
-            console.log("res.data : ", res.data);
+            // console.log("res.data : ", res.data);
             return res.data;
         })
         .catch(function (error) {
