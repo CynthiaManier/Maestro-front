@@ -1,12 +1,16 @@
 @use "../var";
 @use "../mixin";
 
+.dataForm-container {
+    max-width: 50%;
+}
+
 .profil-item {
     border: solid 1px var.$color-client;
     border-radius: 10px;
     box-shadow: 3px 3px 15px 1px rgba(133, 132, 132, 0.31);
     font-family: var.$font-alt;
-    padding: 1rem;
+    padding: 0.5rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
@@ -16,8 +20,8 @@
     border-top-right-radius: 5px;
     background-color: var.$color-client;
     padding: 0.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     margin-top: 0.5rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -26,14 +30,19 @@
 .item {
     border: solid 1px var.$color-client;
     font-family: var.$font-alt;
-    padding: 0.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    padding: 0.3rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.profile-form-item-input {
+    font-size: 0.8rem;
 }
 
 .item-button {
     justify-content: flex-end;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
 }
 
 .mofifier-button {
@@ -41,4 +50,5 @@
     border: solid 1px var.$color-client;
     width: max-content;
     margin-top: 0.5rem;
+    font-size: 0.8rem;
 }

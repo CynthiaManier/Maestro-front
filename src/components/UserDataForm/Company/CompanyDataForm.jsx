@@ -15,41 +15,30 @@ function CompanyDataForm({ onUpdate }) {
     const [companySetting, setCompanySetting] = useState({});
 
     async function getMyCompanySetting() {
-        const myCompagny = await getMyCompany();
-        setCompanySetting(myCompagny);
-        // console.log("setting log :", myCompagny);
+        const myCompany = await getMyCompany();
+        setCompanySetting(myCompany.company);
+        console.log("setting log :", myCompany.company);
     }
 
     useEffect(() => {
-        getMyCompanySetting();
+        onUpdate ? getMyCompanySetting() : null;
     }, []);
 
-    // Modifier mes informations d'entreprise
-    const [newCompanyName, setnewCompanyName] = useState("");
-    const [newCompanyLocalisation, setNewCompanyLocalisation] = useState("");
-    const [newSiret, setNewSiret] = useState("");
-    // const [onUpdate, setOnUpdate] = useState(false);
-
     function companyHandelSubmit(event) {
-        // console.log("companyHandelSubmit");
+        console.log("companyHandelSubmit", companySetting);
         event.preventDefault();
-        const newCompanyData = {
-            name: newCompanyName,
-            localisation: newCompanyLocalisation,
-            siret: newSiret,
-        };
-        // setOnUpdate(true);
 
         onUpdate
-            ? updateCompany(newCompanyData)
-            : createCompany(newCompanyData);
+            ? updateCompany(companySetting)
+            : createCompany(companySetting);
     }
 
     return (
         <>
-            <Container>
+            <Container className="dataForm-container">
                 <Row>
-                    <Col sm={6}>
+                    {/* <Col sm={6}> */}
+                    <Col>
                         {/* ENTREPRISE */}
                         <Row>
                             <Form
@@ -75,15 +64,19 @@ function CompanyDataForm({ onUpdate }) {
                                                 type="name"
                                                 placeholder="Nom de l'entreprise"
                                                 defaultValue={
-                                                    companySetting?.company
-                                                        ?.name
-                                                        ? companySetting.company
-                                                              .name
+                                                    companySetting?.name
+                                                        ? companySetting.name
                                                         : ""
                                                 }
                                                 onChange={(event) =>
-                                                    setnewCompanyName(
-                                                        event.target.value
+                                                    setCompanySetting(
+                                                        (
+                                                            prevCompanySetting
+                                                        ) => ({
+                                                            ...prevCompanySetting, // ← on copie l’ancien objet
+                                                            name: event.target
+                                                                .value, // ← on remplace seulement name
+                                                        })
                                                     )
                                                 }
                                             />
@@ -91,7 +84,7 @@ function CompanyDataForm({ onUpdate }) {
                                     </Row>
 
                                     {/* ADRESSE*/}
-                                    <Row className="item">
+                                    <Row className="item localisation-item">
                                         <Form.Group
                                             className="profile-form-item"
                                             controlId="companyLocalisation"
@@ -99,18 +92,23 @@ function CompanyDataForm({ onUpdate }) {
                                             <Form.Label>Adresse</Form.Label>
                                             <Form.Control
                                                 className="profile-form-item-input"
-                                                type=""
+                                                type="localisation"
                                                 placeholder="Adresse de l'entreprise"
                                                 defaultValue={
-                                                    companySetting?.company
-                                                        ?.localisation
-                                                        ? companySetting.company
-                                                              .localisation
+                                                    companySetting?.localisation
+                                                        ? companySetting?.localisation
                                                         : ""
                                                 }
                                                 onChange={(event) =>
-                                                    setNewCompanyLocalisation(
-                                                        event.target.value
+                                                    setCompanySetting(
+                                                        (
+                                                            prevCompanySetting
+                                                        ) => ({
+                                                            ...prevCompanySetting,
+                                                            localisation:
+                                                                event.target
+                                                                    .value,
+                                                        })
                                                     )
                                                 }
                                             />
@@ -128,18 +126,22 @@ function CompanyDataForm({ onUpdate }) {
                                             </Form.Label>
                                             <Form.Control
                                                 className="profile-form-item-input"
-                                                type=""
+                                                type="siret"
                                                 placeholder="Numero de siret"
                                                 defaultValue={
-                                                    companySetting?.company
-                                                        ?.siret
-                                                        ? companySetting.company
-                                                              .siret
+                                                    companySetting?.siret
+                                                        ? companySetting?.siret
                                                         : ""
                                                 }
                                                 onChange={(event) =>
-                                                    setNewSiret(
-                                                        event.target.value
+                                                    setCompanySetting(
+                                                        (
+                                                            prevCompanySetting
+                                                        ) => ({
+                                                            ...prevCompanySetting,
+                                                            siret: event.target
+                                                                .value,
+                                                        })
                                                     )
                                                 }
                                             />

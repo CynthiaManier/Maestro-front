@@ -1,40 +1,42 @@
+import { Container } from "react-bootstrap";
 import "./ClientCard.scss";
+// import { useState } from "react";
+// import { useEffect } from "react";
+// import { getOneUSer } from "../../../api/apiUser.js";
 
-function ClientCard() {
+function ClientCard({ client }) {
+    console.log("Dans ClientCard", client);
+
     return (
         <section className="client-card">
-            <div className="client-card_div client-card_name_div">
-                <p className="client-card_API-result client-card_first-name_API-result">
-                    Pierre
-                </p>
-                <p className="client-card_API-result client-card_last-name_API-result">
-                    Dupont
+            <div className="client-card-header">
+                <p className="client-card-header-title">
+                    Information du client
                 </p>
             </div>
-            <div className="client-card_div client-card_email_div">
-                <p className="client-card_item client-card_email_item">Email</p>
-                <p className="client-card_API-result client-card_email_API-result">
-                    pierre.dupont@exemple.com
+            <div className="client-card_div">
+                <p className="client-card_item">Nom prénom</p>
+                <p className="client-card_item-result">
+                    {client.firstname} {client.lastname}
                 </p>
             </div>
-            <div className="client-card_div client-card_adress_div">
-                <p className="client-card_item client-card_adress_item">
-                    Adresse
-                </p>
-                <p className="client-card_API-result client-card_adress_API-result">
-                    12 Avenue du Dev Fatigué <br /> 59001 Debug-sur-Mer
-                </p>
+            <div className="client-card_div">
+                <p className="client-card_item">Email</p>
+                <p className="client-card_item-result">{client.email}</p>
             </div>
-            <div className="client-card_div client-card_phone-number_div">
-                <p className="client-card_item client-card_phone-number_item">
-                    N° de téléphone
-                </p>
-                <p className="client-card_API-result client-card_phone-number_API-result">
-                    0000000000
-                </p>
+            <div className="client-card_div">
+                <p className="client-card_item">Adresse</p>
+                <p className="client-card_item-result">{client.localisation}</p>
+            </div>
+            <div className="client-card_div">
+                <p className="client-card_item">N° de téléphone</p>
+                <p className="client-card_item-result">{client.phonenumber}</p>
             </div>
         </section>
     );
 }
 
 export default ClientCard;
+
+{
+}

@@ -19,7 +19,7 @@ function SettingPage() {
         const myProfile = await getMyProfile();
         setSetting(myProfile);
         setIsLoading(false);
-        // console.log("Dans ma page setting :", myProfile);
+        console.log("Dans ma page setting :", myProfile);
     }
 
     useEffect(() => {
@@ -40,7 +40,7 @@ function SettingPage() {
                 <p>Chargement en cours...</p>
             ) : (
                 <div>
-                    <h1>Setting</h1>
+                    {/* <h1>Setting</h1> */}
                     <UserDataForm />
 
                     {setting.user.company_id != null ? (

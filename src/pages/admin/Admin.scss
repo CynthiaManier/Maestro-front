@@ -1,0 +1,38 @@
+@use "../style/var";
+@use "../style/mixin";
+
+.admin-page-title {
+    justify-self: center;
+    margin-top: 3rem;
+}
+
+.admin-container {
+    margin-top: 3rem;
+}
+
+.contact-request-list-item {
+    margin-right: 0.5rem;
+}
+
+.waiting-project-list-item {
+    margin-left: 0.5rem;
+}
+
+.genre-list-item {
+    margin-right: 0.5rem;
+}
+
+.full-card-list-item {
+    margin-left: 0.5rem;
+}
+
+.list-item {
+    box-shadow: 2px 2px 5px 2px rgba(133, 132, 132, 0.31);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.admin-item-title {
+    font-size: 1.8rem;
+}
