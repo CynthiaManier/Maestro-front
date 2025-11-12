@@ -80,7 +80,7 @@ function GenreForm() {
                                     {genreList.length > 0 ?
                                         genreList.map((genre) => (
                                             <>
-                                            <Form key={genre.id}>
+                                            <Form className='genre__form__item' key={genre.id}>
                                                 <ListGroup.Item >
                                                     <Form.Group className='genre__list__item genre__list__item--trash' >
                                                         <Form.Label htmlFor='genre' id={genre.label} className='genre__label' >{genre.label}</Form.Label>

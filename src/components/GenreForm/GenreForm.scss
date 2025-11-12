@@ -130,9 +130,15 @@
 
 .trash__icon {
     padding: .5rem .7rem .5rem .7rem;
+    color: var.$color-admin;
 }
 
 .trash__icon:hover {
     background-color: lightgray;
     border-radius: 5px;
 }
+
+.genre__form__item {
+    border-radius: 10px;
+}
+
