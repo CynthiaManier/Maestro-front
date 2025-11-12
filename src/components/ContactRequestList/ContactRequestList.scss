@@ -4,10 +4,12 @@
 .contact-requests {
     width: 99%;
     max-width: 1600px;
-    position: fixed;
+    // position: fixed;
     bottom: 5rem;
     left: 50%;
-    transform: translateX(-50%); // centrage -50% de la gauche du conteneur pour le centré
+    // transform: translateX(
+    //     -50%
+    // ); // centrage -50% de la gauche du conteneur pour le centré
     padding: 1rem 1.5rem;
     border-radius: 8px;
     background-color: var.$color-bg;
@@ -27,7 +29,7 @@
 
     .request {
         border-radius: 6px;
-        background-color: #FFFFFF;
+        background-color: #ffffff;
         padding: 0.8rem 1rem;
         margin-bottom: 1rem;
         box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);

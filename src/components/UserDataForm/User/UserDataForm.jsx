@@ -15,7 +15,7 @@ function UserDataForm() {
 
     async function getMySetting() {
         const myProfile = await getMyProfile();
-        setSetting(myProfile);
+        setSetting(myProfile.user);
         // console.log("setting log :", myProfile);
     }
 
@@ -23,31 +23,18 @@ function UserDataForm() {
         getMySetting();
     }, []);
 
-    // Modifier mes informations
-    const [newLastname, setNewLastname] = useState("");
-    const [newFirstname, setNewFirstname] = useState("");
-    const [newEmail, setNewEmail] = useState("");
-    const [newLocalisation, setNewLocalisation] = useState("");
-    const [newPhonenumber, setNewPhonenumber] = useState("");
-
     function handelSubmit(event) {
         event.preventDefault();
-        const newUserData = {
-            lastname: newLastname,
-            firstname: newFirstname,
-            email: newEmail,
-            localisation: newLocalisation,
-            phonenumber: newPhonenumber,
-        };
-        updateMyProfile(newUserData);
+        updateMyProfile(setting);
     }
 
     return (
         <>
-            <Container>
+            <Container className="dataForm-container">
                 <Row>
                     {/* PARTICULIER */}
-                    <Col sm={6}>
+                    {/* <Col sm={6}> */}
+                    <Col>
                         <Form
                             className="profile-form"
                             method="post"
@@ -70,15 +57,17 @@ function UserDataForm() {
                                             className="profile-form-item-input"
                                             type="lastname"
                                             placeholder="Votre nom"
-                                            value={
-                                                setting?.user?.lastname
-                                                    ? setting.user.lastname
+                                            defaultValue={
+                                                setting?.lastname
+                                                    ? setting.lastname
                                                     : ""
                                             }
                                             onChange={(event) =>
-                                                setNewLastname(
-                                                    event.target.value
-                                                )
+                                                setSetting((prevSetting) => ({
+                                                    ...prevSetting, // ← on copie l’ancien objet
+                                                    lastname:
+                                                        event.target.value, // ← on remplace seulement fistname
+                                                }))
                                             }
                                         />
                                     </Form.Group>
@@ -95,15 +84,17 @@ function UserDataForm() {
                                             className="profile-form-item-input"
                                             type="firstname"
                                             placeholder="Votre prénom"
-                                            value={
-                                                setting?.user?.firstname
-                                                    ? setting.user.firstname
+                                            defaultValue={
+                                                setting?.firstname
+                                                    ? setting.firstname
                                                     : ""
                                             }
                                             onChange={(event) =>
-                                                setNewFirstname(
-                                                    event.target.value
-                                                )
+                                                setSetting((prevSetting) => ({
+                                                    ...prevSetting,
+                                                    firstname:
+                                                        event.target.value,
+                                                }))
                                             }
                                         />
                                     </Form.Group>
@@ -120,13 +111,16 @@ function UserDataForm() {
                                             className="profile-form-item-input"
                                             type="email"
                                             placeholder="Votre email"
-                                            value={
-                                                setting?.user?.email
-                                                    ? setting.user.email
+                                            defaultValue={
+                                                setting?.email
+                                                    ? setting.email
                                                     : ""
                                             }
                                             onChange={(event) =>
-                                                setNewEmail(event.target.value)
+                                                setSetting((prevSetting) => ({
+                                                    ...prevSetting,
+                                                    email: event.target.value,
+                                                }))
                                             }
                                         />
                                     </Form.Group>
@@ -143,15 +137,17 @@ function UserDataForm() {
                                             className="profile-form-item-input"
                                             type="localisation"
                                             placeholder="Votre adresse"
-                                            value={
-                                                setting?.user?.localisation
-                                                    ? setting.user.localisation
+                                            defaultValue={
+                                                setting?.localisation
+                                                    ? setting.localisation
                                                     : ""
                                             }
                                             onChange={(event) =>
-                                                setNewLocalisation(
-                                                    event.target.value
-                                                )
+                                                setSetting((prevSetting) => ({
+                                                    ...prevSetting,
+                                                    localisation:
+                                                        event.target.value,
+                                                }))
                                             }
                                         />
                                     </Form.Group>
@@ -170,15 +166,17 @@ function UserDataForm() {
                                             className="profile-form-item-input"
                                             type="phonenumber"
                                             placeholder="Votre numero de téléphone"
-                                            value={
-                                                setting?.user?.phonenumber
-                                                    ? setting.user.phonenumber
+                                            defaultValue={
+                                                setting?.phonenumber
+                                                    ? setting.phonenumber
                                                     : ""
                                             }
                                             onChange={(event) =>
-                                                setNewPhonenumber(
-                                                    event.target.value
-                                                )
+                                                setSetting((prevSetting) => ({
+                                                    ...prevSetting,
+                                                    phonenumber:
+                                                        event.target.value,
+                                                }))
                                             }
                                         />
                                     </Form.Group>
@@ -195,7 +193,6 @@ function UserDataForm() {
                                     </Button>
                                 </Row>
                             </Container>
-                            {/* ))} */}
                         </Form>
                     </Col>
                 </Row>

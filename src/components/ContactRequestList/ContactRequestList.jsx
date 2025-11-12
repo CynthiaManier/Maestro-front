@@ -48,7 +48,7 @@ function ContactRequestList() {
 
     return (
         <div className="contact-requests">
-            <h3 className="contact-title">Demandes de Contact</h3>
+            {/* <h3 className="contact-title">Demandes de Contact</h3> */}
             {/*Si la longeur du tableau est stictemennt égal à 0 on affiche aucun
             message pour le moment Sinon on fait un .map pour afficher chaque
             demande dynamique */}
@@ -57,8 +57,8 @@ function ContactRequestList() {
             ) : (
                 requests.map((request) => (
                     <div key={request.id} className="request">
-                        <h4>Email :{" "}{request.mail}</h4>
-                        <p>Message :{" "}{request.message}</p>
+                        <h4>Email : {request.mail}</h4>
+                        <p>Message : {request.message}</p>
                         <p>
                             {/* pour mettre un espace entre statut : est le mot
                             qui suit on utilise ce signe {" "} .
@@ -66,19 +66,19 @@ function ContactRequestList() {
                             Si une valeur est connue on
                             affiche cette valeur sinom on affiche "non lu" par
                             défaults */}
-                            Status :{" "}{request.status ? request.status : "non lu"}
+                            Status :{" "}
+                            {request.status ? request.status : "non lu"}
                         </p>
 
                         <div className="actions">
                             <button
-                            /* si request.status est stictement égal à "non lu" on  passe 
+                                /* si request.status est stictement égal à "non lu" on  passe 
                             à lu on moment du clique avec l'appel handleUpdate pour le changement */
                                 className="update-button"
                                 onClick={() => {
                                     if (request.status === "non lu") {
                                         handleUpdate(request.id, "lu");
                                     }
-                                    
                                 }}
                             >
                                 Marquer
@@ -88,7 +88,7 @@ function ContactRequestList() {
                                 className="delete-button"
                                 onClick={() => handleDelete(request.id)}
                             >
-                                Supprimer 
+                                Supprimer
                             </button>
                         </div>
                     </div>
