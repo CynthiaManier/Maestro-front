@@ -17,7 +17,7 @@ function ProjectList() {
     const [projectFilter, setProjectFilter] = useState (''); // Filtre appliqué aux projets
     const [statusList, setStatusList] = useState ([]); // Liste des statuts disponibles
     const [newStatus, setNewStatus] = useState (''); 
-    const [projectResume, setProjectResume] = useState (''); 
+
 
     // Modal
     const [show, setShow] = useState(false);
@@ -117,6 +117,9 @@ function ProjectList() {
             }
         };
 
+
+
+
     // useeffect s'exécute quand le composant apparait sur la page
     useEffect(() => {
         // quand le composant s'affiche, je lance ma fonction getProjects()
@@ -139,8 +142,8 @@ return (
             :
             <option>Pas de statut</option>
             }
-
         </Form.Select>
+        <div className="projects__container">
         {/* si projectList existe (!=null) et n’est pas vide (length != 0), alors j’affiche la liste des projets avec map, sinon on affiche pas de projet */}
         {(projectList != null && projectList.length != 0) ? projectList.map((project) => (
             <Form key={project.id}>
@@ -188,18 +191,11 @@ return (
                                 {project.name}
                             </Badge>
                             
-                            {/* DESCRIPTION du projet*/}
-                            <Badge
-                                pill
-                                style={{
-                                    color: "black",
-                                    fontSize: "0.9rem",
-                                }}
-                                className="test mb-2 d-block"
-                                bg={userIs === "admin" ? 'color-admin' : 'color-client'}
-                            > 
+                            {/* DESCRIPTION(resume) du projet*/}
+                            <p className={`project__resume ${userIs === "admin" ? "bg-color-admin" : "bg-color-client"}`}
+                            >
                                 {project.resume}
-                            </Badge>
+                            </p>
 
 
                             {/* STATUS*/}
@@ -242,6 +238,7 @@ return (
         </Form>
         ))
     : <p>pas de projet</p>}
+        </div>
     </section>
 );
 }

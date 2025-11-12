@@ -1,6 +1,11 @@
 @use "../style/var.scss";
 @use "../style/mixin.scss";
 
+.projects__container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
 .deadline__badge {
     // espace entre statut et deadline
     margin-top: 12px;
@@ -13,7 +18,9 @@
     background-color: var.$color-admin ;
 }
 
-// $color-title-text: #000000;
-// $color-bg: #F4F1DE;
-// $color-client: #9DC4B5;
-// $color-admin: #E07A5F;
+.project__resume {
+    border-radius: 8px;
+    text-align: left;
+    padding-left: 1rem; 
+    padding-right: 2rem;
+}
