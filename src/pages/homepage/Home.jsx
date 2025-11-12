@@ -11,24 +11,29 @@ function Home() {
     const [descriptions, setDescriptions] = useState([]);
         const { userIs } = useContext(UserContext);
 
-    // Récupère toutes les descriptions (compositeur, prestation, etc.)
+    // Récupère toutes les descriptions (compositeur et prestation)
     useEffect(() => {
         getAllDescription()
             .then((data) => setDescriptions(data))
             .catch((err) => console.error(err));
     }, []);
 
-    // Rafraîchit après création, update ou delete
+    // Permet de recharger les descriptions après une action (création, mise à jour, suppression)
     function refreshDescriptions() {
         getAllDescription()
             .then((data) => setDescriptions(data))
             .catch((err) => console.error(err));
     }
 
-    // Sépare les deux descriptions principales
+    // je parcourt un tableau avec .find pour trouvé les id qui sont strictement égal à celle ci 
     const presentationCompositeur = descriptions.find((d) => d.id === 1);
     const prestation = descriptions.find((d) => d.id === 2);
 
+    /* Affiche la description du compositeur .
+Affiche le formulaire d’administration si l’utilisateur est admin.
+Affiche la composition start.
+Affiche la description de la prestation.
+Affiche à nouveau le formulaire d’administration si l’utilisateur est admin. */
     return (
         <>
             {/* Présentation du compositeur */}
@@ -36,8 +41,7 @@ function Home() {
                 <DescriptionItem description={presentationCompositeur} />
             )}
             {userIs === "admin" && (
-                <section className="description__form">
-                    <h3>Ajouter une description</h3>
+                <section>
                     <DescriptionForm onAction={refreshDescriptions} />
                 </section>
             )}
@@ -46,10 +50,11 @@ function Home() {
             <PreviewList location={locationHome} />
 
             {/* Prestation */}
-            {prestation && <DescriptionItem description={prestation} />}
+            {prestation && (
+                <DescriptionItem description={prestation} />
+            )}
             {userIs === "admin" && (
-                <section className="description__form">
-                    <h3>Ajouter une description</h3>
+                <section>
                     <DescriptionForm onAction={refreshDescriptions} />
                 </section>
             )}

@@ -1,28 +1,21 @@
-import { useState, useEffect  } from "react";
-import { getAllDescription } from "../../api/apiDescription.js";
 import DescriptionItem from "../Description/DescriptionItem/DescriptionItem.jsx";
 import "./Description.scss";
 
-function Description() {
-    const [descriptionList, setDescriptionList] = useState([]);
-    async function getDescriptionList() {
-        const allDescriptions = await getAllDescription();
-        setDescriptionList(allDescriptions);
+//le composant description  affiche une liste de descriptions en utilisant un composant enfant DescriptionItem, et il gère le cas où la liste est vide.
+function Description({ descriptions }) {
+    if (!descriptions || descriptions.length === 0) {
+        return <p>Aucune description disponible.</p>;
     }
 
-    useEffect(() => {
-        getDescriptionList();
-    }, []);
-
     return (
-        <>
-            <section>
-                {descriptionList.length !== 0 &&
-                    descriptionList.map((description) => (
-                        <DescriptionItem key={description.id} description={description} />
-                    ))}
-            </section>
-        </>
+        <section>
+            {descriptions.map((description) => (
+                <DescriptionItem
+                    key={description.id}
+                    description={description}
+                />
+            ))}
+        </section>
     );
 }
 

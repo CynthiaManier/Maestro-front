@@ -1,7 +1,7 @@
 import ContactRequestList from "../../components/ContactRequestList/ContactRequestList.jsx";
 import GenreForm from "../../components/GenreForm/GenreForm.jsx";
 // import ClientList from "../../components/ClientList/ClientList.jsx"
-import ProjectList from "../../components/ProjectList/ProjectList.jsx";
+// import ProjectList from "../../components/ProjectList/ProjectList.jsx";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -58,7 +58,7 @@ function Admin() {
             <Container className="admin-container">
                 <Row className="list-item project-list-item">
                     <h2 className="admin-item-title">Les projets en cours</h2>
-                    <ProjectList />
+                    {/* <ProjectList /> */}
                 </Row>
 
                 <Row>
