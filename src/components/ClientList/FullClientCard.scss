@@ -2,8 +2,9 @@
 @use "../var";
 
 .full-client-card-container {
-    padding: 0;
-    margin: 0;
+    padding: 0rem;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 .client-card-row {
