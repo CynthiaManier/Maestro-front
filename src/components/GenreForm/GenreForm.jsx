@@ -18,7 +18,6 @@ function GenreForm() {
     const [idToUpdate, setIdToUpdate] = useState(null);
     const [updateGenre, setUpdateGenre] = useState('');
     // const [activeItem, setActiveItem] = useState(null);
-    // const [selectedGenre, setSelectedGenre] = useState(null);
 
         // Modal
         const [show, setShow] = useState(false);
@@ -41,10 +40,7 @@ function GenreForm() {
     }
 
     async function handleAddGenre() {
-        console.log("addgenre clicked"); // ok
         setSaving(true);
-        // e.preventDefault();
-        // console.log(e.target.value);
         try {
             const genreAdded = await addAGenre(genreToAdd);
             handleOnSaved();
@@ -57,24 +53,8 @@ function GenreForm() {
     }
 
     function showUpdate(genre) {
-        // const forms = document.querySelectorAll('form'); // for of, .id
-        // console.log(forms);
-        // const formToUpdate = document.getElementById(genre.id);
-        // console.log(formToUpdate);
-        // for (const form of forms) {
-        //     if (form.id === genre.id)
-        // }
         setUpdateGenre(<UpdateGenreForm unshow={unshowUpdate} onSaved={handleOnSaved} genre={genre}/>);
     }
-
-
-
-    // function toggleItem(genre) {
-    //     // const key = String(genre.id);
-    //     // bascule l'item actif et met à jour selectedGenre : si on reclique sur le même, on ferme et on supprime selectedGenre
-    //     // setActiveItem(gen => (gen === key ? null : key));
-    //     setSelectedGenre(gen => (gen && gen.id === genre.id ? null : genre));
-    // }
 
     async function handleDelete(id) {
         handleOnSaved();
@@ -100,8 +80,8 @@ function GenreForm() {
         <>
             <section className='genre__container'>
                 <h2 className='genre__title'>Les Genres</h2>
-                <Accordion>
-                    <Accordion.Item className='genre__accordion__item' eventKey="1">
+                <Accordion >
+                    <Accordion.Item className='genre__accordion__item' eventKey="0">
                         <Accordion.Header className='genre__accordion__title'>Liste des genres</Accordion.Header>
                             <Accordion.Body>
                                 <ListGroup>
@@ -152,10 +132,11 @@ function GenreForm() {
                             </Button>
                             </Modal.Footer>
                         </Modal>
-                        <Accordion.Item className='genre__accordion__item' eventKey="0">
+                        <Accordion.Item className='genre__accordion__item' eventKey="1">
                             <Accordion.Header className='genre__accordion__title'>Ajouter un genre</Accordion.Header>
                             <Accordion.Body>
-                                <Form className='genre__form' onSubmit={(e) => {e.preventDefault(); handleAddGenre(e)} }>
+                                <Form className='genre__form' onSubmit={(e) => {e.preventDefault(); handleAddGenre(e); setGenreToAdd('');
+                                } }>
                                     <Form.Label htmlFor='genre'>Ajout d'un genre</Form.Label>
                                     <Form.Control
                                     onChange={(e) => setGenreToAdd(e.target.value)}
