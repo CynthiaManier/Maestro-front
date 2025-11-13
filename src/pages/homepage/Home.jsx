@@ -25,7 +25,7 @@ function Home() {
             .catch((err) => console.error(err));
     }
 
-    // je parcourt un tableau avec .find pour trouvé les id qui sont strictement égal à celle ci 
+    // je parcourt un tableau avec .find pour trouvé les numbers qui sont strictement égal à celle ci 
     const presentationCompositeur = descriptions.find((d) => d.number === 1);
     const prestation = descriptions.find((d) => d.number === 2);
 

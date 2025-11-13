@@ -98,7 +98,7 @@ function DescriptionForm({ description, onAction }) {
                                     type="text"
                                     value={title}
                                     // defaultValue={description.title}
-                                    placeholder="Titre de la description"
+                                    placeholder="Entrez Votre Titre"
                                     onChange={(e) => setTitle(e.target.value)}
                                 />
                             </Form.Group>
@@ -109,6 +109,7 @@ function DescriptionForm({ description, onAction }) {
                                     as="textarea"
                                     rows={3}
                                     value={text}
+                                    placeholder="Entrez votre Texte"
                                     // defaultValue={description.text}
                                     onChange={(e) => setText(e.target.value)}
                                 />

@@ -3,13 +3,13 @@
 
 .description__container {
     display: flex;
-    flex-direction: column; // Mobile: titre > image > texte
+    flex-direction: column;
     align-items: center;
-    gap: 1rem;
 
     @include mixin.desktop {
-        flex-direction: row; // Desktop: image à gauche, texte + titre à droite
-        align-items: center; // Centrage vertical
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
     }
 }
 
@@ -18,9 +18,33 @@
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
+
     @include mixin.desktop {
+        grid-column: 2;
+        grid-row: 1;
         align-items: flex-start;
-        padding-top: 0; // pour bien coller avec le texte
+        padding-top: 0;
+        margin-left: 10px;
+    }
+}
+
+.description__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    color: #000000;
+    font-family: var.$font-main;
+    font-size: 0.7rem;
+
+    @include mixin.desktop {
+        grid-column: 2;
+        grid-row: 1;
+        align-items: flex-start;
+        padding: 0;
+        margin-top: 70px;
+        margin-left: 10px;
+        font-size: var.$font-size-base;
     }
 }
 
@@ -28,37 +52,17 @@
     width: 100%;
     max-width: 500px;
     height: auto;
-    object-fit: cover;
     padding-top: 20px;
+    object-fit: cover;
 
     @include mixin.desktop {
-        width: 500px;
-        height: 500px;
-        margin-right: 50px; // espace entre image et contenu
-        padding-top: 40px;
-    }
-}
-
-.description__text {
-    display: flex;
-    flex-direction: column; // Titre et texte en dessous l’un de l’autre
-    align-items: center;
-    padding: 20px;
-
-    @include mixin.desktop {
-        align-items: flex-start;
-        justify-content: center;
-        padding: 0;
-    }
-}
-
-.description__paragraph {
-    line-height: 1.6;
-    padding: 20px;
-    text-align: center;
-
-    @include mixin.desktop {
-        text-align: left;
-        padding: 10px 100px 0 0;
+        width: 400px;
+        height: 400px;
+        grid-column: 1;
+        grid-row: 1;
+        align-self: center;
+        padding-top: 0;
+        padding-bottom: 20px;
+        padding-top: 20px;
     }
 }

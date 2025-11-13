@@ -1,11 +1,11 @@
 @use "./var";
-
+/* 
 // Mobile
 @mixin mobile {
     @media (max-width: var.$breakpoint-mobile) {
         @content;
     }
-}
+} */
 
 // Desktop
 @mixin desktop {
