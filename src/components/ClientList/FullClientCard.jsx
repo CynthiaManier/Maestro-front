@@ -10,7 +10,6 @@ import { getAllUsers, getSortedUsers } from "../../api/apiUser.js";
 function FullClientCard() {
     // Recuperer la liste des clients et les faires passer aux composants
     const [clients, setClients] = useState([]);
-    const [sortedClients, setSortedClients] = useState("");
 
     async function getClients() {
         const clients = await getAllUsers();
@@ -18,22 +17,20 @@ function FullClientCard() {
         console.log("Dans ma page admin :", clients);
     }
 
+    // ici ton param a le nom d'un  state attention
     async function getSortedClients(sortedUsers) {
         const clients = await getSortedUsers(sortedUsers);
         setClients(clients);
         console.log("Dans ma page admin :", clients);
     }
 
-    function handelChange(event) {
-        event.preventDefault();
-        const sortedUsers = event.target.value;
-        console.log("sortedUsers : ", sortedUsers);
-        setSortedClients(sortedUsers);
+    function handleChange(event) {
+        // ne pas mettre event.preventDefault() dans un onChange de select !!!
 
-        if (sortedClients === "") {
+        if (event.target.value === "") {
             getClients();
         } else {
-            getSortedClients(sortedClients);
+            getSortedClients(event.target.value);
         }
     }
 
@@ -46,11 +43,12 @@ function FullClientCard() {
             <div className="client-sort-form-select">
                 <Form.Select
                     aria-label="client-sort-form-select"
-                    onChange={handelChange}
+                    onChange={handleChange}
                 >
-                    <option>Trier par</option>
-                    <option value="lastnameSelected">Nom</option>
-                    <option value="firstnameSelected">Prénom</option>
+                    <option value="">Trier par</option>
+
+                    <option value="lastnameSelected">Trier par nom</option>
+                    <option value="firstnameSelected">Trier par prénom</option>
                 </Form.Select>
             </div>
 
