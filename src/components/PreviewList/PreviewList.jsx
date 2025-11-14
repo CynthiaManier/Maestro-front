@@ -22,13 +22,7 @@ function PreviewList({location}) {
     const [activeItem, setActiveItem] = useState(null);
     const [selectedPreview, setSelectedPreview] = useState(null);
 
-
-    // ici tu récupères tout l'objet => {userIs, loginProvider, logoutProvider}
-    // pour cela que tu dois faire userIs.userIs ou {userIs}
     const {userIs} = useContext(UserContext)
-
-    // console.log('role après context', userIs);
-    // console.log(genreList);
     
     function handleOnSave() {
         getPreviewList();
@@ -47,7 +41,6 @@ function PreviewList({location}) {
             getGenreList();
         } else {
             const allStarPreviews = await getAllStarPreviews();
-            console.log('allstarpreviews : ', allStarPreviews);
             setPreviewList(allStarPreviews);
             setComponentTitle('Quelques extraits')
         }
@@ -103,10 +96,6 @@ function PreviewList({location}) {
         getPreviewList();
     }, [])
 
-    // test genres en dur pour map ensuite
-    // const genres = ["pop", "rock", "classique"]
-    // const audioscr = "/src/assets/RAYE.mp3"
-
     return (
         <>
                 <h1 className="preview__list__title">{componentTitle}</h1>
@@ -122,16 +111,6 @@ function PreviewList({location}) {
                             <option value={genre.label} key={genre.id} className="genre__item">{genre.label.charAt(0).toUpperCase() + genre.label.slice(1)}</option>
                         ))}
                     </Form.Select>
-                    {/* <Dropdown>
-                        <Dropdown.Toggle className="toggle-button" variant="success" id="dropdown-basic">
-                            <i className="sort-icon bi bi-sort-down fs-1"></i>
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu className="genre__menu">
-                        {genreList.map((genre) => (
-                            <Dropdown.Item key={genre.id} className="genre__item" href="#">{genre.label}</Dropdown.Item>
-                        ))}
-                        </Dropdown.Menu>
-                    </Dropdown> */}
                 </div>
                 }
 
