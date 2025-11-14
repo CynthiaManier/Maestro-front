@@ -128,9 +128,13 @@
     background-color: #CE4B27;
 }
 
+.buttons__container {
+    display: flex;
+    gap: .7rem;
+}
+
 .trash__icon {
     padding: .5rem .7rem .5rem .7rem;
-    color: var.$color-admin;
 }
 
 .trash__icon:hover {

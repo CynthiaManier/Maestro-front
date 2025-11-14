@@ -4,6 +4,7 @@ import { useState } from "react";
 export function UserProvider({children}) {
     const [userIs, setUserIs] = useState('visitor');
 
+
     function loginProvider(role) {
         setUserIs(role);
     };

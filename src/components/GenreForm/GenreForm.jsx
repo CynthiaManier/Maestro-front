@@ -2,11 +2,12 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/Form';
-import {Trash} from "react-bootstrap-icons";
+import {Trash, PencilSquare} from "react-bootstrap-icons";
 import './GenreForm.scss'
 import { addAGenre, getAllGenres, deleteGenre } from '../../api/apiGenre.js';
 import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import UpdateGenreForm from '../UpdateGenreForm/UpdateGenreForm.jsx';
 
 function GenreForm() {
 
@@ -14,6 +15,9 @@ function GenreForm() {
     const [genreToAdd, setGenreToAdd] = useState('');
     const [saving, setSaving] = useState(false);
     const [idToDelete, setIdToDelete] = useState(null);
+    const [idToUpdate, setIdToUpdate] = useState(null);
+    const [updateGenre, setUpdateGenre] = useState('');
+    // const [activeItem, setActiveItem] = useState(null);
 
         // Modal
         const [show, setShow] = useState(false);
@@ -30,11 +34,13 @@ function GenreForm() {
         getListGenres();
     }
 
+    function unshowUpdate() {
+        setIdToUpdate(null);
+        setUpdateGenre('');
+    }
+
     async function handleAddGenre() {
-        console.log("addgenre clicked"); // ok
         setSaving(true);
-        // e.preventDefault();
-        // console.log(e.target.value);
         try {
             const genreAdded = await addAGenre(genreToAdd);
             handleOnSaved();
@@ -46,6 +52,9 @@ function GenreForm() {
         
     }
 
+    function showUpdate(genre) {
+        setUpdateGenre(<UpdateGenreForm unshow={unshowUpdate} onSaved={handleOnSaved} genre={genre}/>);
+    }
 
     async function handleDelete(id) {
         handleOnSaved();
@@ -71,8 +80,8 @@ function GenreForm() {
         <>
             <section className='genre__container'>
                 <h2 className='genre__title'>Les Genres</h2>
-                <Accordion>
-                    <Accordion.Item className='genre__accordion__item' eventKey="1">
+                <Accordion >
+                    <Accordion.Item className='genre__accordion__item' eventKey="0">
                         <Accordion.Header className='genre__accordion__title'>Liste des genres</Accordion.Header>
                             <Accordion.Body>
                                 <ListGroup>
@@ -80,16 +89,23 @@ function GenreForm() {
                                     {genreList.length > 0 ?
                                         genreList.map((genre) => (
                                             <>
-                                            <Form className='genre__form__item' key={genre.id}>
+                                            <Form className='genre__form__item' id={genre.id} key={genre.id}>
                                                 <ListGroup.Item >
                                                     <Form.Group className='genre__list__item genre__list__item--trash' >
                                                         <Form.Label htmlFor='genre' id={genre.label} className='genre__label' >{genre.label}</Form.Label>
-                                                        <Button id={genre.id} name='genre' onClick={(e) => {e.preventDefault(); setIdToDelete(genre.id); handleShow()}} className='trash__icon'>
-                                                                <Trash />
-                                                        </Button>
+                                                        <div className='buttons__container'>
+                                                            <Button id={genre.id} name='genre' onClick={(e) => {e.preventDefault(); setIdToDelete(genre.id); handleShow()}} className='trash__icon'>
+                                                                    <Trash />
+                                                            </Button>
+                                                            <Button id={genre.label} name='genre' className='pencil__icon' onClick={(e) => {e.preventDefault(); e.stopPropagation(); setIdToUpdate(genre.id); showUpdate(genre)}}>
+                                                                    <PencilSquare />
+                                                            </Button>
+                                                        </div>
                                                     </Form.Group>
                                                 </ListGroup.Item>
                                             </Form>
+                                            {idToUpdate === genre.id
+                                            && updateGenre}
 
                                             </>
                                         ))
@@ -116,10 +132,11 @@ function GenreForm() {
                             </Button>
                             </Modal.Footer>
                         </Modal>
-                        <Accordion.Item className='genre__accordion__item' eventKey="0">
+                        <Accordion.Item className='genre__accordion__item' eventKey="1">
                             <Accordion.Header className='genre__accordion__title'>Ajouter un genre</Accordion.Header>
                             <Accordion.Body>
-                                <Form className='genre__form' onSubmit={(e) => {e.preventDefault(); handleAddGenre(e)} }>
+                                <Form className='genre__form' onSubmit={(e) => {e.preventDefault(); handleAddGenre(e); setGenreToAdd('');
+                                } }>
                                     <Form.Label htmlFor='genre'>Ajout d'un genre</Form.Label>
                                     <Form.Control
                                     onChange={(e) => setGenreToAdd(e.target.value)}
