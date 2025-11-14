@@ -8,6 +8,7 @@ function DescriptionForm({ onAction }) {
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     const [imageFile, setImageFile] = useState(null);
+    const [number, setNumber] = useState(1);
     const [showForm, setShowForm] = useState(false);
 
     function handleSubmit(event) {
@@ -16,6 +17,7 @@ function DescriptionForm({ onAction }) {
         const formData = new FormData();
         formData.append("title", title);
         formData.append("text", text);
+        formData.append("number", number); // ajout du champ number
         if (imageFile) formData.append("image", imageFile);
 
         create(formData)
@@ -31,6 +33,7 @@ function DescriptionForm({ onAction }) {
         setTitle("");
         setText("");
         setImageFile(null);
+        setNumber(1);
     }
 
     return (
@@ -47,7 +50,7 @@ function DescriptionForm({ onAction }) {
             </div>
 
             <div className="d-flex justify-content-center">
-                <div className="border rounded ">
+                <div className="border rounded">
                     {showForm && (
                         <Form
                             onSubmit={handleSubmit}
@@ -74,6 +77,19 @@ function DescriptionForm({ onAction }) {
                                     placeholder="Entrez votre texte"
                                     onChange={(e) => setText(e.target.value)}
                                 />
+                            </Form.Group>
+
+                            <Form.Group controlId="formNumber" className="mt-3">
+                                <Form.Label>Numéro</Form.Label>
+                                <Form.Select
+                                    value={number}
+                                    onChange={(e) =>
+                                        setNumber(Number(e.target.value))
+                                    }
+                                >
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                </Form.Select>
                             </Form.Group>
 
                             <Form.Group controlId="formImage" className="mt-3">
