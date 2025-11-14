@@ -146,16 +146,16 @@ return (
         </Form.Select>
 
         {/* LISTE DES PROJETS */}
-        <Container fluid>
-        <Row>
+        <Container>
+        <Row className="projects__container">
         {/* si projectList existe (!=null) et n’est pas vide (length != 0), alors j’affiche la liste des projets avec map, sinon on affiche pas de projet */}
         {(projectList != null && projectList.length != 0) ? projectList.map((project) => (
-            <Col key={project.id} className="mb-5" >
+            <Col key={project.id} className="mb-5" md={12}>
                 <Form >
                     <Card 
                         className="border border-primary rounded-3 shadow-sm"
                         style={{
-                            // width: "100%",
+                            width: "100%",
                             border: "2px" ,
                         }}
                     >
@@ -163,6 +163,7 @@ return (
                         {/* SUPPRESSION PROJET*/}
                         <Card.Body>
                             <Row className="align-items-center">
+                                {/* ICÔNE POUBELLE */}
                                 <Col xs="auto">
                                     < Trash size={30} onClick={(e) => {e.preventDefault(); handleShow() }}/>
                                 
@@ -182,7 +183,7 @@ return (
                                         </Modal>
                                 </Col>
 
-                                <Col className="text-center">
+                                <Col className="text-center ">
                                 {/* TITRE PROJET "en cours" */}
                                     <Badge
                                         pill
