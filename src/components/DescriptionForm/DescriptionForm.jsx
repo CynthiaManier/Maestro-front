@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { create, update, deleteDescription } from "../../api/apiDescription.js";
+import { create } from "../../api/apiDescription.js";
 import { PlusSquareFill, DashSquareFill } from "react-bootstrap-icons";
 import "./DescriptionForm.scss";
 
-//Crée plusieurs états "useState"  pour gérer les valeurs du formulaire, les champs à mettre à jour, et l’affichage du formulaire.
-function DescriptionForm({ description, onAction }) {
+function DescriptionForm({ onAction }) {
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     const [imageFile, setImageFile] = useState(null);
@@ -14,13 +13,9 @@ function DescriptionForm({ description, onAction }) {
     function handleSubmit(event) {
         event.preventDefault();
 
-        // Si "title" ou "text" sont vides, utiliser ceux de "description"
-        const finalTitle = title || description.title;
-        const finalText = text || description.text;
-
         const formData = new FormData();
-        formData.append("title", finalTitle);
-        formData.append("text", finalText);
+        formData.append("title", title);
+        formData.append("text", text);
         if (imageFile) formData.append("image", imageFile);
 
         create(formData)
@@ -32,38 +27,6 @@ function DescriptionForm({ description, onAction }) {
             .catch((error) => console.error("Erreur :", error));
     }
 
-    function handleUpdate() {
-        const finalTitle = title || description.title;
-        const finalText = text || description.text;
-
-        const formData = new FormData();
-        formData.append("title", finalTitle);
-        formData.append("text", finalText);
-        if (imageFile) formData.append("image", imageFile);
-
-        console.log("id description", description.id);
-        update(description.id, formData)
-            .then((response) => {
-                console.log("Description mise à jour :", response);
-                resetForm();
-                if (onAction) onAction();
-            })
-            .catch((error) => console.error("Erreur :", error));
-    }
-
-    //Gère la suppression d’une description.  appelle la fonction deleteDescription, et réinitialise le formulaire.
-    function handleDelete() {
-        console.log("id description", description.id);
-        deleteDescription(description.id)
-            .then((response) => {
-                console.log("Description supprimée :", response);
-                resetForm();
-                if (onAction) onAction();
-            })
-            .catch((error) => console.error("Erreur :", error));
-    }
-
-    //Réinitialise tous les états du formulaire
     function resetForm() {
         setTitle("");
         setText("");
@@ -97,8 +60,7 @@ function DescriptionForm({ description, onAction }) {
                                 <Form.Control
                                     type="text"
                                     value={title}
-                                    // defaultValue={description.title}
-                                    placeholder="Entrez Votre Titre"
+                                    placeholder="Entrez votre titre"
                                     onChange={(e) => setTitle(e.target.value)}
                                 />
                             </Form.Group>
@@ -109,8 +71,7 @@ function DescriptionForm({ description, onAction }) {
                                     as="textarea"
                                     rows={3}
                                     value={text}
-                                    placeholder="Entrez votre Texte"
-                                    // defaultValue={description.text}
+                                    placeholder="Entrez votre texte"
                                     onChange={(e) => setText(e.target.value)}
                                 />
                             </Form.Group>
@@ -128,22 +89,6 @@ function DescriptionForm({ description, onAction }) {
                             <div className="mt-4">
                                 <Button variant="primary" type="submit">
                                     Créer
-                                </Button>
-                                <Button
-                                    variant="warning"
-                                    type="button"
-                                    className="ms-2"
-                                    onClick={handleUpdate}
-                                >
-                                    Mettre à jour
-                                </Button>
-                                <Button
-                                    variant="danger"
-                                    type="button"
-                                    className="ms-2"
-                                    onClick={handleDelete}
-                                >
-                                    Supprimer
                                 </Button>
                             </div>
                         </Form>
