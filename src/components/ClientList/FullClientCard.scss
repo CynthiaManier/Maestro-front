@@ -2,8 +2,9 @@
 @use "../var";
 
 .full-client-card-container {
-    padding: 0;
-    margin: 0;
+    padding: 0rem;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 .client-card-row {
@@ -13,6 +14,17 @@
     margin-bottom: 0.5rem;
 }
 
-.client-card-columne {
+.client-card-column {
     margin: 0;
+}
+
+.client-sort-form-select {
+    padding-bottom: 0.5rem;
+}
+
+.disable-button {
+    border: solid 1px black;
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 3.5rem;
 }

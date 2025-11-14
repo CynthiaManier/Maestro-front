@@ -1,19 +1,16 @@
 .App {
-  display: flex;
-  flex-direction: column;
-  
-  /*garantit que le conteneur prend toujours au moins la hauteur 
+    display: flex;
+    flex-direction: column;
+
+    /*garantit que le conteneur prend toujours au moins la hauteur 
   totale de la fenêtre du navigateur*/
-  min-height: 100vh;
+    min-height: 100vh;
 }
 
 main {
-  flex: 1;
+    flex: 1;
 
-
-  /*ajoute une barre de défilement verticale uniquement 
+    /*ajoute une barre de défilement verticale uniquement 
   si le contenu dépasse la hauteur du conteneur.*/
-  overflow-y: auto;
-} 
-
-
+    overflow-y: auto;
+}
