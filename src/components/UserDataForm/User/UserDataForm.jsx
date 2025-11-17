@@ -125,6 +125,7 @@ function UserDataForm() {
                                     >
                                         <Form.Label>Email</Form.Label>
                                         <Form.Control
+                                            required
                                             className="profile-form-item-input"
                                             type="email"
                                             placeholder="Votre email"
@@ -199,6 +200,7 @@ function UserDataForm() {
                                     </Form.Group>
                                 </Row>
 
+                                {/* DESACTIVER SON COMPTE */}
                                 <Row className="item profile-item">
                                     <Form.Group className="profile-form-item profile-form-item-toggle">
                                         <Form.Check
