@@ -1,10 +1,11 @@
-import "./LoginForm.scss";
 import { loginUser } from "../../api/apiUser.js";
 import { useState, useContext } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import UserContext from "../../UserContext.jsx";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import "./LoginForm.scss";
 
 function LoginForm({ setUserHasAccount }) {
     const [email, setEmail] = useState("");
