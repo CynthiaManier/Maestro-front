@@ -1,9 +1,10 @@
+
 import { useEffect, useState } from "react";
 import LoginForm from "../../components/LoginForm/LoginForm.jsx";
 import RegisterForm from "../../components/RegisterForm/RegisterForm.jsx";
-import "./Login.scss";
 
 function Login() {
+
     // LES COMPOSANTS QUI SERONT SUR LA PAGE:
 
     // Se connecter
@@ -15,18 +16,16 @@ function Login() {
 
     useEffect(() => {
         console.log("onClick");
-    }, [userHasAccount]);
+    }, [userHasAccount])
 
     return (
         <>
-            <h1 className="login-page-title">Connexion</h1>
-            {userHasAccount ? (
-                <LoginForm setUserHasAccount={setUserHasAccount} />
-            ) : (
-                <RegisterForm setUserHasAccount={setUserHasAccount} />
-            )}
+            {userHasAccount ? 
+            <LoginForm setUserHasAccount={setUserHasAccount}/>
+            : <RegisterForm setUserHasAccount={setUserHasAccount}/>}
+            
         </>
-    );
+    )
 }
 
 export default Login;
