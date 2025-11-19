@@ -12,6 +12,7 @@ function ProjectForm() {
     const [resume, setResume] = useState("");
     const [message, setMessage] = useState('');
 
+    // supprimer message alerte "demande envoyée"
     const [show, setShow] = useState(false);
 
     const {needRefreshProjectList} = useContext(UserContext)
@@ -26,7 +27,7 @@ function ProjectForm() {
         await createProject(projectData);
         needRefreshProjectList()
         setMessage("Demande envoyée");
-        setShow(true);
+        setShow(true); 
     };
 
     return (
@@ -70,6 +71,7 @@ function ProjectForm() {
             {/* message alerte : demande envoyée */}
             {message ? 
             <Alert variant="success" className="d-lg-block" onClose={() => setShow(false)} dismissible> {message}</Alert>
+                // on close & setShow = supprimer message d'alerte
             : null}
 
             <p className="form__champsObligatoire">*champs obligatoires</p>
