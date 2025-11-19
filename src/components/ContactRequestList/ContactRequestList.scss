@@ -1,5 +1,5 @@
-@use "../style/var.scss";
-@use "../style/mixin.scss";
+@use "/src/mixin";
+@use "/src/var";
 
 .contact-requests {
     width: 99%;
@@ -7,12 +7,9 @@
     // position: fixed;
     bottom: 5rem;
     left: 50%;
-    // transform: translateX(
-    //     -50%
-    // ); // centrage -50% de la gauche du conteneur pour le centré
     padding: 1rem 1.5rem;
     border-radius: 8px;
-    background-color: var.$color-bg;
+    background-color: #ffffff;
 
     max-height: 400px;
     overflow-y: auto;

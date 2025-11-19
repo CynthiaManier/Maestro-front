@@ -1,13 +1,12 @@
-@use "../style/var.scss";
-@use "../style/mixin.scss";
+@use "/src/mixin";
+@use "/src/var";
 
-#addDescription {
+#addDescription  #updatePreview {
     margin: 3rem;
     padding: 1rem;
     border: solid 1px var.$color-admin;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
-        rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     display: flex;
     flex-direction: column;
     justify-content: center;
