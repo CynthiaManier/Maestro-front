@@ -3,6 +3,7 @@ import { findAll, deleteMessage, update } from "../../api/apiMessageContact";
 import "./ContactRequestList.scss";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { notify } from "../Toast/Toast";
 
 function ContactRequestList() {
     /* request est une variable d'état contenant la liste de demande de contact 
@@ -111,7 +112,7 @@ function ContactRequestList() {
                 <Button variant="secondary" onClick={() => {handleClose(); setRequestToDelete('')}}>
                     Annuler
                 </Button>
-                <Button variant="primary" onClick={(e) => {e.preventDefault(); handleDelete(requestToDelete.id); setRequestToDelete(''); handleClose()}}>
+                <Button variant="primary" onClick={(e) => {e.preventDefault(); handleDelete(requestToDelete.id); setRequestToDelete(''); handleClose(); notify('Demande de contact supprimée avec succès !')}}>
                     Supprimer la demande de contact
                 </Button>
                 </Modal.Footer>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import "./Contact.scss";
 import { create } from "../../api/apiMessageContact";
+import { notify } from "../../components/Toast/Toast.jsx";
 
 function Contact() {
     const [email, setEmail] = useState("");
@@ -16,13 +17,13 @@ function Contact() {
         create(formData)
             .then((response) => {
                 console.log("Message envoyé", response);
-                alert("Message envoyé !");
+                notify("Message envoyé avec succès !");
                 setEmail("");
                 setMessage("");
             })
             .catch((error) => {
                 console.error("L'envoi du message a échoué", error);
-                alert("L'envoi du message a échoué");
+                notify("Echec lors de l'envoi du message");
             });
     }
 
