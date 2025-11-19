@@ -4,16 +4,13 @@ import { useState,useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import UserContext from "../../UserContext.jsx";
-import Alert from 'react-bootstrap/Alert';
+import { notify } from "../Toast/Toast.jsx";
 
 function ProjectForm() {
     // useState permet de stocker et mettre à jour les valeurs du formulaire.
     const [name, setName] = useState("");
     const [resume, setResume] = useState("");
-    const [message, setMessage] = useState('');
 
-    // supprimer message alerte "demande envoyée"
-    const [show, setShow] = useState(false);
 
     const {needRefreshProjectList} = useContext(UserContext)
 
@@ -26,8 +23,7 @@ function ProjectForm() {
         // envoie les données
         await createProject(projectData);
         needRefreshProjectList()
-        setMessage("Demande envoyée");
-        setShow(true); 
+        notify("Demande envoyée") // message TOAST 
     };
 
     return (
@@ -67,12 +63,6 @@ function ProjectForm() {
             <Button className="form__button" variant="primary" type="submit">
                 Envoyer ma demande
             </Button>
-
-            {/* message alerte : demande envoyée */}
-            {message.length != 0 && show === true ? 
-            <Alert variant="success" className="d-lg-block" onClose={() => { setShow(false); setMessage('')}} dismissible> {message}</Alert>
-                // on close & setShow = message d'alerte vidé et supprimé
-            : null}
 
             <p className="form__champsObligatoire">*champs obligatoires</p>
         </Form>
