@@ -61,43 +61,63 @@ function DescriptionItem({ description, onAction }) {
 
             {/* Le formulaire d’action n’est affiché que pour l’admin */}
             {userIs === "admin" && showActions && (
-                <Form className="mt-3 border-top pt-3">
-                    <Form.Group>
-                        <Form.Label>Nouveau titre</Form.Label>
+                <Form
+                    className="mt-3 border-top pt-3 updatePreview"
+                    id="updatePreview"
+                >
+                    <h2 className="form__title">Modifier la description</h2>
+                    <Form.Group className="mb-3 form__group">
+                        <Form.Label className="form__label" htmlFor="newTitle">
+                            Nouveau titre
+                        </Form.Label>
                         <Form.Control
+                            className="form__input"
+                            id="newTitle"
                             type="text"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </Form.Group>
 
-                    <Form.Group className="mt-2">
-                        <Form.Label>Nouveau texte</Form.Label>
+                    <Form.Group className="mb-3 form__group">
+                        <Form.Label className="form__label" htmlFor="newText">
+                            Nouveau texte
+                        </Form.Label>
                         <Form.Control
+                            className="form__input"
                             as="textarea"
                             rows={2}
+                            id="newText"
                             value={text}
                             onChange={(e) => setText(e.target.value)}
                         />
                     </Form.Group>
 
-                    <Form.Group className="mt-2">
-                        <Form.Label>Nouvelle image</Form.Label>
+                    <Form.Group className="mb-3 form__group">
+                        <Form.Label className="form__label" htmlFor="newImage">
+                            Nouvelle image
+                        </Form.Label>
                         <Form.Control
+                            className="form__input"
+                            id="newImage"
                             type="file"
                             onChange={(e) => setImageFile(e.target.files[0])}
                         />
                     </Form.Group>
 
-                    <div className="mt-3">
+                    <div className="d-flex form__button__container">
                         <Button
                             variant="warning"
-                            className="me-2"
+                            className="preview__form__button me-2"
                             onClick={handleUpdate}
                         >
                             Mettre à jour
                         </Button>
-                        <Button variant="danger" onClick={handleDelete}>
+                        <Button
+                            variant="danger"
+                            className="preview__form__button preview__form__button--delete"
+                            onClick={handleDelete}
+                        >
                             Supprimer
                         </Button>
                     </div>
