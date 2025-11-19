@@ -4,6 +4,7 @@ import { useState,useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import UserContext from "../../UserContext.jsx";
+import Alert from 'react-bootstrap/Alert';
 
 function ProjectForm() {
     // useState permet de stocker et mettre à jour les valeurs du formulaire.
@@ -62,9 +63,12 @@ function ProjectForm() {
             <Button className="form__button" variant="primary" type="submit">
                 Envoyer ma demande
             </Button>
-            {/* {message && <div>{message}</div>} */}
-            
-            
+
+            {/* message alerte : demande envoyée */}
+            {message ? 
+            <Alert variant="success" className="d-lg-block"> {message}</Alert>
+            : null}
+
             <p className="form__champsObligatoire">*champs obligatoires</p>
         </Form>
         
