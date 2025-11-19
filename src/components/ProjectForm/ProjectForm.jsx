@@ -12,6 +12,8 @@ function ProjectForm() {
     const [resume, setResume] = useState("");
     const [message, setMessage] = useState('');
 
+    const [show, setShow] = useState(false);
+
     const {needRefreshProjectList} = useContext(UserContext)
 
     // Fonction appelée quand l'utilisateur valide le formulaire
@@ -24,6 +26,7 @@ function ProjectForm() {
         await createProject(projectData);
         needRefreshProjectList()
         setMessage("Demande envoyée");
+        setShow(true);
     };
 
     return (
@@ -66,7 +69,7 @@ function ProjectForm() {
 
             {/* message alerte : demande envoyée */}
             {message ? 
-            <Alert variant="success" className="d-lg-block"> {message}</Alert>
+            <Alert variant="success" className="d-lg-block" onClose={() => setShow(false)} dismissible> {message}</Alert>
             : null}
 
             <p className="form__champsObligatoire">*champs obligatoires</p>
