@@ -99,7 +99,7 @@ function PreviewList({location}) {
 
     return (
         <>
-                <h1 className="preview__list__title">{componentTitle}</h1>
+                {location == '/compositions' ? <h1 className="preview__list__title">{componentTitle}</h1> : <h2 className="preview__list__title">{componentTitle}</h2>}
                 {location == '/compositions' && 
                 <div className="preview__list__form__container">
                     {/* on a notre formulaire pour sélectionner un genre */}
