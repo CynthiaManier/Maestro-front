@@ -21,6 +21,7 @@ function Accessibility() {
                         l’accessibilité de notre site, en appliquant les
                         recommandations suivantes :
                     </p>
+                    
                     <ul>
                         <li>
                             Utilisation d’une structure HTML sémantique
@@ -64,6 +65,7 @@ function Accessibility() {
                         react-aria-live.
                         </li>
                     </ul>
+                    
                 </section>
 
                 <section>

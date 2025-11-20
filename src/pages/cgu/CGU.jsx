@@ -4,7 +4,7 @@ function CGU() {
     return (
         <>
             <div className="cgu-container-header">
-                <h2>CGU</h2>
+                <h1>CGU</h1>
                 <p>En vigueur au 00/00/00</p>
                 <p>
                     Bienvenue sur notre site Maestro. Veuillez lire
