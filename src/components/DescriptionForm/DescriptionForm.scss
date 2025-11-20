@@ -27,6 +27,19 @@
     }
 }
 
+.description__form__group__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.description__group__container {
+    display: flex;
+    flex-direction: column;
+    @include mixin.desktop {
+        flex-direction: row;
+    }
+}
+
 .form__group {
     margin: 1rem;
     display: flex;
