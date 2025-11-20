@@ -35,9 +35,7 @@ function ProjectForm() {
 
             {/* Titre du projet */}
             <Form.Group controlId="FormTitleProject">
-                <Form.Label className="form__title" >
-                    Titre du projet*
-                </Form.Label>
+                <Form.Label className="form__title" >Titre du projet*</Form.Label>
                 <Form.Control
                     className="form__titleInput"
                     type="text"
@@ -62,10 +60,8 @@ function ProjectForm() {
             </Form.Group>
 
             {/* Date limite */}
-            <Form.Group>
-                <Form.Label className="form__deadline" >
-                    Date limite*
-                </Form.Label>
+            <Form.Group className="form__deadline" controlId="FormDeadline">
+                <Form.Label>Date limite*</Form.Label>
                 <Form.Control
                     className="form__deadlineInput"
                     type="date"
