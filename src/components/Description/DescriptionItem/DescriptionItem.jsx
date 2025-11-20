@@ -33,7 +33,7 @@ function DescriptionItem({ description, onAction }) {
         <>
             <div className="d-flex justify-content-between align-items-start">
                 <div className="description__container">
-                    <h2 className="description__title">{description.title}</h2>
+                    <h1 className="description__title">{description.title}</h1>
                     <img
                         className="description__image"
                         src={imageSrc}
