@@ -162,27 +162,32 @@ return (
                         }}
                     >
                     
-                        {/* SUPPRESSION PROJET*/}
+                        {/* SUPPRESSION PROJET pour l'admin*/}
                         <Card.Body>
                             <Row className="align-items-center">
-                                {/* ICÔNE POUBELLE */}
+                                {/* ICÔNE POUBELLE  */}
                                 <Col xs="auto">
-                                    < Trash size={30} onClick={(e) => {e.preventDefault(); handleShow() }}/>
-                                
-                                        <Modal show={show} onHide={handleClose}>
-                                            <Modal.Header closeButton>
-                                                <Modal.Title>Supprimer un projet</Modal.Title>
-                                            </Modal.Header>
-                                                <Modal.Body>Etes-vous sur de vouloir le supprimer ?</Modal.Body>
-                                                    <Modal.Footer>
-                                                        <Button variant="secondary" onClick={handleClose}>
-                                                            Annuler
-                                                        </Button>
-                                                        <Button variant="primary" onClick={(e) => {e.preventDefault(); handleDelete(project.id); handleClose()}}>
-                                                            Supprimer
-                                                        </Button>
-                                                    </Modal.Footer>
-                                        </Modal>
+                                {userIs === "admin" && (
+                                    <>
+                                        < Trash 
+                                            size={30} onClick={(e) => {e.preventDefault(); handleShow() }}
+                                        />
+                                            <Modal show={show} onHide={handleClose}>
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title>Supprimer un projet</Modal.Title>
+                                                </Modal.Header>
+                                                    <Modal.Body>Etes-vous sur de vouloir le supprimer ?</Modal.Body>
+                                                        <Modal.Footer>
+                                                            <Button variant="secondary" onClick={handleClose}>
+                                                                Annuler
+                                                            </Button>
+                                                            <Button variant="primary" onClick={(e) => {e.preventDefault(); handleDelete(project.id); handleClose()}}>
+                                                                Supprimer
+                                                            </Button>
+                                                        </Modal.Footer>
+                                            </Modal>
+                                    </>
+                                )}
                                 </Col>
 
                                 <Col className="text-center ">
