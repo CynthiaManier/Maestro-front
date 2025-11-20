@@ -30,7 +30,7 @@ function Contact() {
     return (
         <div className="contact-page">
             <div className="header-contact">
-                <h2>Contactez-nous</h2>
+                <h2 className="h2">Contactez-nous</h2>
                 <p>Les champs marqués d'un astérisque (*) sont obligatoires</p>
             </div>
 

@@ -43,9 +43,9 @@ function DescriptionForm({ onAction }) {
                 onClick={() => setShowForm(!showForm)}
             >
                 {showForm ? (
-                    <DashSquareFill size={28} color="#E07A5F" />
+                    <DashSquareFill size={40} className="minus__icon"/>
                 ) : (
-                    <PlusSquareFill size={28} color="#E07A5F" />
+                    <PlusSquareFill size={40} className="plus__icon"/>
                 )}
             </div>
 

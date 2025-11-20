@@ -12,9 +12,9 @@
     flex-direction: column;
     justify-content: center;
 
-    @include mixin.desktop {
-    max-width: calc(100vw/2 - 6rem);
-    }
+    // @include mixin.desktop {
+    // max-width: calc(100vw/2 - 6rem);
+    // }
 }
 
 .genre__title {
