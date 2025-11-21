@@ -154,7 +154,7 @@ return (
                                 <Col xs="auto">
                                 {userIs === "admin" && (
                                     <>
-                                        < Trash 
+                                        < Trash className="project__trash__icon"
                                             size={30} onClick={(e) => {e.preventDefault(); handleShow() }}
                                         />
                                             <Modal show={show} onHide={handleClose}>
