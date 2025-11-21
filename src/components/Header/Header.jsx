@@ -1,4 +1,3 @@
-// Header.jsx
 import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
@@ -10,6 +9,7 @@ import { logoutUser } from "../../api/apiUser.js";
 import { useAxiosInterceptor } from "../../api/axiosConfig.js";
 import { getMyProfile } from "../../api/apiUser.js";
 import { notify } from "../Toast/Toast.jsx";
+import logo from "../../assets/images/logo.png";
 
 /*useContext(UserContext) récupère les données partagées dans le contexte utilisateur.
 userIs : indique le rôle actuel (admin, client, visitor).
@@ -81,7 +81,7 @@ Si visiteur  pas d’icône.
         <header>
             <a href="/">
                 <img
-                    src="src/assets/images/logo.png"
+                    src={logo}
                     alt="logo maestro"
                     className="logo"
                 />

@@ -1,11 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Button, Form } from "react-bootstrap";
 import { PencilSquare, DashSquareFill } from "react-bootstrap-icons";
-import {
-    handleUpdateDescription,
-    handleDeleteDescription,
-} from "../../DescriptionAction/DescriptionAction.jsx";
+import {handleUpdateDescription,handleDeleteDescription,} from "../../DescriptionAction/DescriptionAction.jsx";
 import UserContext from "../../../UserContext.jsx";
+import DOMPurify from 'dompurify';
+
 
 function DescriptionItem({ description, onAction }) {
     const [title, setTitle] = useState(description.title || "");
@@ -22,9 +21,12 @@ function DescriptionItem({ description, onAction }) {
         ? `${URL_IMAGES}${description.image_link.split("/").pop()}`
         : null;
 
-    function handleUpdate() {
-        handleUpdateDescription(description, title, text, imageFile, onAction);
-    }
+function handleUpdate() {
+    const cleanTitle = DOMPurify.sanitize(title);
+    const cleanText = DOMPurify.sanitize(text);
+    handleUpdateDescription(description, cleanTitle, cleanText, imageFile, onAction);
+}
+
 
     function handleDelete() {
         handleDeleteDescription(description.id, onAction);

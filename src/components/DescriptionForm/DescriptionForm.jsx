@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { create } from "../../api/apiDescription.js";
 import { PlusSquareFill, DashSquareFill } from "react-bootstrap-icons";
+import DOMPurify from 'dompurify';
 import "./DescriptionForm.scss";
 
 function DescriptionForm({ onAction }) {
@@ -11,23 +12,28 @@ function DescriptionForm({ onAction }) {
     const [number, setNumber] = useState(1);
     const [showForm, setShowForm] = useState(false);
 
-    function handleSubmit(event) {
-        event.preventDefault();
+function handleSubmit(event) {
+    event.preventDefault();
 
-        const formData = new FormData();
-        formData.append("title", title);
-        formData.append("text", text);
-        formData.append("number", number);
-        if (imageFile) formData.append("image", imageFile);
+    const cleanTitle = DOMPurify.sanitize(title);
+    const cleanText = DOMPurify.sanitize(text);
+    const cleanNumber = DOMPurify.sanitize(number.toString());
 
-        create(formData)
-            .then((response) => {
-                console.log("Description créée :", response);
-                resetForm();
-                if (onAction) onAction();
-            })
-            .catch((error) => console.error("Erreur :", error));
-    }
+    const formData = new FormData();
+    formData.append("title", cleanTitle);
+    formData.append("text", cleanText);
+    formData.append("number", cleanNumber);
+    if (imageFile) formData.append("image", imageFile);
+
+    create(formData)
+        .then((response) => {
+            console.log("Description créée :", response);
+            resetForm();
+            if (onAction) onAction();
+        })
+        .catch((error) => console.error("Erreur :", error));
+}
+
 
     function resetForm() {
         setTitle("");
