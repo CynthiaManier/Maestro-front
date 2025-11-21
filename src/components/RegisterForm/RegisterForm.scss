@@ -2,7 +2,7 @@
 @use "/src/mixin";
 @use "/src/var";
 
-h2 {
+.h2 {
   text-align: center;
   padding-top: 3rem;
   font-family: var.$font-main;
@@ -85,7 +85,7 @@ p {
 
 
 @include mixin.desktop {
-  h2 {
+  .h2 {
     padding-top: 6rem;
     font-size: var.$font-size-h2;
   }

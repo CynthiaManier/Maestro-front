@@ -34,11 +34,13 @@ function DescriptionItem({ description, onAction }) {
             <div className="d-flex justify-content-between align-items-start">
                 <div className="description__container">
                     <h2 className="description__title">{description.title}</h2>
-                    <img
-                        className="description__image"
-                        src={imageSrc}
-                        alt="présentation du composateur"
-                    />
+                    <div className="description__image__container">
+                        <img
+                            className="description__image"
+                            src={imageSrc}
+                            alt="présentation du composateur"
+                        />
+                    </div>
 
                     <p className="description__text">{description.text}</p>
                 </div>

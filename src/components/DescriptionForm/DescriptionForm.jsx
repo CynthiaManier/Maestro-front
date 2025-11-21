@@ -43,9 +43,9 @@ function DescriptionForm({ onAction }) {
                 onClick={() => setShowForm(!showForm)}
             >
                 {showForm ? (
-                    <DashSquareFill size={28} color="#E07A5F" />
+                    <DashSquareFill size={40} className="minus__icon"/>
                 ) : (
-                    <PlusSquareFill size={28} color="#E07A5F" />
+                    <PlusSquareFill size={40} className="plus__icon"/>
                 )}
             </div>
 
@@ -59,17 +59,38 @@ function DescriptionForm({ onAction }) {
                 >
                     <h2 className="form__title">Ajouter une description</h2>
 
-                    <div className="form__group__container">
-                        <Form.Group className="form__group mb-3">
-                            <Form.Label className="form__label">Titre</Form.Label>
-                            <Form.Control
-                                className="form__input"
-                                type="text"
-                                value={title}
-                                placeholder="Entrez le titre"
-                                onChange={(e) => setTitle(e.target.value)}
-                            />
-                        </Form.Group>
+                    <div className="form__group__container description__form__group__container">
+                        <div className="description__group__container">
+                            <Form.Group className="form__group mb-3">
+                                <Form.Label className="form__label">Titre</Form.Label>
+                                <Form.Control
+                                    className="form__input"
+                                    type="text"
+                                    value={title}
+                                    placeholder="Entrez le titre"
+                                    onChange={(e) => setTitle(e.target.value)}
+                                />
+                            </Form.Group>
+                            <Form.Group className="form__group mb-3">
+                                <Form.Label className="form__label">Numéro</Form.Label>
+                                <Form.Select
+                                    className="form__input"
+                                    value={number}
+                                    onChange={(e) => setNumber(Number(e.target.value))}
+                                >
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                </Form.Select>
+                            </Form.Group>
+                            <Form.Group className="form__group mb-3">
+                                <Form.Label className="form__label">Image</Form.Label>
+                                <Form.Control
+                                    className="form__input"
+                                    type="file"
+                                    onChange={(e) => setImageFile(e.target.files[0])}
+                                />
+                            </Form.Group>
+                        </div>
 
                         <Form.Group className="form__group mb-3">
                             <Form.Label className="form__label">Texte</Form.Label>
@@ -80,27 +101,6 @@ function DescriptionForm({ onAction }) {
                                 value={text}
                                 placeholder="Entrez le texte"
                                 onChange={(e) => setText(e.target.value)}
-                            />
-                        </Form.Group>
-
-                        <Form.Group className="form__group mb-3">
-                            <Form.Label className="form__label">Numéro</Form.Label>
-                            <Form.Select
-                                className="form__input"
-                                value={number}
-                                onChange={(e) => setNumber(Number(e.target.value))}
-                            >
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                            </Form.Select>
-                        </Form.Group>
-
-                        <Form.Group className="form__group mb-3">
-                            <Form.Label className="form__label">Image</Form.Label>
-                            <Form.Control
-                                className="form__input"
-                                type="file"
-                                onChange={(e) => setImageFile(e.target.files[0])}
                             />
                         </Form.Group>
                     </div>

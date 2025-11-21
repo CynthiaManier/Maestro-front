@@ -56,7 +56,7 @@ function PreviewForm({genreList, onSave = () => {}, close = () => {}}) {
 
     return (
         <Form className='addPreview__form' onSubmit={handleSubmit} id='addPreview' method='post' encType="multipart/form-data">
-            <h2 className="form__title">Ajouter un extrait</h2>
+            <h2 className="preview__forms__title">Ajouter un extrait</h2>
             <div className='form__group__container'>
                 <Form.Group className="form__group mb-3">
                     <Form.Label className='form__label' htmlFor='previewTitle'>Titre de l'extrait</Form.Label>

@@ -104,7 +104,7 @@ function UpdatePreviewForm({ id, genreList = [], preview, onSaved = () => {} }) 
         <>
             {error && <p className="text-danger">{error}</p>}
             <Form onSubmit={handleSubmit} id='updatePreview' method='patch'>
-                <h2 className="form__title">Modifier l'extrait</h2>
+                <h2 className="preview__forms__title">Modifier l'extrait</h2>
                 <Form.Group className="mb-3 form__group">
                     <Form.Label className='form__label' htmlFor='previewTitle'>Titre de l'extrait</Form.Label>
                     <Form.Control className='form__input' value={formData.title} onChange={(e) => setFormData(prev => ({...prev, title: e.target.value}))} id='previewTitle' name='title' type="text" placeholder="Entrer le titre" />

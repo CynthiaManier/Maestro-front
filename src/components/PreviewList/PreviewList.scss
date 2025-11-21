@@ -175,9 +175,9 @@
 }
 
 .plus__icon, .minus__icon {
-    color: lightgray;
+    color: var.$color-admin;
 }
 
 .plus__icon:hover, .minus__icon:hover {
-    color: grey;
+    color: #CE4B27;
 }
