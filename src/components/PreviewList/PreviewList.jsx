@@ -163,7 +163,7 @@ function PreviewList({location}) {
                                 </Accordion.Header>
                                 <Accordion.Body>
                                     {userIs === 'admin' &&
-                                        <UpdatePreviewForm id={preview.id} preview={preview} genreList={genreList} onSaved={handleSaved} />
+                                        <UpdatePreviewForm setSelectedPreview={setSelectedPreview} setActiveItem={setActiveItem} id={preview.id} preview={preview} genreList={genreList} onSaved={handleSaved} />
                                     }
                                 </Accordion.Body>
                             </Accordion.Item>

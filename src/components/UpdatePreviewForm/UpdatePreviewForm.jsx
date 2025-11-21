@@ -7,9 +7,10 @@ import Modal from 'react-bootstrap/Modal';
 import { notify } from "../Toast/Toast.jsx";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { XLg } from "react-bootstrap-icons";
 
 
-function UpdatePreviewForm({ id, genreList = [], preview, onSaved = () => {} }) {
+function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = [], preview, onSaved = () => {} }) {
 
     // un seul state pour tout le formulaire (genres stocke les ids)
     const [formData, setFormData] = useState(() => ({
@@ -114,7 +115,10 @@ function UpdatePreviewForm({ id, genreList = [], preview, onSaved = () => {} }) 
         <>
             {error && <p className="text-danger">{error}</p>}
             <Form onSubmit={handleSubmit} id='updatePreview' method='patch'>
-                <h2 className="preview__forms__title">Modifier l'extrait</h2>
+                <div className="preview__form__header">
+                    <h2 className="preview__forms__title">Modifier l'extrait</h2>
+                    <Button onClick={() => {setSelectedPreview(null); setActiveItem(null)}} className="preview__close__icon"><XLg size={30}/></Button>
+                </div>
                 <p className="form__mandatory">Les champs marqués d'un (*) sont obligatoires.</p>
                 <Form.Group className="mb-3 form__group">
                     <Form.Label className='form__label' htmlFor='previewTitle'>Titre de l'extrait *</Form.Label>
