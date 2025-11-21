@@ -43,9 +43,10 @@ function ProjectForm() {
             <Form.Group controlId="FormTitleProject">
                 <Form.Label className="form__title" >Titre du projet*</Form.Label>
                 <Form.Control
+                    required
                     className="form__titleInput"
                     type="text"
-                    value={name}
+                    defaultValue={name}
                     onChange={(e) => setName(e.target.value)} // Met à jour le titre du projet
                 />
             </Form.Group>
@@ -57,10 +58,11 @@ function ProjectForm() {
             >
                 <Form.Label>Description du projet*</Form.Label>
                 <Form.Control
+                    required
                     className="form__descriptionInput"
                     as="textarea"
                     rows={4}
-                    value={resume}
+                    defaultValue={resume}
                     onChange={(e) => setResume(e.target.value)} // Met à jour la description du projet
                 />
             </Form.Group>
@@ -71,7 +73,7 @@ function ProjectForm() {
                 <Form.Control
                     className="form__deadlineInput"
                     type="date"
-                    value={deadline}
+                    defaultValue={deadline}
                     onChange={(e) => setDeadline(e.target.value)} // Met à jour la deadline du projet
                 />
             </Form.Group>
