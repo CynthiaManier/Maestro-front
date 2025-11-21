@@ -35,6 +35,13 @@
     border-color: var.$color-admin;
 }
 
+.card-body .project__card__row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
 
 
 @media (min-width: var.$breakpoint-desktop) {

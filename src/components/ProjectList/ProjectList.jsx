@@ -163,81 +163,79 @@ return (
                     >
                     
                         {/* SUPPRESSION PROJET*/}
-                        <Card.Body>
-                            <Row className="align-items-center">
+                        <Card.Body >
+                            {/* <Row className="flush align-items-center project__card__row"> */}
                                 {/* ICÔNE POUBELLE */}
-                                <Col xs="auto">
-                                    < Trash size={30} onClick={(e) => {e.preventDefault(); handleShow() }}/>
-                                
-                                        <Modal show={show} onHide={handleClose}>
-                                            <Modal.Header closeButton>
-                                                <Modal.Title>Supprimer un projet</Modal.Title>
-                                            </Modal.Header>
-                                                <Modal.Body>Etes-vous sur de vouloir le supprimer ?</Modal.Body>
-                                                    <Modal.Footer>
-                                                        <Button variant="secondary" onClick={handleClose}>
-                                                            Annuler
-                                                        </Button>
-                                                        <Button variant="primary" onClick={(e) => {e.preventDefault(); handleDelete(project.id); handleClose()}}>
-                                                            Supprimer
-                                                        </Button>
-                                                    </Modal.Footer>
-                                        </Modal>
-                                </Col>
-
-                                <Col className="text-center ">
-                                {/* TITRE PROJET "en cours" */}
-                                    <Badge
-                                        pill
-                                        style={{
-                                            color: "black",
-                                            fontSize: "0.9rem",
-                                        }}
-                                        className="mb-2 d-block"
-                                        bg={userIs === "admin" ? 'color-admin' : 'color-client'}
-                                    > 
-                                        {project.name}
-                                    </Badge>
+                                <div className="project__card__row">
+                                    <Col xs="auto">
+                                        < Trash size={30} onClick={(e) => {e.preventDefault(); handleShow() }}/>
                                     
-                                    {/* DESCRIPTION/RESUME PROJET */}
-                                    <p className="border rounded">
-                                        {project.resume}
-                                    </p>
-
-                                    {/* STATUS*/}
-                                    {userIs === 'admin' &&
-                                    <div>
-                                        <section className="update__status">
-                                            <Form.Group>
-                                                <Form.Label htmlFor="status-select">Selectionner le statut</Form.Label>
-
-                                                <Form.Select defaultValue={project.status} onChange={handleChangeStatus} name="status" id="status-select">
-                                                    {statusList.length > 0 ?
-                                                    statusList.map((status, index) => (
-                                                        <option value={status} id={project.id} key={index}>{status}</option>
-                                                    )):
-                                                    <option value="noStatus">pas de statut</option>
-                                                    }
-                                                </Form.Select>
-                                            </Form.Group>
-                                        </section>
-                                    </div>
-                                    }       
-
-                                    {/* DEADLINE*/}
-                                    <Badge
-                                        pill 
-                                        style={{
-                                            color: "black",
-                                            fontSize: "0.9rem",
-                                        }}
-                                        className="deadline__badge d-block"
-                                        bg={userIs === "admin" ? 'color-admin' : 'color-client'}
-                                    >
-                                        {project.deadline}
-                                    </Badge>
-                                </Col>
-                            </Row>
+                                            <Modal show={show} onHide={handleClose}>
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title>Supprimer un projet</Modal.Title>
+                                                </Modal.Header>
+                                                    <Modal.Body>Etes-vous sur de vouloir le supprimer ?</Modal.Body>
+                                                        <Modal.Footer>
+                                                            <Button variant="secondary" onClick={handleClose}>
+                                                                Annuler
+                                                            </Button>
+                                                            <Button variant="primary" onClick={(e) => {e.preventDefault(); handleDelete(project.id); handleClose()}}>
+                                                                Supprimer
+                                                            </Button>
+                                                        </Modal.Footer>
+                                            </Modal>
+                                    </Col>
+                                    <Col className="text-center ">
+                                    {/* TITRE PROJET "en cours" */}
+                                        <Badge
+                                            pill
+                                            style={{
+                                                color: "black",
+                                                fontSize: "0.9rem",
+                                            }}
+                                            className="mb-2 d-block"
+                                            bg={userIs === "admin" ? 'color-admin' : 'color-client'}
+                                        >
+                                            {project.name}
+                                        </Badge>
+                                    
+                                        {/* DESCRIPTION/RESUME PROJET */}
+                                        <p className="border rounded">
+                                            {project.resume}
+                                        </p>
+                                        {/* STATUS*/}
+                                        {userIs === 'admin' &&
+                                        <div>
+                                            <section className="update__status">
+                                                <Form.Group>
+                                                    <Form.Label htmlFor="status-select">Selectionner le statut</Form.Label>
+                                                    <Form.Select defaultValue={project.status} onChange={handleChangeStatus} name="status" id="status-select">
+                                                        {statusList.length > 0 ?
+                                                        statusList.map((status, index) => (
+                                                            <option value={status} id={project.id} key={index}>{status}</option>
+                                                        )):
+                                                        <option value="noStatus">pas de statut</option>
+                                                        }
+                                                    </Form.Select>
+                                                </Form.Group>
+                                            </section>
+                                        </div>
+                                        }
+                                        {/* DEADLINE*/}
+                                        <Badge
+                                            pill
+                                            style={{
+                                                color: "black",
+                                                fontSize: "0.9rem",
+                                            }}
+                                            className="deadline__badge d-block"
+                                            bg={userIs === "admin" ? 'color-admin' : 'color-client'}
+                                        >
+                                            {project.deadline}
+                                        </Badge>
+                                    </Col>
+                                </div>
+                            {/* </Row> */}
                         </Card.Body>
                     </Card>
                 </Form>
