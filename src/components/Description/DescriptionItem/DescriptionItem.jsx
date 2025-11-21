@@ -33,7 +33,23 @@ function DescriptionItem({ description, onAction }) {
         <>
             <div className="d-flex justify-content-between align-items-start">
                 <div className="description__container">
-                    <h2 className="description__title">{description.title}</h2>
+                    <div className="description__title">
+                        <h2 className="description__title__h2">{description.title}</h2>
+                        {/* Le bouton crayon n’apparaît que pour les administrateurs */}
+                        {userIs === "admin" && (
+                            <div
+                                className="icon-container"
+                                onClick={() => setShowActions(!showActions)}
+                                style={{ cursor: "pointer" }}
+                            >
+                                {showActions ? (
+                                    <DashSquareFill size={24} color="#E07A5F" />
+                                ) : (
+                                    <PencilSquare size={24} color="#3D405B" />
+                                )}
+                            </div>
+                        )}
+                    </div>
                     <div className="description__image__container">
                         <img
                             className="description__image"
@@ -45,20 +61,6 @@ function DescriptionItem({ description, onAction }) {
                     <p className="description__text">{description.text}</p>
                 </div>
 
-                {/* Le bouton crayon n’apparaît que pour les administrateurs */}
-                {userIs === "admin" && (
-                    <div
-                        className="icon-container"
-                        onClick={() => setShowActions(!showActions)}
-                        style={{ cursor: "pointer" }}
-                    >
-                        {showActions ? (
-                            <DashSquareFill size={24} color="#E07A5F" />
-                        ) : (
-                            <PencilSquare size={24} color="#3D405B" />
-                        )}
-                    </div>
-                )}
             </div>
 
             {/* Le formulaire d’action n’est affiché que pour l’admin */}
