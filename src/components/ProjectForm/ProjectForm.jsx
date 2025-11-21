@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import UserContext from "../../UserContext.jsx";
 import { notify } from "../Toast/Toast.jsx";
+import DOMPurify from "dompurify";
+
 
 function ProjectForm() {
 
@@ -19,13 +21,22 @@ function ProjectForm() {
     async function handleCreateProject (e) {
         e.preventDefault(); // empêche la page de se recharger
 
+
         let projectData;
+
         // ajoute la deadline si présente
         if (deadline !='' ){ 
-            projectData = { name: name, resume: resume, deadline: deadline };
+            projectData = { 
+                name: DOMPurify.sanitize(name),
+                resume: DOMPurify.sanitize(resume),
+                deadline: DOMPurify.sanitize(resume)
+            };
         } else {
             // sinon que le nom et description
-            projectData = { name: name, resume: resume};
+            projectData = { 
+                name: DOMPurify.sanitize(name),
+                resume: DOMPurify.sanitize(resume),
+            };
         }
 
         // envoie le projet puis rafraîchit la liste
@@ -43,9 +54,10 @@ function ProjectForm() {
             <Form.Group controlId="FormTitleProject">
                 <Form.Label className="form__title" >Titre du projet*</Form.Label>
                 <Form.Control
+                    required
                     className="form__titleInput"
                     type="text"
-                    value={name}
+                    defaultValue={name}
                     onChange={(e) => setName(e.target.value)} // Met à jour le titre du projet
                 />
             </Form.Group>
@@ -57,10 +69,11 @@ function ProjectForm() {
             >
                 <Form.Label>Description du projet*</Form.Label>
                 <Form.Control
+                    required
                     className="form__descriptionInput"
                     as="textarea"
                     rows={4}
-                    value={resume}
+                    defaultValue={resume}
                     onChange={(e) => setResume(e.target.value)} // Met à jour la description du projet
                 />
             </Form.Group>
@@ -71,7 +84,7 @@ function ProjectForm() {
                 <Form.Control
                     className="form__deadlineInput"
                     type="date"
-                    value={deadline}
+                    defaultValue={deadline}
                     onChange={(e) => setDeadline(e.target.value)} // Met à jour la deadline du projet
                 />
             </Form.Group>
