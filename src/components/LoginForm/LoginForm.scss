@@ -1,7 +1,11 @@
 @use "/src/mixin";
 @use "/src/var";
 
-.h2 {
+.login-form-global {
+    padding-top: 6.25rem;
+}
+
+.h1 {
     text-align: center;
     padding-top: 5rem;
     font-family: var.$font-main;

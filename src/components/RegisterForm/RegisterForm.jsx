@@ -62,7 +62,8 @@ function RegisterForm({ setUserHasAccount }) {
 
     return (
         <>
-            <h2 className="h2">Créer un compte</h2>
+        <div className="register-form-global">
+            <h1 className="h1">Créer un compte</h1>
             <p>Les champs marqués d'un (*) sont obligatoires</p>
             <div className="register-form-container">
                 <Form
@@ -168,6 +169,7 @@ function RegisterForm({ setUserHasAccount }) {
                         Connectez-vous
                     </Link>
                 </p>
+            </div>
             </div>
         </>
     );

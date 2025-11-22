@@ -23,7 +23,6 @@ function LoginForm({ setUserHasAccount }) {
             if (userInfo) {
                 console.log("userInfo", userInfo);
                 loginProvider(userInfo.user.role);
-                notify("Vous êtes bien connecté.");
                 navigate("/");
             }
         } catch (error) {
@@ -38,8 +37,8 @@ function LoginForm({ setUserHasAccount }) {
     }
 
     return (
-        <>
-            <h2 className="h2">Connexion</h2>
+        <div className="login-form-global">
+            <h1 className="h1">Connexion</h1>
             <div className="login-form-container">
                 <Form
                     className="login-form"
@@ -99,7 +98,7 @@ function LoginForm({ setUserHasAccount }) {
                     </Link>
                 </p>
             </div>
-        </>
+        </div>
     );
 }
 
