@@ -1,31 +1,25 @@
 import { Card, Badge, Row, Col, Button } from "react-bootstrap";
-import {
-    getAllProjectList,
-    getFilteredProjectList,
-} from "../../api/apiProjectList.js";
-import {
-    getAllAdminProjects,
-    getFilteredAdminProjects,
-    updateProjectStatus,
-    deleteProject,
-} from "../../api/apiProjectList.js";
+import { getAllProjectList, getFilteredProjectList } from "../../api/apiProjectList.js";
+import { getAllAdminProjects, getFilteredAdminProjects, updateProjectStatus, deleteProject  } from "../../api/apiProjectList.js";
 import { useState, useEffect, useContext } from "react";
 import UserContext from "../../UserContext.jsx";
-import Form from "react-bootstrap/Form";
+import Form from 'react-bootstrap/Form';
 import "./ProjectList.scss";
 import { Trash } from "react-bootstrap-icons";
-import Modal from "react-bootstrap/Modal";
+import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import { notify } from "../Toast/Toast.jsx";
+import Container from 'react-bootstrap/Container';
+
+
 
 function ProjectList() {
-    // permet de gérer l'affichage de la liste de mes projets et leur status
-    const [projectList, setProjectList] = useState([]); // Liste des projets affichés
-    const [projectFilter, setProjectFilter] = useState(""); // Filtre appliqué aux projets
-    const [statusList, setStatusList] = useState([]); // Liste des statuts disponibles
-    const [newStatus, setNewStatus] = useState(""); // nouveau statut 
 
+    const [projectList, setProjectList] = useState([]); // liste des projets
+    const [projectFilter, setProjectFilter] = useState (''); // statut sélectionné pour filtrer
+    const [statusList, setStatusList] = useState ([]); // tous les statuts disponibles
+    const [newStatus, setNewStatus] = useState (''); // nouveau statut 
+
+    
     // fenêtre Modal (être vous sûr de vouloir supprimer)
     const [show, setShow] = useState(false);
 
@@ -153,14 +147,17 @@ return (
                         }}
                     >
                     
-                        {/* SUPPRESSION PROJET*/}
-                        <Card.Body >
-                            {/* <Row className="flush align-items-center project__card__row"> */}
-                                {/* ICÔNE POUBELLE */}
-                                <div className="project__card__row">
-                                    <Col xs="auto">
-                                        < Trash size={30} onClick={(e) => {e.preventDefault(); handleShow() }}/>
-                                    
+                        {/* SUPPRESSION PROJET pour l'admin*/}
+                        <Card.Body>
+                            {/* <Row className="align-items-center"> */}
+                            <div className="project__card__row">
+                                {/* ICÔNE POUBELLE  */}
+                                <Col xs="auto">
+                                {userIs === "admin" && (
+                                    <>
+                                        < Trash className="project__trash__icon"
+                                            size={30} onClick={(e) => {e.preventDefault(); handleShow() }}
+                                        />
                                             <Modal show={show} onHide={handleClose}>
                                                 <Modal.Header closeButton>
                                                     <Modal.Title>Supprimer un projet</Modal.Title>
@@ -175,11 +172,33 @@ return (
                                                             </Button>
                                                         </Modal.Footer>
                                             </Modal>
-                                    </Col>
-                                    <Col className="text-center ">
-                                    {/* TITRE PROJET "en cours" */}
+                                    </>
+                                )}
+                                </Col>
+
+                                <Col className="text-center ">
+                                {/* TITRE/NOM du PROJET "en cours" */}
+                                    <Badge
+                                        pill
+                                        style={{
+                                            color: "black",
+                                            fontSize: "0.9rem",
+                                        }}
+                                        className="mb-2 d-block"
+                                        bg={userIs === "admin" ? 'color-admin' : 'color-client'}
+                                    > 
+                                        {project.name}
+                                    </Badge>
+                                    
+                                    {/* DESCRIPTION */}
+                                    <p className="border rounded">
+                                        {project.resume}
+                                    </p>
+
+                                    {/* STATUS du projet CLIENT*/}                                    
+                                    {userIs === 'client' &&
                                         <Badge
-                                            pill
+                                            pill 
                                             style={{
                                                 color: "black",
                                                 fontSize: "0.9rem",
@@ -195,14 +214,14 @@ return (
                                     <div>
                                         <section className="update__status">
                                             <Form.Group>
-                                                <Form.Label htmlFor="status-select">Selectionner le statut</Form.Label>
+                                                <Form.Label htmlFor="status-select">Selectionner le status</Form.Label>
 
                                                 <Form.Select defaultValue={project.status} onChange={handleChangeStatus} name="status" id="status-select">
                                                     {statusList.length > 0 ?
                                                     statusList.map((status, index) => (
                                                         <option value={status} id={project.id} key={index}>{status}</option>
                                                     )):
-                                                    <option value="noStatus">pas de statut</option>
+                                                    <option value="noStatus">pas de status</option>
                                                     }
                                                 </Form.Select>
                                             </Form.Group>
@@ -225,7 +244,8 @@ return (
                                         </Badge>
                                     }
                                 </Col>
-                            </Row>
+                            {/* </Row> */}
+                            </div>
                         </Card.Body>
                     </Card>
                 </Form>
@@ -237,5 +257,6 @@ return (
     </section>
 );
 }
+
 
 export default ProjectList;

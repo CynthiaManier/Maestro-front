@@ -9,6 +9,7 @@ import { useAxiosInterceptor } from "../../api/axiosConfig.js";
 import { getMyProfile } from "../../api/apiUser.js";
 import { notify } from "../Toast/Toast.jsx";
 import logo from "../../assets/images/logo.png";
+import "./Header.scss";
 
 /*useContext(UserContext) récupère les données partagées dans le contexte utilisateur.
 userIs : indique le rôle actuel (admin, client, visitor).
