@@ -47,7 +47,7 @@ const redirectLoginOrKeep = () => {
     if (validPaths.includes(path)) {
         // Remplace l'historique pour éviter d'empiler inutilement
         navigate(path, { replace: true });
-    } else if (path === "/login" || path === "/404") {
+    } else if (path === "/login") {
         // Autoriser la navigation vers login ou 404 directement
         navigate(path, { replace: true });
     } else {

@@ -37,7 +37,7 @@ function handleSubmit(event) {
     return (
         <div className="contact-page">
             <div className="header-contact">
-                <h2 className="h2">Contactez-nous</h2>
+                <h1>Contactez-nous</h1>
                 <p>Les champs marqués d'un astérisque (*) sont obligatoires</p>
             </div>
 
@@ -51,6 +51,7 @@ function handleSubmit(event) {
                             value={email}
                             onChange={(event) => setEmail(event.target.value)}
                             required
+                            aria-label="Adresse email"
                         />
                     </Form.Group>
 
@@ -70,7 +71,7 @@ function handleSubmit(event) {
                     </Form.Group>
 
                     <div className="form-actions">
-                        <Button className="btn btn-primary" type="submit">
+                        <Button className="btn btn-primary" type="submit" aria-label="Envoyer le message de contact">
                             Envoyer
                         </Button>
                     </div>

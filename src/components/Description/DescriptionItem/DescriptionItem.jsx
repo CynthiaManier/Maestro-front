@@ -35,14 +35,12 @@ function handleUpdate() {
         <>
             <div className="d-flex justify-content-between align-items-start">
                 <div className="description__container">
-                    <h2 className="description__title">{description.title}</h2>
-                    <div className="description__image__container">
-                        <img
-                            className="description__image"
-                            src={imageSrc}
-                            alt="présentation du composateur"
-                        />
-                    </div>
+                    <h1 className="description__title">{description.title}</h1>
+                    <img
+                        className="description__image"
+                        src={imageSrc}
+                        alt="présentation du composateur"
+                    />
 
                     <p className="description__text">{description.text}</p>
                 </div>
@@ -51,6 +49,8 @@ function handleUpdate() {
                 {userIs === "admin" && (
                     <div
                         className="icon-container"
+                        aria-label={showActions ? "Masquer les actions de modification" : "Afficher les actions de modification"}
+                        tabIndex={0}
                         onClick={() => setShowActions(!showActions)}
                         style={{ cursor: "pointer" }}
                     >
@@ -79,6 +79,7 @@ function handleUpdate() {
                             id="newTitle"
                             type="text"
                             value={title}
+                            aria-label="Ajouter un nouveaux titre"
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </Form.Group>
@@ -93,6 +94,7 @@ function handleUpdate() {
                             rows={2}
                             id="newText"
                             value={text}
+                            aria-label="Ajouter un nouveaux texte"
                             onChange={(e) => setText(e.target.value)}
                         />
                     </Form.Group>
@@ -105,6 +107,7 @@ function handleUpdate() {
                             className="form__input"
                             id="newImage"
                             type="file"
+                            aria-label="Ajouter une nouvelle image"
                             onChange={(e) => setImageFile(e.target.files[0])}
                         />
                     </Form.Group>
@@ -114,6 +117,7 @@ function handleUpdate() {
                             variant="warning"
                             className="preview__form__button me-2"
                             onClick={handleUpdate}
+                            aria-label="Mettre à jour la description"
                         >
                             Mettre à jour
                         </Button>
@@ -121,6 +125,7 @@ function handleUpdate() {
                             variant="danger"
                             className="preview__form__button preview__form__button--delete"
                             onClick={handleDelete}
+                            aria-label="Supprimer la description"
                         >
                             Supprimer
                         </Button>
