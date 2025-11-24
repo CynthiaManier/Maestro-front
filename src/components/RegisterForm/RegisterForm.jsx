@@ -116,6 +116,7 @@ function RegisterForm({ setUserHasAccount }) {
                                     required
                                     aria-label="Mot de passe"
                                     aria-describedby="password-description"
+                                    autoComplete="Mot de passe"
                                 />
                             </OverlayTrigger>
                             <span
@@ -153,6 +154,7 @@ function RegisterForm({ setUserHasAccount }) {
                                     required
                                     aria-label="Confirmation du mot de passe"
                                     aria-describedby="confirm-password-description"
+                                    autoComplete="Confirmation du mot de passe"
                                 />
                             </OverlayTrigger>
                             <span

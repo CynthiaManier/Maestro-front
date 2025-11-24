@@ -84,6 +84,7 @@ function LoginForm({ setUserHasAccount }) {
                                 required
                                 aria-label="Mot de passe"
                                 aria-describedby="password-description"
+                                autoComplete="Mot de passe"
                             />
                             <span
                                 className="show-password-btn"
