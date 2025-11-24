@@ -15,7 +15,6 @@ import Container from 'react-bootstrap/Container';
 function ProjectList() {
 
     const [projectList, setProjectList] = useState([]); // liste des projets
-    const [projectFilter, setProjectFilter] = useState (''); // statut sélectionné pour filtrer
     const [statusList, setStatusList] = useState ([]); // tous les statuts disponibles
     const [newStatus, setNewStatus] = useState (''); // nouveau statut 
 
@@ -76,8 +75,6 @@ function ProjectList() {
     function handleChange(e) {
         e.preventDefault(); // empêche le rechargement par défaut
         const status = e.target.value;
-        console.log("status : ", status);
-        setProjectFilter(status); 
 
         if (status === "") {
             getProjects(); // affiche toute la liste des statut
