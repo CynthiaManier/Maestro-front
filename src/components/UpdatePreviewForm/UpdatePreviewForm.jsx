@@ -31,13 +31,13 @@ function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = 
 
     const {userIs} = useContext(UserContext)
     
-    function renderTooltip(tooltipMessage) {
-        return (
-            <Tooltip id="password-tooltip" {...tooltipMessage}>
-                {tooltipMessage}
-            </Tooltip>
-        );
-    }
+    // function renderTooltip(tooltipMessage) {
+    //     return (
+    //         <Tooltip {...tooltipMessage}>
+    //             {tooltipMessage}
+    //         </Tooltip>
+    //     );
+    // }
 
     // il faut recevoir les infos de la preview
 
@@ -122,13 +122,13 @@ function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = 
                 <p className="form__mandatory">Les champs marqués d'un (*) sont obligatoires.</p>
                 <Form.Group className="mb-3 form__group">
                     <Form.Label className='form__label' htmlFor='previewTitle'>Titre de l'extrait *</Form.Label>
-                    <OverlayTrigger
+                    {/* <OverlayTrigger
                         placement="right"
                         delay={{ show: 250, hide: 400 }}
                         overlay={renderTooltip('Ce champ est obligatoire.')}
-                    >
+                    > */}
                     <Form.Control required className='form__input' value={formData.title} onChange={(e) => setFormData(prev => ({...prev, title: e.target.value}))} id='previewTitle' name='title' type="text" placeholder="Entrer le titre" />
-                    </OverlayTrigger>
+                    {/* </OverlayTrigger> */}
                 </Form.Group>
                 <Form.Group className="mb-3 form__group">
                     <Form.Label className='form__label' htmlFor='previewDate'>Date de l'extrait</Form.Label>
