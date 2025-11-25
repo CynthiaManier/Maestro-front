@@ -15,7 +15,6 @@ import Container from 'react-bootstrap/Container';
 function ProjectList() {
 
     const [projectList, setProjectList] = useState([]); // liste des projets
-    const [projectFilter, setProjectFilter] = useState (''); // statut sélectionné pour filtrer
     const [statusList, setStatusList] = useState ([]); // tous les statuts disponibles
     const [newStatus, setNewStatus] = useState (''); // nouveau statut 
 
@@ -76,8 +75,6 @@ function ProjectList() {
     function handleChange(e) {
         e.preventDefault(); // empêche le rechargement par défaut
         const status = e.target.value;
-        console.log("status : ", status);
-        setProjectFilter(status); 
 
         if (status === "") {
             getProjects(); // affiche toute la liste des statut
@@ -91,7 +88,7 @@ function ProjectList() {
     function handleChangeStatus(e) {
         e.preventDefault();
         setNewStatus(e.target.value);
-        const result = updateProjectStatus(e.target.selectedOptions[0].id, e.target.value);
+        updateProjectStatus(e.target.selectedOptions[0].id, e.target.value);
         // e.target c’est le <select>
         // e.target.value c’est le nouveau statut choisi (ex : "en cours")
         // e.target.selectedOptions[0].id  c’est l’ID du projet
@@ -120,7 +117,7 @@ return (
     <section className="title__container">
 
         {/* FILTRER LES PROJETS */}
-        <Form.Select size="lg"onChange={handleChange} aria-label="Sort by genre" className="mb-4 select-margin">
+        <Form.Select size="lg"onChange={handleChange} aria-label="Trier les projets par statut" className="mb-4 select-margin">
                     
             <option value=''>Trier par statut</option>
             {/* Si la liste de projets & statut n'est pas vide, on affiche la liste des status, sinon on affiche "Pas de statut"*/}
@@ -149,7 +146,6 @@ return (
                     
                         {/* SUPPRESSION PROJET pour l'admin*/}
                         <Card.Body>
-                            {/* <Row className="align-items-center"> */}
                             <div className="project__card__row">
                                 {/* ICÔNE POUBELLE  */}
                                 <Col xs="auto">
@@ -180,6 +176,7 @@ return (
                                 {/* TITRE/NOM du PROJET "en cours" */}
                                     <Badge
                                         pill
+                                        aria-label="Nom du projet"
                                         style={{
                                             color: "black",
                                             fontSize: "0.9rem",
@@ -199,6 +196,7 @@ return (
                                     {userIs === 'client' &&
                                         <Badge
                                             pill 
+                                            aria-label="Statut du projet"
                                             style={{
                                                 color: "black",
                                                 fontSize: "0.9rem",
@@ -233,6 +231,7 @@ return (
                                     {project.deadline !=null &&
                                         <Badge
                                             pill 
+                                            aria-label="Date limite du projet"
                                             style={{
                                                 color: "black",
                                                 fontSize: "0.9rem",
@@ -244,7 +243,6 @@ return (
                                         </Badge>
                                     }
                                 </Col>
-                            {/* </Row> */}
                             </div>
                         </Card.Body>
                     </Card>

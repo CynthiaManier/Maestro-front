@@ -46,7 +46,7 @@ function ProjectForm() {
     };
 
     return (
-        <Form className="project-frm" onSubmit={(e) => handleCreateProject(e)}> 
+        <Form className="project-frm" onSubmit={(e) => handleCreateProject(e)} aria-labelledby="form-title"> 
         {/* onSubmit = exécute la fonction "handleCreateProject" quand le formulaire est soumis */}
             <h2 className="title">Nouvelle demande de projet</h2>
 
@@ -55,6 +55,8 @@ function ProjectForm() {
                 <Form.Label className="form__title" >Titre du projet*</Form.Label>
                 <Form.Control
                     required
+                    aria-required="true"
+                    aria-label="Titre du projet, champ obligatoire"
                     className="form__titleInput"
                     type="text"
                     defaultValue={name}
@@ -70,6 +72,8 @@ function ProjectForm() {
                 <Form.Label>Description du projet*</Form.Label>
                 <Form.Control
                     required
+                    aria-required="true"
+                    aria-label="Description du projet, champ obligatoire"
                     className="form__descriptionInput"
                     as="textarea"
                     rows={4}
@@ -82,6 +86,7 @@ function ProjectForm() {
             <Form.Group className="form__deadline" controlId="FormDeadline">
                 <Form.Label>Date limite</Form.Label>
                 <Form.Control
+                    aria-label="Date limite du projet, champ optionnel"
                     className="form__deadlineInput"
                     type="date"
                     defaultValue={deadline}
@@ -90,7 +95,7 @@ function ProjectForm() {
             </Form.Group>
 
             {/* BOUTON ENVOYER */}
-            <Button className="form__button" variant="primary" type="submit">
+            <Button className="form__button" variant="primary" type="submit" aria-label="Envoyer la demande de projet">
                 Envoyer ma demande
             </Button>
 
