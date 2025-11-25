@@ -3,12 +3,12 @@
 @use "/src/var";
 
 .register-form-global {
-  padding-top: 6.25rem;
+  padding-top: 2rem;
 }
 
 .register-form-headtitle {
   text-align: center;
-  padding-top: 3rem;
+  // padding-top: 3rem;
   font-family: var.$font-main;
   font-size: var.$font-size-h2; // plus petit pour mobile d'abord
 }
@@ -90,7 +90,7 @@
 
 @include mixin.desktop {
   .register-form-headtitle {
-    padding-top: 6rem;
+    // padding-top: 6rem;
     font-size: var.$font-size-h2;
   }
 

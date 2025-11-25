@@ -118,7 +118,7 @@ function PreviewList({location}) {
                 {/* Un Accordion autonome par preview — grille responsive */}
                 <section className="preview__list">
                     {/* Ici, on map sur la liste des extraits */}
-                    {previewList.length > 0 ? previewList.map((preview) => (
+                    {(previewList != null && previewList.length > 0) ? previewList.map((preview) => (
                         <div className="preview__item" key={preview.id}>
                         <Accordion
                             className="preview-card-accordion"

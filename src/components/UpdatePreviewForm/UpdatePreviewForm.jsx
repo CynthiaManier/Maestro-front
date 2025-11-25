@@ -31,13 +31,13 @@ function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = 
 
     const {userIs} = useContext(UserContext)
     
-    function renderTooltip(tooltipMessage) {
-        return (
-            <Tooltip id="password-tooltip" {...tooltipMessage}>
-                {tooltipMessage}
-            </Tooltip>
-        );
-    }
+    // function renderTooltip(tooltipMessage) {
+    //     return (
+    //         <Tooltip {...tooltipMessage}>
+    //             {tooltipMessage}
+    //         </Tooltip>
+    //     );
+    // }
 
     // il faut recevoir les infos de la preview
 
@@ -68,11 +68,11 @@ function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = 
         try {
             await updatePreview(id, payload); 
             onSaved();
-            notify("Extrait modifié avec succès !");
+            notify("Extrait modifié avec succès !", "success");
         } catch (err) {
             console.error("Erreur mise à jour preview:", err);
             setError("Échec de la mise à jour.");
-            notify("Erreur lors de la modification de l'extrait");
+            notify("Erreur lors de la modification de l'extrait", "error");
         } finally {
             setSaving(false);
         }
@@ -86,11 +86,11 @@ function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = 
         try {
             await deletePreview(id);
             onSaved();
-            notify("Extrait supprimé avec succès !");
+            notify("Extrait supprimé avec succès !", "success");
         } catch (err) {
             console.error("Erreur lors de la suppression de l'extrait : ", err);
             setError("Échec de la suppression.");
-            notify("Erreur lors de la suppression de l'extrait");
+            notify("Erreur lors de la suppression de l'extrait", "error");
         } finally {
             setSaving(false);
         }
@@ -114,21 +114,21 @@ function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = 
 
         <>
             {error && <p className="text-danger">{error}</p>}
-            <Form onSubmit={handleSubmit} id='updatePreview' method='patch'>
+            <Form onSubmit={handleSubmit} id='updatePreview' method='patch' aria-labelledby="update-preview-title">
                 <div className="preview__form__header">
-                    <h2 className="preview__forms__title">Modifier l'extrait</h2>
-                    <Button onClick={() => {setSelectedPreview(null); setActiveItem(null)}} className="preview__close__icon"><XLg size={20}/></Button>
+                    <h2 className="preview__forms__title" id="update-preview-title">Modifier l'extrait</h2>
+                    <Button aria-label="Fermer le formulaire" onClick={() => {setSelectedPreview(null); setActiveItem(null)}} className="preview__close__icon"><XLg aria-hidden='true' size={20}/></Button>
                 </div>
                 <p className="form__mandatory">Les champs marqués d'un (*) sont obligatoires.</p>
                 <Form.Group className="mb-3 form__group">
                     <Form.Label className='form__label' htmlFor='previewTitle'>Titre de l'extrait *</Form.Label>
-                    <OverlayTrigger
+                    {/* <OverlayTrigger
                         placement="right"
                         delay={{ show: 250, hide: 400 }}
                         overlay={renderTooltip('Ce champ est obligatoire.')}
-                    >
-                    <Form.Control required className='form__input' value={formData.title} onChange={(e) => setFormData(prev => ({...prev, title: e.target.value}))} id='previewTitle' name='title' type="text" placeholder="Entrer le titre" />
-                    </OverlayTrigger>
+                    > */}
+                    <Form.Control aria-required='true' required className='form__input' value={formData.title} onChange={(e) => setFormData(prev => ({...prev, title: e.target.value}))} id='previewTitle' name='title' type="text" placeholder="Entrer le titre" />
+                    {/* </OverlayTrigger> */}
                 </Form.Group>
                 <Form.Group className="mb-3 form__group">
                     <Form.Label className='form__label' htmlFor='previewDate'>Date de l'extrait</Form.Label>
@@ -142,11 +142,12 @@ function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = 
                         name='isStar'
                         type="switch"
                         id="star-switch"
+                        aria-label="Afficher cet extrait sur la page d'accueil"
                         label="Rendre l'extrait star"
                     />
                 </Form.Group>
-                <Form.Group className="mb-3 form__group">
-                    <Form.Label className='form__label' htmlFor='genre'>Ajoute un ou plusieurs genres</Form.Label>
+                <Form.Group aria-labelledby="update-preview-label" className="mb-3 form__group">
+                    <Form.Label id="update-preview-label" className='form__label' htmlFor='genre'>Ajoute un ou plusieurs genres</Form.Label>
                     {genreList.length > 0 && genreList.map((genre) => (
                         <Form.Check key={genre.id}
                             className='checkBox form__input'
@@ -170,11 +171,11 @@ function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = 
                     {saving ? "Suppression..." : "Supprimer l'extrait"}
                     </Button>
                 </div>
-                <Modal show={show} onHide={handleClose}>
+                <Modal show={show} onHide={handleClose} aria-labelledby='modal-update-preview-title' aria-describedby='modal-update-preview-desc'>
                     <Modal.Header closeButton>
-                    <Modal.Title>Supprimer l'extrait</Modal.Title>
+                    <Modal.Title id="modal-update-preview-title">Supprimer l'extrait</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Etes-vous sûr de vouloir supprimer l'extrait "{preview.title}" ?</Modal.Body>
+                    <Modal.Body id="modal-update-preview-desc">Etes-vous sûr de vouloir supprimer l'extrait "{preview.title}" ?</Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Annuler
