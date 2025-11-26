@@ -1,22 +1,17 @@
 import UserContext from "./UserContext.jsx";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export function UserProvider({children}) {
-    
-    const [userIs, setUserIs] = useState(() => sessionStorage.getItem('userRole') || 'visitor');
-    const [refreshList, setrefreshList] = useState(false);
+    const [userIs, setUserIs] = useState('visitor');
+    const [refreshList,setrefreshList] = useState('false');
 
-    
-    useEffect(() => {
-        sessionStorage.setItem('userRole', userIs);
-    }, [userIs]);
-
-    function needRefreshProjectList() {
+    function needRefreshProjectList(){
         setrefreshList(true);
     }
     function desactiveRefreshProjectList(){
         setrefreshList(false);
     }
+
 
     function loginProvider(role) {
         setUserIs(role);
