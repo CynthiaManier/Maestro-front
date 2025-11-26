@@ -27,9 +27,9 @@ function ProjectForm() {
         // ajoute la deadline si présente
         if (deadline !='' ){ 
             projectData = { 
-                name: DOMPurify.sanitize(name),
-                resume: DOMPurify.sanitize(resume),
-                deadline: DOMPurify.sanitize(resume)
+                name: DOMPurify.sanitize(name), // nettoie name
+                resume: DOMPurify.sanitize(resume), // nettoie description
+                deadline: DOMPurify.sanitize(deadline) // nettoie deadline
             };
         } else {
             // sinon que le nom et description
@@ -38,6 +38,11 @@ function ProjectForm() {
                 resume: DOMPurify.sanitize(resume),
             };
         }
+
+        // TEST DOMPURIFY 
+        // console.log("name brut:", name);        
+        // console.log("name nettoyé:", DOMPurify.sanitize(name));
+        
 
         // envoie le projet puis rafraîchit la liste
         await createProject(projectData);
