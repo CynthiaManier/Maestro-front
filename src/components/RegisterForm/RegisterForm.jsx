@@ -5,10 +5,7 @@ import { Eye, EyeSlash } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "./RegisterForm.scss";
 import { notify } from "../Toast/Toast.jsx";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-import DOMPurify from 'dompurify';
-
+import DOMPurify from "dompurify";
 
 function RegisterForm({ setUserHasAccount }) {
     const [email, setEmail] = useState("");
@@ -19,17 +16,6 @@ function RegisterForm({ setUserHasAccount }) {
 
     const regex =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&(),.?":{}|<>]).{8,}$/;
-
-    // const passwordPattern = `Au moins 8 caractères dont : 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial parmi : !@#$%^&(),.?"{}:|`;
-    // const infoCopyPassword = `Attention ! les deux mots de passes doivent être identiques`;
-
-    // function renderTooltip(tooltipMessage) {
-    //     return (
-    //         <Tooltip id="password-tooltip" {...tooltipMessage}>
-    //             {tooltipMessage}
-    //         </Tooltip>
-    //     );
-    // }
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -103,28 +89,34 @@ function RegisterForm({ setUserHasAccount }) {
                     >
                         <Form.Label>Mot de passe</Form.Label>
                         <div className="password-wrapper">
-                            {/* <OverlayTrigger
-                                placement="right"
-                                delay={{ show: 250, hide: 400 }}
-                                overlay={renderTooltip(passwordPattern)}
-                            > */}
-                                <Form.Control
-                                    type={showPassword ? "text" : "password"}
-                                    placeholder="Entrez votre mot de passe"
-                                    value={password}
-                                    onChange={(event) =>setPassword(event.target.value)}
-                                    required
-                                    aria-label="Mot de passe"
-                                    aria-describedby="password-description"
-                                    autoComplete="Mot de passe"
-                                />
-                            {/* </OverlayTrigger> */}
+                            <Form.Control
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Entrez votre mot de passe"
+                                value={password}
+                                onChange={(event) =>
+                                    setPassword(event.target.value)
+                                }
+                                required
+                                aria-label="Mot de passe"
+                                aria-describedby="password-description"
+                                autoComplete="Mot de passe"
+                            />
                             <span
                                 className="show-password-btn"
                                 onClick={() => setShowPassword(!showPassword)}
                             >
                                 {showPassword ? <EyeSlash /> : <Eye />}
                             </span>
+                        </div>
+                        <div className="format-password-item">
+                            <p>Le mot de passe doit contenir au moins :</p>
+                            <ul>
+                                <li>8 caractères</li>
+                                <li>1 majuscule</li>
+                                <li>1 minuscule</li>
+                                <li>1 chiffre</li>
+                                <li>1 caractère spécial</li>
+                            </ul>
                         </div>
                     </Form.Group>
 
@@ -135,28 +127,18 @@ function RegisterForm({ setUserHasAccount }) {
                     >
                         <Form.Label>Confirmer le mot de passe</Form.Label>
                         <div className="password-wrapper">
-                            {/* <OverlayTrigger
-                                placement="right"
-                                delay={{ show: 250, hide: 400 }}
-                                overlay={renderTooltip(infoCopyPassword)}
-                            > */}
-                                <Form.Control
-                                    type={
-                                        showConfirmPassword
-                                            ? "text"
-                                            : "password"
-                                    }
-                                    placeholder="Confirmez votre mot de passe"
-                                    value={confirmPassword}
-                                    onChange={(event) =>
-                                        setConfirmPassword(event.target.value)
-                                    }
-                                    required
-                                    aria-label="Confirmation du mot de passe"
-                                    aria-describedby="confirm-password-description"
-                                    autoComplete="Confirmation du mot de passe"
-                                />
-                            {/* </OverlayTrigger> */}
+                            <Form.Control
+                                type={showConfirmPassword ? "text" : "password"}
+                                placeholder="Confirmez votre mot de passe"
+                                value={confirmPassword}
+                                onChange={(event) =>
+                                    setConfirmPassword(event.target.value)
+                                }
+                                required
+                                aria-label="Confirmation du mot de passe"
+                                aria-describedby="confirm-password-description"
+                                autoComplete="Confirmation du mot de passe"
+                            />
                             <span
                                 className="show-password-btn"
                                 onClick={() =>
@@ -168,7 +150,11 @@ function RegisterForm({ setUserHasAccount }) {
                         </div>
                     </Form.Group>
 
-                    <Button className="register-form-button" type="submit"aria-label="Valider l'inscription">
+                    <Button
+                        className="register-form-button"
+                        type="submit"
+                        aria-label="Valider l'inscription"
+                    >
                         S'inscrire
                     </Button>
                 </Form>

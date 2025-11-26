@@ -16,7 +16,7 @@ userIs : indique le rôle actuel (admin, client, visitor).
 logoutProvider : fonction pour déconnecter l’utilisateur.
 useNavigate() retourne une fonction navigate pour effectuer une redirection.*/
 function Header() {
-    const { userIs, logoutProvider, loginProvider } = useContext(UserContext);
+    const { userIs, logoutProvider, loginProvider, needRefreshProjectList } = useContext(UserContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -33,6 +33,7 @@ function Header() {
             loginProvider(profile.user.role);
             const lastPath = sessionStorage.getItem("lastPath");
             if (lastPath) {
+                needRefreshProjectList();
                 navigate(lastPath, { replace: true });
                 sessionStorage.removeItem("lastPath");
             }

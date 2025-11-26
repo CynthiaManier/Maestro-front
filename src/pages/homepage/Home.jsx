@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import Description from "../../components/Description/Description.jsx";
-import DescriptionItem from "../../components/Description/DescriptionItem/DescriptionItem.jsx";
+import Description from "../../components/Description/Description.jsx"
 import DescriptionForm from "../../components/DescriptionForm/DescriptionForm.jsx";
 import PreviewList from "../../components/PreviewList/PreviewList.jsx";
 import { getAllDescription } from "../../api/apiDescription.js";
@@ -41,7 +40,7 @@ function Home() {
             {/* Présentation du compositeur */}
             {presentationCompositeur != null && presentationCompositeur.length > 0 
             ? presentationCompositeur.map((description) => (
-                <DescriptionItem
+                <Description
                     key={description.id}
                     description={description}
                     onAction={refreshDescriptions}
@@ -55,7 +54,7 @@ function Home() {
             {/* Prestation */}
             {prestation != null && prestation.length > 0 
             ? prestation.map((description) => (
-                <DescriptionItem
+                <Description
                     key={description.id}
                     description={description}
                     onAction={refreshDescriptions}

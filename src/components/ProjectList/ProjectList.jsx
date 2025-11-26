@@ -16,7 +16,7 @@ function ProjectList() {
 
     const [projectList, setProjectList] = useState([]); // liste des projets
     const [statusList, setStatusList] = useState ([]); // tous les statuts disponibles
-    const [newStatus, setNewStatus] = useState (''); // nouveau statut 
+
 
     
     // fenêtre Modal (être vous sûr de vouloir supprimer)
@@ -45,7 +45,7 @@ function ProjectList() {
             const result = await getAllProjectList();
             setStatusList (result.Liststatus);
             setProjectList(result.projects);
-        } else { 
+        } else if (userIs === 'admin'){ 
             // si ADMIN
             const result = await getAllAdminProjects();
             setStatusList (result.Liststatus);
@@ -61,7 +61,7 @@ function ProjectList() {
             const result  = await getFilteredProjectList(status);
             console.log("client:",result.projects);
             setProjectList(result.projects);
-        } else {
+        } else if (userIs === 'admin') {
             // si ADMIN
             const result  = await getFilteredAdminProjects(status);
             console.log("admin:", result);
@@ -85,14 +85,12 @@ function ProjectList() {
 
 
     // modifie le statut d’un projet
-    function handleChangeStatus(e) {
+    async function handleChangeStatus(e) {
         e.preventDefault();
-        setNewStatus(e.target.value);
-        updateProjectStatus(e.target.selectedOptions[0].id, e.target.value);
+        await updateProjectStatus(e.target.selectedOptions[0].id, e.target.value);
         // e.target c’est le <select>
         // e.target.value c’est le nouveau statut choisi (ex : "en cours")
         // e.target.selectedOptions[0].id  c’est l’ID du projet
-        console.log(newStatus);
     }
 
         // supprime un projet
@@ -158,7 +156,7 @@ return (
                                                 <Modal.Header closeButton>
                                                     <Modal.Title>Supprimer un projet</Modal.Title>
                                                 </Modal.Header>
-                                                    <Modal.Body>Etes-vous sur de vouloir le supprimer ?</Modal.Body>
+                                                    <Modal.Body>Etes-vous sur de vouloir supprimer le projet ?</Modal.Body>
                                                         <Modal.Footer>
                                                             <Button variant="secondary" onClick={handleClose}>
                                                                 Annuler

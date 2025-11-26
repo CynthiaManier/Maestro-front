@@ -4,29 +4,35 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../DataForm.scss";
-import { useState } from "react";
-import { getMyCompany } from "../../../api/apiCompany.js";
-import { updateCompany } from "../../../api/apiCompany.js";
-import { createCompany } from "../../../api/apiCompany.js";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import {
+    getMyCompany,
+    updateCompany,
+    createCompany,
+} from "../../../api/apiCompany.js";
 import { notify } from "../../Toast/Toast.jsx";
+import DOMPurify from "dompurify";
 
-function CompanyDataForm({ onUpdate }) {
+function CompanyDataForm({ onUpdate, onCompanyCreated }) {
     // Voir mes informations d'entreprise
     const [companySetting, setCompanySetting] = useState({});
 
     async function getMyCompanySetting() {
         const myCompany = await getMyCompany();
         setCompanySetting(myCompany.company);
-        // console.log("setting log :", myCompany.company);
     }
 
     useEffect(() => {
         onUpdate ? getMyCompanySetting() : null;
     }, []);
 
+    function notifandUpdate() {
+        notify("Entreprise crée avec succès");
+        onCompanyCreated();
+        console.log("OnUpdate:", onUpdate);
+    }
+
     function companyHandelSubmit(event) {
-        // console.log("companyHandelSubmit", companySetting);
         event.preventDefault();
 
         onUpdate
@@ -34,15 +40,13 @@ function CompanyDataForm({ onUpdate }) {
               notify(
                   "Les informations de votre entreprise on bien été misent à jour"
               )
-            : createCompany(companySetting) &&
-              notify("Entreprise crée avec succès");
+            : createCompany(companySetting) && notifandUpdate();
     }
 
     return (
         <>
             <Container className="dataForm-container">
                 <Row>
-                    {/* <Col sm={6}> */}
                     <Col>
                         {/* ENTREPRISE */}
                         <Row>
@@ -87,8 +91,10 @@ function CompanyDataForm({ onUpdate }) {
                                                             prevCompanySetting
                                                         ) => ({
                                                             ...prevCompanySetting, // ← on copie l’ancien objet
-                                                            name: event.target
-                                                                .value, // ← on remplace seulement name
+                                                            name: DOMPurify.sanitize(
+                                                                event.target
+                                                                    .value
+                                                            ), // ← on remplace seulement name
                                                         })
                                                     )
                                                 }
@@ -119,8 +125,10 @@ function CompanyDataForm({ onUpdate }) {
                                                         ) => ({
                                                             ...prevCompanySetting,
                                                             localisation:
-                                                                event.target
-                                                                    .value,
+                                                                DOMPurify.sanitize(
+                                                                    event.target
+                                                                        .value
+                                                                ),
                                                         })
                                                     )
                                                 }
@@ -152,8 +160,10 @@ function CompanyDataForm({ onUpdate }) {
                                                             prevCompanySetting
                                                         ) => ({
                                                             ...prevCompanySetting,
-                                                            siret: event.target
-                                                                .value,
+                                                            siret: DOMPurify.sanitize(
+                                                                event.target
+                                                                    .value
+                                                            ),
                                                         })
                                                     )
                                                 }

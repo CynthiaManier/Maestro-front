@@ -1,6 +1,5 @@
 import ContactRequestList from "../../components/ContactRequestList/ContactRequestList.jsx";
 import GenreForm from "../../components/GenreForm/GenreForm.jsx";
-//import ClientList from "../../components/ClientList/ClientList.jsx"
 import ProjectList from "../../components/ProjectList/ProjectList.jsx";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -9,17 +8,6 @@ import "./Admin.scss";
 import FullClientCard from "../../components/ClientList/FullClientCard.jsx";
 
 function Admin() {
-    // LES COMPOSANTS QUI SERONT SUR LA PAGE:
-
-    // Nouvelles demandes de projets
-    // => WaitingProjectList -> en V2
-    // Liste des clients avec leurs informations
-    // => ClientList
-    // Les projets validés (avec leur statut etc)
-    // => ProjectList (version admin)
-    // Nouvelles demandes de contact
-    // => ContactRequestList
-
     return (
         <>
             <h1 className="admin-page-title">Mon espace administrateur</h1>
@@ -30,15 +18,30 @@ function Admin() {
                     {/* <Row className="list-item project-list-item">
                         <h2 className="admin-item-title">Les projets en cours</h2>
                     </Row> */}
+
                     <Row>
-                        <Col className=" component-admin-container list-item contact-request-list-item">
-                            <h2 className="admin-item-title">
+                        <Col
+                            className=" component-admin-container list-item contact-request-list-item"
+                            aria-labelledby="admin-contact-requests-title"
+                        >
+                            <h2
+                                className="admin-item-title"
+                                id="admin-contact-requests-title"
+                            >
                                 Les demandes de contact
                             </h2>
                             <ContactRequestList />
                         </Col>
-                        <Col className="component-admin-container list-item waiting-project-list-item">
-                            <h2 className="admin-item-title">Les projets</h2>
+                        <Col
+                            className="component-admin-container list-item waiting-project-list-item"
+                            aria-labelledby="admin-projects-title"
+                        >
+                            <h2
+                                className="admin-item-title"
+                                id="admin-projects-title"
+                            >
+                                Les projets
+                            </h2>
                             <ProjectList />
                         </Col>
                     </Row>
@@ -47,12 +50,24 @@ function Admin() {
                         <Col
                             lg={5}
                             className="component-admin-container list-item genre-list-item"
+                            aria-labelledby="admin-genres-title"
                         >
-                            <h2 className="admin-item-title">Les genres</h2>
+                            <h2
+                                className="admin-item-title"
+                                id="admin-genres-title"
+                            >
+                                Les genres
+                            </h2>
                             <GenreForm />
                         </Col>
-                        <Col className="component-admin-container list-item full-card-list-item">
-                            <h2 className="admin-item-title">
+                        <Col
+                            className="component-admin-container list-item full-card-list-item"
+                            aria-labelledby="admin-clients-title"
+                        >
+                            <h2
+                                className="admin-item-title"
+                                id="admin-clients-title"
+                            >
                                 La liste des clients
                             </h2>
                             <FullClientCard />

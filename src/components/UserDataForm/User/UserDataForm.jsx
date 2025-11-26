@@ -4,43 +4,47 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../DataForm.scss";
-import { useState } from "react";
-import { getMyProfile } from "../../../api/apiUser.js";
-import { updateMyProfile } from "../../../api/apiUser.js";
-import { useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
+import {
+    getMyProfile,
+    updateMyProfile,
+    logoutUser,
+} from "../../../api/apiUser.js";
 import { notify } from "../../Toast/Toast.jsx";
 import UserContext from "../../../UserContext.jsx";
+import DOMPurify from "dompurify";
 
 function UserDataForm() {
-    // Voir mes informations
     const [setting, setSetting] = useState({});
-    const { userIs } = useContext(UserContext);
+    const { userIs, logoutProvider } = useContext(UserContext);
 
     async function getMySetting() {
         const myProfile = await getMyProfile();
+        if (myProfile.user.isActive == false) {
+            await logoutUser(); // deconnexion de user
+            logoutProvider(); // retourne à l'état de visiteur
+        }
         setSetting(myProfile.user);
-        // console.log("setting log :", myProfile);
     }
 
     useEffect(() => {
         getMySetting();
     }, []);
 
-    function handelSubmit(event) {
+    async function handelSubmit(event) {
         event.preventDefault();
-        updateMyProfile(setting);
+        await updateMyProfile(setting);
         getMySetting();
         notify("Vos informations ont bien été mise à jour", "success");
     }
 
     function handleSwitch(event) {
-        console.log("Dans handelSwitch", event.target.checked);
         setSetting((prevSetting) => ({
-            ...prevSetting, // ← on copie l’ancien objet
-            isActive: event.target.checked, // ← on remplace seulement fistname
+            ...prevSetting,
+            isActive: !event.target.checked,
         }));
-        // console.log("Dans handelSwitch", setting);
     }
+    // Déconnexion automatique après avoir désactivé le compte en V2
 
     return (
         <>
@@ -87,7 +91,9 @@ function UserDataForm() {
                                                 setSetting((prevSetting) => ({
                                                     ...prevSetting, // ← on copie l’ancien objet
                                                     lastname:
-                                                        event.target.value, // ← on remplace seulement fistname
+                                                        DOMPurify.sanitize(
+                                                            event.target.value
+                                                        ), // ← on remplace seulement fistname
                                                 }))
                                             }
                                         />
@@ -114,7 +120,9 @@ function UserDataForm() {
                                                 setSetting((prevSetting) => ({
                                                     ...prevSetting,
                                                     firstname:
-                                                        event.target.value,
+                                                        DOMPurify.sanitize(
+                                                            event.target.value
+                                                        ),
                                                 }))
                                             }
                                         />
@@ -141,7 +149,9 @@ function UserDataForm() {
                                             onChange={(event) =>
                                                 setSetting((prevSetting) => ({
                                                     ...prevSetting,
-                                                    email: event.target.value,
+                                                    email: DOMPurify.sanitize(
+                                                        event.target.value
+                                                    ),
                                                 }))
                                             }
                                         />
@@ -168,7 +178,9 @@ function UserDataForm() {
                                                 setSetting((prevSetting) => ({
                                                     ...prevSetting,
                                                     localisation:
-                                                        event.target.value,
+                                                        DOMPurify.sanitize(
+                                                            event.target.value
+                                                        ),
                                                 }))
                                             }
                                         />
@@ -197,7 +209,9 @@ function UserDataForm() {
                                                 setSetting((prevSetting) => ({
                                                     ...prevSetting,
                                                     phonenumber:
-                                                        event.target.value,
+                                                        DOMPurify.sanitize(
+                                                            event.target.value
+                                                        ),
                                                 }))
                                             }
                                         />
