@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import UpdateGenreForm from "../UpdateGenreForm/UpdateGenreForm.jsx";
 import { notify } from "../Toast/Toast.jsx";
+import DOMPurify from "dompurify";
 
 function GenreForm() {
     const [genreList, setGenreList] = useState([]);
@@ -18,9 +19,6 @@ function GenreForm() {
     const [idToUpdate, setIdToUpdate] = useState(null);
     const [updateGenre, setUpdateGenre] = useState("");
     const [genreToDelete, setGenreToDelete] = useState("");
-    const [genreToUpdate, setGenreToUpdate] = useState("");
-
-    // Modal
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -42,8 +40,12 @@ function GenreForm() {
 
     async function handleAddGenre() {
         setSaving(true);
+        // test avec : TEST DOMPURIFY <a href="javascript:alert('XSS via javascript: URI')">clique-moi</a>
+        const genreToAddPurified = DOMPurify.sanitize(genreToAdd);
+        console.log('genre brut', genreToAdd)
+        console.log('genre purifié', genreToAddPurified)
         try {
-            const genreAdded = await addAGenre(genreToAdd);
+            await addAGenre(genreToAddPurified);
             handleOnSaved();
             notify("Genre créé avec succès", "success");
         } catch (error) {
@@ -70,7 +72,6 @@ function GenreForm() {
         setSaving(true);
         try {
             console.log(id);
-            // setIdToDelete(id);
             await deleteGenre(id);
             handleOnSaved();
             notify("Le genre à bien été supprimé", "success");
@@ -90,14 +91,12 @@ function GenreForm() {
     return (
         <>
             <section className="genre__container">
-                {/* <h2 className='genre__title'>Les Genres</h2> */}
                 <Accordion>
                     <Accordion.Item
                         className="genre__accordion__item"
                         eventKey="0"
                     >
                         <Accordion.Header
-                            onClick={console.log("0 : click")}
                             className="genre__accordion__title"
                         >
                             Liste des genres
@@ -149,9 +148,6 @@ function GenreForm() {
                                                                 ) => {
                                                                     e.preventDefault();
                                                                     e.stopPropagation();
-                                                                    setGenreToUpdate(
-                                                                        genre.label
-                                                                    );
                                                                     setIdToUpdate(
                                                                         genre.id
                                                                     );
@@ -213,7 +209,6 @@ function GenreForm() {
                         eventKey="1"
                     >
                         <Accordion.Header
-                            onClick={console.log("1 : click")}
                             className="genre__accordion__title"
                         >
                             Ajouter un genre

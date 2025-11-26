@@ -1,12 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import UserContext from "../../UserContext.jsx";
+import { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { updatePreview, deletePreview } from "../../api/apiPreview.js";
 import Modal from 'react-bootstrap/Modal';
 import { notify } from "../Toast/Toast.jsx";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import { XLg } from "react-bootstrap-icons";
 
 
@@ -23,24 +20,12 @@ function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = 
     }));
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState(null);
-    // Modal
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const {userIs} = useContext(UserContext)
-    
-    // function renderTooltip(tooltipMessage) {
-    //     return (
-    //         <Tooltip {...tooltipMessage}>
-    //             {tooltipMessage}
-    //         </Tooltip>
-    //     );
-    // }
-
     // il faut recevoir les infos de la preview
-
     function toggleGenre(genreId) {
         setFormData(prev => {
             // on regarde si genreId est déjà dans la liste
@@ -61,7 +46,6 @@ function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = 
             title: formData.title,
             date: formData.date || null,
             isStar: formData.isStar,
-            // envoi au backend sous forme  "1,2"
             genres: formData.genres.length ? formData.genres.join(',') : ""
         };
 
@@ -82,7 +66,6 @@ function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = 
         e.preventDefault();
         setSaving(true);
         setError(null);
-        // alert "êtes vous sur de vouloir supprimer l'extrait ?"
         try {
             await deletePreview(id);
             onSaved();
@@ -122,13 +105,7 @@ function UpdatePreviewForm({ setSelectedPreview, setActiveItem, id, genreList = 
                 <p className="form__mandatory">Les champs marqués d'un (*) sont obligatoires.</p>
                 <Form.Group className="mb-3 form__group">
                     <Form.Label className='form__label' htmlFor='previewTitle'>Titre de l'extrait *</Form.Label>
-                    {/* <OverlayTrigger
-                        placement="right"
-                        delay={{ show: 250, hide: 400 }}
-                        overlay={renderTooltip('Ce champ est obligatoire.')}
-                    > */}
                     <Form.Control aria-required='true' required className='form__input' value={formData.title} onChange={(e) => setFormData(prev => ({...prev, title: e.target.value}))} id='previewTitle' name='title' type="text" placeholder="Entrer le titre" />
-                    {/* </OverlayTrigger> */}
                 </Form.Group>
                 <Form.Group className="mb-3 form__group">
                     <Form.Label className='form__label' htmlFor='previewDate'>Date de l'extrait</Form.Label>
